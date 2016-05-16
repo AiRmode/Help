@@ -1,8 +1,8 @@
 package com.formula1.help;
 
-import com.formula1.help.actors.Company;
-import com.formula1.help.actors.CompanyStatus;
-import com.formula1.help.actors.User;
+import com.formula1.help.actor.Company;
+import com.formula1.help.actor.CompanyStatus;
+import com.formula1.help.actor.User;
 
 import java.util.List;
 

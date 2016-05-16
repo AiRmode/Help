@@ -1,6 +1,6 @@
 package com.formula1.help;
 
-import com.formula1.help.actors.InNeedEntity;
+import com.formula1.help.actor.InNeedEntity;
 
 import java.util.List;
 

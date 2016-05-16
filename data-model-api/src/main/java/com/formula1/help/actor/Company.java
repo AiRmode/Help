@@ -1,4 +1,4 @@
-package com.formula1.help.actors;
+package com.formula1.help.actor;
 
 import java.util.List;
 
