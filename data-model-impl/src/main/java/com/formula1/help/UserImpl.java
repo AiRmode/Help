@@ -1,8 +1,9 @@
 package com.formula1.help;
 
-import com.formula1.help.actor.Company;
-import com.formula1.help.actor.User;
-import com.formula1.help.actor.UserStatus;
+import com.formula1.help.actor.company.Company;
+import com.formula1.help.actor.personalData.PersonalData;
+import com.formula1.help.actor.user.User;
+import com.formula1.help.actor.user.UserStatus;
 
 import java.util.List;
 
@@ -41,23 +42,8 @@ public class UserImpl implements User {
     }
 
     @Override
-    public String getEmail() {
-        return email;
-    }
-
-    @Override
     public String getPassword() {
         return password;
-    }
-
-    @Override
-    public String getFullPhoneNumber() {
-        return "+" + String.valueOf(getPhoneNumber());
-    }
-
-    @Override
-    public int getPhoneNumber() {
-        return phoneNumber;
     }
 
     /**
@@ -91,6 +77,11 @@ public class UserImpl implements User {
     }
 
     @Override
+    public PersonalData getPersonalData() {
+        return null;
+    }
+
+    @Override
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -101,18 +92,8 @@ public class UserImpl implements User {
     }
 
     @Override
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     @Override
@@ -136,6 +117,12 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setPersonalData(PersonalData personalData) {
+
+    }
+
+    //TODO:update
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -157,6 +144,7 @@ public class UserImpl implements User {
 
     }
 
+    //TODO:update
     @Override
     public int hashCode() {
         int result = id;
@@ -172,6 +160,7 @@ public class UserImpl implements User {
         return result;
     }
 
+    //TODO:update
     @Override
     public String toString() {
         return "UserImpl{" +

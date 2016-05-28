@@ -1,8 +1,9 @@
 package com.formula1.help;
 
-import com.formula1.help.actor.Company;
-import com.formula1.help.actor.User;
-import com.formula1.help.actor.UserStatus;
+import com.formula1.help.actor.company.Company;
+import com.formula1.help.actor.personalData.PersonalData;
+import com.formula1.help.actor.user.User;
+import com.formula1.help.actor.user.UserStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,23 +32,8 @@ public class TestUserGenerator {
             }
 
             @Override
-            public String getEmail() {
-                return "wgendalf@middleearth.ring";
-            }
-
-            @Override
             public String getPassword() {
                 return "youShellNotPass";
-            }
-
-            @Override
-            public String getFullPhoneNumber() {
-                return "+911123123";
-            }
-
-            @Override
-            public int getPhoneNumber() {
-                return 911123123;
             }
 
             @Override
@@ -76,6 +62,11 @@ public class TestUserGenerator {
             }
 
             @Override
+            public PersonalData getPersonalData() {
+                return null;
+            }
+
+            @Override
             public void setFirstName(String firstName) {
 
             }
@@ -86,17 +77,7 @@ public class TestUserGenerator {
             }
 
             @Override
-            public void setEmail(String email) {
-
-            }
-
-            @Override
             public void setPassword(String password) {
-
-            }
-
-            @Override
-            public void setPhoneNumber(int phoneNumber) {
 
             }
 
@@ -117,6 +98,11 @@ public class TestUserGenerator {
 
             @Override
             public void setUserStatus(UserStatus userStatus) {
+
+            }
+
+            @Override
+            public void setPersonalData(PersonalData personalData) {
 
             }
         };

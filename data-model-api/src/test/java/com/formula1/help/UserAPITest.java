@@ -1,6 +1,6 @@
 package com.formula1.help;
 
-import com.formula1.help.actor.User;
+import com.formula1.help.actor.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -22,9 +22,9 @@ public class UserAPITest extends AbstractTestNGSpringContextTests {
 
         Assert.assertNotNull(validUser);
         Assert.assertTrue(validUser.getID() > 0);
-        Assert.assertNotNull(validUser.getEmail());
-        Assert.assertTrue(validUser.getEmail().split("@").length > 0);
-        Assert.assertEquals("+" + String.valueOf(validUser.getPhoneNumber()), validUser.getFullPhoneNumber());
+        Assert.assertNotNull(validUser.getPersonalData().getEmail());
+        Assert.assertTrue(validUser.getPersonalData().getEmail().split("@").length > 0);
+        Assert.assertEquals("+" + String.valueOf(validUser.getPersonalData().getPhoneNumber()), validUser.getPersonalData().getFullPhoneNumber());
     }
 
 }

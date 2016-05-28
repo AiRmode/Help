@@ -1,20 +1,22 @@
 package com.formula1.help;
 
-import com.formula1.help.actor.InNeedEntity;
+import com.formula1.help.actor.personalData.PersonalData;
+import com.formula1.help.actor.shelter.Shelter;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by alexey on 03.05.16.
  */
-public class InNeedEntityImpl implements InNeedEntity {
+public class ShelterImpl implements Shelter {
     private final int id;
     private String name;
     private String description;
     private List<String> tags;
     private List<String> assignedCategories;
 
-    public InNeedEntityImpl(int id) {
+    public ShelterImpl(int id) {
         this.id = id;
     }
 
@@ -24,13 +26,38 @@ public class InNeedEntityImpl implements InNeedEntity {
     }
 
     @Override
-    public String getName() {
+    public String getTitle() {
         return name;
     }
 
     @Override
-    public void setName(String name) {
+    public void setTitle(String name) {
         this.name = name;
+    }
+
+    @Override
+    public Set<String> getAlias() {
+        return null;
+    }
+
+    @Override
+    public void addAlias(String title) {
+
+    }
+
+    @Override
+    public void removeAlias(String title) {
+
+    }
+
+    @Override
+    public void setPersonalData(PersonalData personalData) {
+
+    }
+
+    @Override
+    public PersonalData getPersonalData() {
+        return null;
     }
 
     @Override
@@ -63,12 +90,14 @@ public class InNeedEntityImpl implements InNeedEntity {
         this.assignedCategories = assignedCategories;
     }
 
+
+    //TODO:update
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        InNeedEntityImpl that = (InNeedEntityImpl) o;
+        ShelterImpl that = (ShelterImpl) o;
 
         if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
@@ -77,6 +106,7 @@ public class InNeedEntityImpl implements InNeedEntity {
         return !(assignedCategories != null ? !assignedCategories.equals(that.assignedCategories) : that.assignedCategories != null);
     }
 
+    //TODO:update
     @Override
     public int hashCode() {
         int result = id;
@@ -87,6 +117,7 @@ public class InNeedEntityImpl implements InNeedEntity {
         return result;
     }
 
+    //TODO:update
     @Override
     public String toString() {
         return "InNeedEntityImpl{" +

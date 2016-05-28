@@ -1,10 +1,11 @@
 package com.formula1.help;
 
-import com.formula1.help.actor.Company;
-import com.formula1.help.actor.CompanyStatus;
-import com.formula1.help.actor.User;
+import com.formula1.help.actor.company.Company;
+import com.formula1.help.actor.company.CompanyStatus;
+import com.formula1.help.actor.personalData.PersonalData;
+import com.formula1.help.actor.user.User;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by alexey on 03.05.16.
@@ -12,11 +13,11 @@ import java.util.List;
 public class CompanyImpl implements Company {
     private final int id;
     private User createdUser;
-    private String name;
-    private List<String> webSite;
-    private List<User> adminUsers;
-    private List<User> members;
-    private List<String> companyType;
+    private Set<String> aliases;
+    private Set<String> webSite;
+    private Set<User> adminUsers;
+    private Set<User> members;
+    private Set<String> companyType;
     private CompanyStatus companyStatus;
 
     public CompanyImpl(int id) {
@@ -34,27 +35,57 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return null;
     }
 
     @Override
-    public List<String> getWebSite() {
+    public void setTitle(String title) {
+
+    }
+
+    @Override
+    public Set<String> getAliases() {
+        return aliases;
+    }
+
+    @Override
+    public void addAlias(String title) {
+
+    }
+
+    @Override
+    public void removeAlias(String title) {
+
+    }
+
+    @Override
+    public Set<String> getWebSite() {
         return webSite;
     }
 
     @Override
-    public List<User> getAdminUsers() {
+    public void addWebSite(String webSite) {
+
+    }
+
+    @Override
+    public void removeWebSite(String webSite) {
+
+    }
+
+    @Override
+    public Set<User> getCompanyAdminUsers() {
         return adminUsers;
     }
 
     @Override
-    public List<User> getMembers() {
+    public Set<User> getMembers() {
         return members;
     }
 
     @Override
-    public List<String> getCompanyType() {
+    public Set<String> getCompanyType() {
         return companyType;
     }
 
@@ -64,38 +95,28 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public void setCreatedUser(User createdUser) {
-        this.createdUser = createdUser;
+    public PersonalData getPersonalData() {
+        return null;
     }
 
     @Override
-    public void setName(String name) {
-        this.name = name;
+    public void addAdminUser(User adminUser) {
+
     }
 
     @Override
-    public void setWebSite(List<String> webSite) {
-        this.webSite = webSite;
+    public void addMember(User member) {
+
     }
 
     @Override
-    public void setAdminUsers(List<User> adminUsers) {
-        this.adminUsers = adminUsers;
+    public void removeAdminUser(User adminUser) {
+
     }
 
     @Override
-    public void setMembers(List<User> members) {
-        this.members = members;
-    }
+    public void removeMemberUser(User user) {
 
-    @Override
-    public void setCompanyType(List<String> companyType) {
-        this.companyType = companyType;
-    }
-
-    @Override
-    public void setCompanyStatus(CompanyStatus companyStatus) {
-        this.companyStatus = companyStatus;
     }
 
     @Override
@@ -107,7 +128,7 @@ public class CompanyImpl implements Company {
 
         if (id != company.id) return false;
         if (createdUser != null ? !createdUser.equals(company.createdUser) : company.createdUser != null) return false;
-        if (name != null ? !name.equals(company.name) : company.name != null) return false;
+        if (aliases != null ? !aliases.equals(company.aliases) : company.aliases != null) return false;
         if (webSite != null ? !webSite.equals(company.webSite) : company.webSite != null) return false;
         if (adminUsers != null ? !adminUsers.equals(company.adminUsers) : company.adminUsers != null) return false;
         if (members != null ? !members.equals(company.members) : company.members != null) return false;
@@ -120,7 +141,7 @@ public class CompanyImpl implements Company {
     public int hashCode() {
         int result = id;
         result = 31 * result + (createdUser != null ? createdUser.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (aliases != null ? aliases.hashCode() : 0);
         result = 31 * result + (webSite != null ? webSite.hashCode() : 0);
         result = 31 * result + (adminUsers != null ? adminUsers.hashCode() : 0);
         result = 31 * result + (members != null ? members.hashCode() : 0);
@@ -134,7 +155,7 @@ public class CompanyImpl implements Company {
         return "CompanyImpl{" +
                 "id=" + id +
                 ", createdUser=" + createdUser +
-                ", name='" + name + '\'' +
+                ", aliases='" + aliases + '\'' +
                 ", webSite='" + webSite + '\'' +
                 ", adminUsers=" + adminUsers +
                 ", members=" + members +

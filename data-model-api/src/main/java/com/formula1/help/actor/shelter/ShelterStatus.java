@@ -1,9 +1,9 @@
-package com.formula1.help.actor;
+package com.formula1.help.actor.shelter;
 
 /**
  * Created by alexey on 03.05.16.
  */
-public enum InNeedEntityStatuses {
+public enum ShelterStatus {
     DELETED,
     BANNED,
     NOT_VERIFIED,

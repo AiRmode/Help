@@ -1,4 +1,4 @@
-package com.formula1.help.actor;
+package com.formula1.help.actor.user;
 
 /**
  * Created by alexey on 03.05.16.
@@ -7,6 +7,6 @@ package com.formula1.help.actor;
 /**
  * Need to have access to all entities
  */
-public interface AdminUser extends User {
+public interface CompanyAdminUser extends User {
 
 }

@@ -1,4 +1,4 @@
-package com.formula1.help.actor;
+package com.formula1.help.actor.company;
 
 /**
  * Created by alexey on 03.05.16.
