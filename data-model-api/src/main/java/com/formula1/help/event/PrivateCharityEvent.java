@@ -8,6 +8,9 @@ import com.formula1.help.actor.user.User;
  * Created by alexey on 06.05.16.
  */
 public interface PrivateCharityEvent {
+    String getTitle();
+
+    String getDescription();
 
     Shelter getShelter();
 
