@@ -33,3 +33,8 @@ sudo apt-get install maven
 #install git
 sudo apt-get install git
 
+#create postgres
+git clone https://github.com/docker-library/postgres
+cd cd postgres/9.6
+docker build -t postgres96test .
+docker run -d --name mypostgres -e POSTGRES_PASSWORD=postpassword -p 5432:5432 postgres96test
