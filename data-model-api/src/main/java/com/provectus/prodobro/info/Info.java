@@ -3,6 +3,8 @@ package com.provectus.prodobro.info;
 
 public interface Info {
 
+    int getId();
+
     InfoType getType();
 
     String getInfo();

@@ -6,6 +6,7 @@ import com.provectus.prodobro.actor.company.Company;
 import com.provectus.prodobro.event.Event;
 
 import java.util.List;
+import java.util.Locale;
 
 public interface User extends Actor {
 
@@ -18,6 +19,11 @@ public interface User extends Actor {
     String getPassHash();
 
     String getPhoneNumber();
+
+    /**
+     * @return User`s locale
+     */
+    Locale getLanguage();
 
     /**
      * @return {@link List<Company>} of companies, where {@link User} is assigned
@@ -48,6 +54,8 @@ public interface User extends Actor {
     void setPassHash(String passHash);
 
     void setPhoneNumber(String phoneNumber);
+
+    void setLanguage(Locale language);
 
     void setUserAssignedCompanies(List<Company> userAssignedCompanies);
 
