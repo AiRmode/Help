@@ -9,6 +9,8 @@ public interface Info {
 
     String getInfo();
 
+    void setId(int id);
+
     void setType(InfoType type);
 
     void setInfo(String info);

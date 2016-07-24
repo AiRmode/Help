@@ -8,13 +8,14 @@ import com.provectus.prodobro.info.Info;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 public class EventImpl implements Event {
 
     private int id;
     private String title;
     private List<Info> info;
-    private String description;
+    private Optional<String> description;
     private Shelter shelter;
     private Timestamp date;
     private boolean accessible;
@@ -25,8 +26,7 @@ public class EventImpl implements Event {
     private List<User> assignedUsers;
     private List<Company> assignedCompanies;
 
-    public EventImpl(int id) {
-        this.id = id;
+    public EventImpl() {
     }
 
     @Override
@@ -45,7 +45,7 @@ public class EventImpl implements Event {
     }
 
     @Override
-    public String getDescription() {
+    public Optional<String> getDescription() {
         return description;
     }
 
@@ -95,6 +95,11 @@ public class EventImpl implements Event {
     }
 
     @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
     public void setTitle(String title) {
         this.title = title;
     }
@@ -106,7 +111,7 @@ public class EventImpl implements Event {
 
     @Override
     public void setDescription(String description) {
-        this.description = description;
+        this.description = Optional.ofNullable(description);
     }
 
     @Override

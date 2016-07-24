@@ -5,20 +5,20 @@ import com.provectus.prodobro.actor.Actor;
 import com.provectus.prodobro.event.Event;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface Shelter extends Actor {
 
     String getTitle();
 
-    String getDescription();
+    Optional<String> getDescription();
 
     ShelterType getType();
 
     /**
-     * @return {@link Event} for shelter
-     * @throws NullPointerException if no assigned event
+     * @return {@link Optional}<{@link Event}> for shelter
      */
-    Event getEvent() throws NullPointerException;
+    Optional<Event> getEvent();
 
     List<Tag> getTags();
 

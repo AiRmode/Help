@@ -12,6 +12,8 @@ public interface Tag {
 
     List<Shelter> getShelters();
 
+    void setId(int id);
+
     void setTitle(String title);
 
     void setShelters(List<Shelter> shelters);

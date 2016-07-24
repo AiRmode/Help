@@ -2,18 +2,18 @@ package com.provectus.prodobro.actor.user;
 
 
 import com.provectus.prodobro.actor.ActorStatus;
-import com.provectus.prodobro.actor.company.Company;
 import com.provectus.prodobro.event.Event;
 import com.provectus.prodobro.info.Info;
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 public class UserImpl implements User {
 
     private int id;
-    private byte[] avatarBytea;
+    private Optional<byte[]> avatarBytea;
     private List<Info> info;
     private ActorStatus status;
     private Timestamp createdDate;
@@ -27,13 +27,11 @@ public class UserImpl implements User {
     private String passHash;
     private String phoneNumber;
     private Locale language;
-    private List<Company> userAssignedCompanies;
-    private List<Company> userIsAdminCompanies;
+    private Optional<CompanyRelation> companyRelation;
     private List<Event> userAssignedEvents;
     private List<Event> userCreatedEvents;
 
-    public UserImpl(int id) {
-        this.id = id;
+    public UserImpl() {
     }
 
     @Override
@@ -42,7 +40,7 @@ public class UserImpl implements User {
     }
 
     @Override
-    public byte[] getAvatarBytea() {
+    public Optional<byte[]> getAvatarBytea() {
         return avatarBytea;
     }
 
@@ -107,13 +105,8 @@ public class UserImpl implements User {
     }
 
     @Override
-    public List<Company> getUserAssignedCompanies() {
-        return userAssignedCompanies;
-    }
-
-    @Override
-    public List<Company> getUserIsAdminCompanies() {
-        return userIsAdminCompanies;
+    public Optional<CompanyRelation> getCompanyRelation() {
+        return this.companyRelation;
     }
 
     @Override
@@ -127,8 +120,13 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
     public void setAvatarBytea(byte[] avatarBytea) {
-        this.avatarBytea = avatarBytea;
+        this.avatarBytea = Optional.ofNullable(avatarBytea);
     }
 
     @Override
@@ -192,13 +190,8 @@ public class UserImpl implements User {
     }
 
     @Override
-    public void setUserAssignedCompanies(List<Company> userAssignedCompanies) {
-        this.userAssignedCompanies = userAssignedCompanies;
-    }
-
-    @Override
-    public void setUserIsAdminCompanies(List<Company> userIsAdminCompanies) {
-        this.userIsAdminCompanies = userIsAdminCompanies;
+    public void setCompanyRelation(CompanyRelation companyRelation) {
+        this.companyRelation = Optional.ofNullable(companyRelation);
     }
 
     @Override

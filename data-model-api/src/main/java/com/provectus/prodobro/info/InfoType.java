@@ -4,8 +4,10 @@ package com.provectus.prodobro.info;
 public enum InfoType {
 
     EMAIL(1),
-    WEBSITE(2),
-    IMAGE(3);
+    SKYPE(2),
+    WEBSITE(3),
+    PHONE_NUMBER(4),
+    IMAGE(5);
 
     private int id;
 

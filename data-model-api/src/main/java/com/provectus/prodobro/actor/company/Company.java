@@ -21,6 +21,11 @@ public interface Company extends Actor {
     List<User> getUsers();
 
     /**
+     * @return {@link List<User>} of admin users
+     */
+    List<User> getAdmins();
+
+    /**
      * @return {@link List<User>} of company assigned events
      */
     List<Event> getCompanyAssignedEvents();

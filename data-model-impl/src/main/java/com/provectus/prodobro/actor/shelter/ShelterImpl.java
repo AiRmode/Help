@@ -8,11 +8,12 @@ import com.provectus.prodobro.info.Info;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 public class ShelterImpl implements Shelter {
 
     private int id;
-    private byte[] avatarBytea;
+    private Optional<byte[]> avatarBytea;
     private List<Info> info;
     private ActorStatus status;
     private Timestamp createdDate;
@@ -21,13 +22,12 @@ public class ShelterImpl implements Shelter {
     private User lastModifiedBy;
 
     private String title;
-    private String description;
+    private Optional<String> description;
     private ShelterType type;
-    private Event event;
+    private Optional<Event> event;
     private List<Tag> tags;
 
-    public ShelterImpl(int id) {
-        this.id = id;
+    public ShelterImpl() {
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
-    public byte[] getAvatarBytea() {
+    public Optional<byte[]> getAvatarBytea() {
         return avatarBytea;
     }
 
@@ -76,7 +76,7 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
-    public String getDescription() {
+    public Optional<String> getDescription() {
         return description;
     }
 
@@ -86,7 +86,7 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
-    public Event getEvent() {
+    public Optional<Event> getEvent() {
         return event;
     }
 
@@ -96,8 +96,13 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
     public void setAvatarBytea(byte[] avatarBytea) {
-        this.avatarBytea = avatarBytea;
+        this.avatarBytea = Optional.ofNullable(avatarBytea);
     }
 
     @Override
@@ -137,7 +142,7 @@ public class ShelterImpl implements Shelter {
 
     @Override
     public void setDescription(String description) {
-        this.description = description;
+        this.description = Optional.ofNullable(description);
     }
 
     @Override
@@ -147,7 +152,7 @@ public class ShelterImpl implements Shelter {
 
     @Override
     public void setEvent(Event event) {
-        this.event = event;
+        this.event = Optional.ofNullable(event);
     }
 
     @Override

@@ -2,11 +2,11 @@ package com.provectus.prodobro.actor.user;
 
 
 import com.provectus.prodobro.actor.Actor;
-import com.provectus.prodobro.actor.company.Company;
 import com.provectus.prodobro.event.Event;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 public interface User extends Actor {
 
@@ -26,14 +26,9 @@ public interface User extends Actor {
     Locale getLanguage();
 
     /**
-     * @return {@link List<Company>} of companies, where {@link User} is assigned
+     * @return {@link Optional<CompanyRelation>} user`s company
      */
-    List<Company> getUserAssignedCompanies();
-
-    /**
-     * @return {@link List<Company>} of companies, where {@link User} is assigned as admin
-     */
-    List<Company> getUserIsAdminCompanies();
+    Optional<CompanyRelation> getCompanyRelation();
 
     /**
      * @return {@link List<Event>} of events, where {@link User} is assigned
@@ -57,9 +52,7 @@ public interface User extends Actor {
 
     void setLanguage(Locale language);
 
-    void setUserAssignedCompanies(List<Company> userAssignedCompanies);
-
-    void setUserIsAdminCompanies(List<Company> userIsAdminCompanies);
+    void setCompanyRelation(CompanyRelation companyRelation);
 
     void setUserAssignedEvents(List<Event> userAssignedEvents);
 

@@ -9,8 +9,7 @@ public class TagImpl implements Tag {
     private String title;
     private List<Shelter> shelters;
 
-    public TagImpl(int id) {
-        this.id = id;
+    public TagImpl() {
     }
 
     @Override
@@ -26,6 +25,11 @@ public class TagImpl implements Tag {
     @Override
     public List<Shelter> getShelters() {
         return shelters;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

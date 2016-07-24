@@ -7,8 +7,7 @@ public class InfoImpl implements Info {
     private InfoType type;
     private String info;
 
-    public InfoImpl(int id) {
-        this.id = id;
+    public InfoImpl() {
     }
 
     @Override
@@ -24,6 +23,11 @@ public class InfoImpl implements Info {
     @Override
     public String getInfo() {
         return info;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

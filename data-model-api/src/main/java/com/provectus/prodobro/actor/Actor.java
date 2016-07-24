@@ -6,6 +6,7 @@ import com.provectus.prodobro.info.Info;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 public interface Actor {
 
@@ -17,7 +18,7 @@ public interface Actor {
     /**
      * @return Actor`s avatar
      */
-    byte[] getAvatarBytea();
+    Optional<byte[]> getAvatarBytea();
 
     /**
      * Information: Photos, Emails, Websites, etc.
@@ -52,6 +53,8 @@ public interface Actor {
     User getLastModifiedBy();
 
     // Setters
+    void setId(int id);
+
     void setAvatarBytea(byte[] avatarBytea);
 
     void setInfo(List<Info> info);

@@ -8,11 +8,13 @@ import com.provectus.prodobro.info.Info;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CompanyImpl implements Company {
 
     private int id;
-    private byte[] avatarBytea;
+    private Optional<byte[]> avatarBytea;
     private List<Info> info;
     private ActorStatus status;
     private Timestamp createdDate;
@@ -26,8 +28,7 @@ public class CompanyImpl implements Company {
     private List<User> users;
     private List<Event> companyAssignedEvents;
 
-    public CompanyImpl(int id) {
-        this.id = id;
+    public CompanyImpl() {
     }
 
     @Override
@@ -36,7 +37,7 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public byte[] getAvatarBytea() {
+    public Optional<byte[]> getAvatarBytea() {
         return avatarBytea;
     }
 
@@ -91,13 +92,25 @@ public class CompanyImpl implements Company {
     }
 
     @Override
+    public List<User> getAdmins() {
+        return users.stream()
+                .filter(line -> line.getCompanyRelation().get().isAdmin())
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<Event> getCompanyAssignedEvents() {
         return companyAssignedEvents;
     }
 
     @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
     public void setAvatarBytea(byte[] avatarBytea) {
-        this.avatarBytea = avatarBytea;
+        this.avatarBytea = Optional.ofNullable(avatarBytea);
     }
 
     @Override

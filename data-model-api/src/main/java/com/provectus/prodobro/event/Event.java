@@ -8,6 +8,7 @@ import com.provectus.prodobro.info.Info;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 public interface Event {
 
@@ -17,7 +18,7 @@ public interface Event {
 
     List<Info> getInfo();
 
-    String getDescription();
+    Optional<String> getDescription();
 
     Shelter getShelter();
 
@@ -36,6 +37,8 @@ public interface Event {
     List<User> getAssignedUsers();
 
     List<Company> getAssignedCompanies();
+
+    void setId(int id);
 
     void setTitle(String title);
 
