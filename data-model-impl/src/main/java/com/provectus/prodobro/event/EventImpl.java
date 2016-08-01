@@ -9,12 +9,13 @@ import com.provectus.prodobro.info.Info;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class EventImpl implements Event {
 
     private int id;
     private String title;
-    private List<Info> info;
+    private Set<Info> info;
     private Optional<String> description;
     private Shelter shelter;
     private Timestamp date;
@@ -23,8 +24,8 @@ public class EventImpl implements Event {
     private User createdBy;
     private Timestamp lastModifiedDate;
     private User lastModifiedBy;
-    private List<User> assignedUsers;
-    private List<Company> assignedCompanies;
+    private Set<User> assignedUsers;
+    private Set<Company> assignedCompanies;
 
     public EventImpl() {
     }
@@ -40,7 +41,7 @@ public class EventImpl implements Event {
     }
 
     @Override
-    public List<Info> getInfo() {
+    public Set<Info> getInfo() {
         return info;
     }
 
@@ -85,12 +86,12 @@ public class EventImpl implements Event {
     }
 
     @Override
-    public List<User> getAssignedUsers() {
+    public Set<User> getAssignedUsers() {
         return assignedUsers;
     }
 
     @Override
-    public List<Company> getAssignedCompanies() {
+    public Set<Company> getAssignedCompanies() {
         return assignedCompanies;
     }
 
@@ -105,7 +106,7 @@ public class EventImpl implements Event {
     }
 
     @Override
-    public void setInfo(List<Info> info) {
+    public void setInfo(Set<Info> info) {
         this.info = info;
     }
 
@@ -150,12 +151,101 @@ public class EventImpl implements Event {
     }
 
     @Override
-    public void setAssignedUsers(List<User> assignedUsers) {
+    public void setAssignedUsers(Set<User> assignedUsers) {
         this.assignedUsers = assignedUsers;
     }
 
     @Override
-    public void setAssignedCompanies(List<Company> assignedCompanies) {
+    public void setAssignedCompanies(Set<Company> assignedCompanies) {
         this.assignedCompanies = assignedCompanies;
+    }
+
+    @Override
+    public void addInfo(Info info) {
+        this.info.add(info);
+    }
+
+    @Override
+    public void removeInfo(Info info) {
+        this.info.remove(info);
+    }
+
+    @Override
+    public void addAssignedUser(User user) {
+        assignedUsers.add(user);
+    }
+
+    @Override
+    public void removeAssignedUser(User user) {
+        assignedUsers.remove(user);
+    }
+
+    @Override
+    public void addAssignedCompany(Company company) {
+        assignedCompanies.add(company);
+    }
+
+    @Override
+    public void removeAssignedCompany(Company company) {
+        assignedCompanies.remove(company);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EventImpl)) return false;
+
+        EventImpl event = (EventImpl) o;
+
+        if (accessible != event.accessible) return false;
+        if (!title.equals(event.title)) return false;
+        if (info != null ? !info.equals(event.info) : event.info != null) return false;
+        if (description != null ? !description.equals(event.description) : event.description != null) return false;
+        if (!shelter.equals(event.shelter)) return false;
+        if (!date.equals(event.date)) return false;
+        if (!createdDate.equals(event.createdDate)) return false;
+        if (!createdBy.equals(event.createdBy)) return false;
+        if (!lastModifiedDate.equals(event.lastModifiedDate)) return false;
+        if (!lastModifiedBy.equals(event.lastModifiedBy)) return false;
+        if (assignedUsers != null ? !assignedUsers.equals(event.assignedUsers) : event.assignedUsers != null)
+            return false;
+        return assignedCompanies != null ? assignedCompanies.equals(event.assignedCompanies) : event.assignedCompanies == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title.hashCode();
+        result = 31 * result + (info != null ? info.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + shelter.hashCode();
+        result = 31 * result + date.hashCode();
+        result = 31 * result + (accessible ? 1 : 0);
+        result = 31 * result + createdDate.hashCode();
+        result = 31 * result + createdBy.hashCode();
+        result = 31 * result + lastModifiedDate.hashCode();
+        result = 31 * result + lastModifiedBy.hashCode();
+        result = 31 * result + (assignedUsers != null ? assignedUsers.hashCode() : 0);
+        result = 31 * result + (assignedCompanies != null ? assignedCompanies.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "EventImpl{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", info=" + info +
+                ", description=" + description +
+                ", shelter=" + shelter +
+                ", date=" + date +
+                ", accessible=" + accessible +
+                ", createdDate=" + createdDate +
+                ", createdBy=" + createdBy +
+                ", lastModifiedDate=" + lastModifiedDate +
+                ", lastModifiedBy=" + lastModifiedBy +
+                ", assignedUsers=" + assignedUsers +
+                ", assignedCompanies=" + assignedCompanies +
+                '}';
     }
 }

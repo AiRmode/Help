@@ -6,39 +6,57 @@ import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.event.Event;
 
 import java.util.List;
+import java.util.Set;
 
 public interface Company extends Actor {
 
     String getTitle();
 
-    List<String> getAlias();
+    Set<String> getAliases();
 
     String getDescription();
 
     /**
-     * @return {@link List<User>} of assigned users
+     * @return {@link Set<User>} of assigned users
      */
-    List<User> getUsers();
+    Set<User> getUsers();
 
     /**
-     * @return {@link List<User>} of admin users
+     * @return {@link Set<User>} of admin users
      */
-    List<User> getAdmins();
+    Set<User> getAdmins();
 
     /**
      * @return {@link List<User>} of company assigned events
      */
-    List<Event> getCompanyAssignedEvents();
+    Set<Event> getAssignedEvents();
 
     void setTitle(String title);
 
-    void setAlias(List<String> alias);
+    void setAliases(Set<String> aliases);
 
     void setDescription(String description);
 
-    void setUsers(List<User> users);
+    void setUsers(Set<User> users);
 
-    void setCompanyAssignedEvents(List<Event> companyAssignedEvents);
+    void setAdmins(Set<User> admins);
 
+    void setAssignedEvents(Set<Event> assignedEvents);
+
+    void addAlias(String alias);
+
+    void removeAlias(String alias);
+
+    void addUser(User user);
+
+    void addAdmin(User admin);
+
+    void removeUser(User user);
+
+    void removeAdmin(User admin);
+
+    void addAssignedEvent(Event event);
+
+    void removeAssignedEvent(Event event);
 
 }

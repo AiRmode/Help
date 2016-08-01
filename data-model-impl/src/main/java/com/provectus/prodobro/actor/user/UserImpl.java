@@ -9,12 +9,13 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
 
 public class UserImpl implements User {
 
     private int id;
     private Optional<byte[]> avatarBytea;
-    private List<Info> info;
+    private Set<Info> info;
     private ActorStatus status;
     private Timestamp createdDate;
     private User createdBy;
@@ -28,8 +29,8 @@ public class UserImpl implements User {
     private String phoneNumber;
     private Locale language;
     private Optional<CompanyRelation> companyRelation;
-    private List<Event> userAssignedEvents;
-    private List<Event> userCreatedEvents;
+    private Set<Event> asignedEvents;
+    private Set<Event> createdEvents;
 
     public UserImpl() {
     }
@@ -45,7 +46,7 @@ public class UserImpl implements User {
     }
 
     @Override
-    public List<Info> getInfo() {
+    public Set<Info> getInfo() {
         return info;
     }
 
@@ -110,13 +111,13 @@ public class UserImpl implements User {
     }
 
     @Override
-    public List<Event> getUserAssignedEvents() {
-        return userAssignedEvents;
+    public Set<Event> getAssignedEvents() {
+        return asignedEvents;
     }
 
     @Override
-    public List<Event> getUserCreatedEvents() {
-        return userCreatedEvents;
+    public Set<Event> getCreatedEvents() {
+        return createdEvents;
     }
 
     @Override
@@ -130,7 +131,7 @@ public class UserImpl implements User {
     }
 
     @Override
-    public void setInfo(List<Info> info) {
+    public void setInfo(Set<Info> info) {
         this.info = info;
     }
 
@@ -195,12 +196,114 @@ public class UserImpl implements User {
     }
 
     @Override
-    public void setUserAssignedEvents(List<Event> userAssignedEvents) {
-        this.userAssignedEvents = userAssignedEvents;
+    public void setAssignedEvents(Set<Event> assignedEvents) {
+        this.asignedEvents = assignedEvents;
     }
 
     @Override
-    public void setUserCreatedEvents(List<Event> userCreatedEvents) {
-        this.userCreatedEvents = userCreatedEvents;
+    public void setCreatedEvents(Set<Event> createdEvents) {
+        this.createdEvents = createdEvents;
+    }
+
+    @Override
+    public void addInfo(Info info) {
+        this.info.add(info);
+    }
+
+    @Override
+    public void removeInfo(Info info) {
+        this.info.remove(info);
+    }
+
+    @Override
+    public void addAssignedEvent(Event event) {
+        asignedEvents.add(event);
+    }
+
+    @Override
+    public void removeAssignedEvent(Event event) {
+        asignedEvents.remove(event);
+    }
+
+    @Override
+    public void addCreatedEvent(Event event) {
+        createdEvents.add(event);
+    }
+
+    @Override
+    public void removeCreatedEvent(Event event) {
+        createdEvents.remove(event);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserImpl)) return false;
+
+        UserImpl user = (UserImpl) o;
+
+        if (avatarBytea != null ? !avatarBytea.equals(user.avatarBytea) : user.avatarBytea != null) return false;
+        if (info != null ? !info.equals(user.info) : user.info != null) return false;
+        if (status != user.status) return false;
+        if (!createdDate.equals(user.createdDate)) return false;
+        if (!createdBy.equals(user.createdBy)) return false;
+        if (!lastModifiedDate.equals(user.lastModifiedDate)) return false;
+        if (!lastModifiedBy.equals(user.lastModifiedBy)) return false;
+        if (!firstName.equals(user.firstName)) return false;
+        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
+        if (!email.equals(user.email)) return false;
+        if (!passHash.equals(user.passHash)) return false;
+        if (phoneNumber != null ? !phoneNumber.equals(user.phoneNumber) : user.phoneNumber != null) return false;
+        if (!language.equals(user.language)) return false;
+        if (companyRelation != null ? !companyRelation.equals(user.companyRelation) : user.companyRelation != null)
+            return false;
+        if (asignedEvents != null ? !asignedEvents.equals(user.asignedEvents) : user.asignedEvents != null)
+            return false;
+        return createdEvents != null ? createdEvents.equals(user.createdEvents) : user.createdEvents == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = avatarBytea != null ? avatarBytea.hashCode() : 0;
+        result = 31 * result + (info != null ? info.hashCode() : 0);
+        result = 31 * result + status.hashCode();
+        result = 31 * result + createdDate.hashCode();
+        result = 31 * result + createdBy.hashCode();
+        result = 31 * result + lastModifiedDate.hashCode();
+        result = 31 * result + lastModifiedBy.hashCode();
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + email.hashCode();
+        result = 31 * result + passHash.hashCode();
+        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + language.hashCode();
+        result = 31 * result + (companyRelation != null ? companyRelation.hashCode() : 0);
+        result = 31 * result + (asignedEvents != null ? asignedEvents.hashCode() : 0);
+        result = 31 * result + (createdEvents != null ? createdEvents.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "UserImpl{" +
+                "id=" + id +
+                ", avatarBytea=" + avatarBytea +
+                ", info=" + info +
+                ", status=" + status +
+                ", createdDate=" + createdDate +
+                ", createdBy=" + createdBy +
+                ", lastModifiedDate=" + lastModifiedDate +
+                ", lastModifiedBy=" + lastModifiedBy +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", passHash='" + passHash + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", language=" + language +
+                ", companyRelation=" + companyRelation +
+                ", asignedEvents=" + asignedEvents +
+                ", createdEvents=" + createdEvents +
+                '}';
     }
 }
