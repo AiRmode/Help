@@ -7,6 +7,7 @@ import com.provectus.prodobro.info.Info;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface Actor {
 
@@ -25,7 +26,7 @@ public interface Actor {
      *
      * @return {@link List<Info>} of Actor`s information
      */
-    List<Info> getInfo();
+    Set<Info> getInfo();
 
     /**
      * @return current {@link ActorStatus}
@@ -57,7 +58,7 @@ public interface Actor {
 
     void setAvatarBytea(byte[] avatarBytea);
 
-    void setInfo(List<Info> info);
+    void setInfo(Set<Info> info);
 
     void setStatus(ActorStatus status);
 
@@ -68,4 +69,8 @@ public interface Actor {
     void setLastModifiedDate(Timestamp lastModifiedDate);
 
     void setLastModifiedBy(User lastModifiedBy);
+
+    void addInfo(Info info);
+
+    void removeInfo(Info info);
 }

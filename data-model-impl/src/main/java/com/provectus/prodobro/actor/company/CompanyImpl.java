@@ -2,20 +2,21 @@ package com.provectus.prodobro.actor.company;
 
 
 import com.provectus.prodobro.actor.ActorStatus;
+import com.provectus.prodobro.actor.EmployeeRelation;
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.event.Event;
 import com.provectus.prodobro.info.Info;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class CompanyImpl implements Company {
 
     private int id;
     private Optional<byte[]> avatarBytea;
-    private List<Info> info;
+    private Set<Info> info = new TreeSet<>();
     private ActorStatus status;
     private Timestamp createdDate;
     private User createdBy;
@@ -23,10 +24,10 @@ public class CompanyImpl implements Company {
     private User lastModifiedBy;
 
     private String title;
-    private List<String> alias;
+    private Set<String> aliases = new TreeSet<>();
     private String description;
-    private List<User> users;
-    private List<Event> companyAssignedEvents;
+    private Set<EmployeeRelation> employeeRelations = new TreeSet<>();
+    private Set<Event> assignedEvents = new TreeSet<>();
 
     public CompanyImpl() {
     }
@@ -42,7 +43,7 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public List<Info> getInfo() {
+    public Set<Info> getInfo() {
         return info;
     }
 
@@ -77,8 +78,8 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public List<String> getAlias() {
-        return alias;
+    public Set<String> getAliases() {
+        return aliases;
     }
 
     @Override
@@ -87,20 +88,13 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public List<User> getUsers() {
-        return users;
+    public Set<EmployeeRelation> getEmployeeRelations() {
+        return employeeRelations;
     }
 
     @Override
-    public List<User> getAdmins() {
-        return users.stream()
-                .filter(line -> line.getCompanyRelation().get().isAdmin())
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Event> getCompanyAssignedEvents() {
-        return companyAssignedEvents;
+    public Set<Event> getAssignedEvents() {
+        return assignedEvents;
     }
 
     @Override
@@ -114,7 +108,7 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public void setInfo(List<Info> info) {
+    public void setInfo(Set<Info> info) {
         this.info = info;
     }
 
@@ -149,8 +143,8 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public void setAlias(List<String> alias) {
-        this.alias = alias;
+    public void setAliases(Set<String> aliases) {
+        this.aliases = aliases;
     }
 
     @Override
@@ -159,12 +153,110 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setEmployeeRelations(Set<EmployeeRelation> employeeRelations) {
+        this.employeeRelations = employeeRelations;
     }
 
     @Override
-    public void setCompanyAssignedEvents(List<Event> companyAssignedEvents) {
-        this.companyAssignedEvents = companyAssignedEvents;
+    public void setAssignedEvents(Set<Event> assignedEvents) {
+        this.assignedEvents = assignedEvents;
+    }
+
+    @Override
+    public void addInfo(Info info) {
+        this.info.add(info);
+    }
+
+    @Override
+    public void removeInfo(Info info) {
+        this.info.remove(info);
+    }
+
+    @Override
+    public void addAlias(String alias) {
+        aliases.add(alias);
+    }
+
+    @Override
+    public void removeAlias(String alias) {
+        aliases.remove(alias);
+    }
+
+    @Override
+    public void addEmployeeRelation(EmployeeRelation employeeRelation) {
+        employeeRelations.add(employeeRelation);
+    }
+
+    @Override
+    public void removeEmployeeRelation(EmployeeRelation employeeRelation) {
+        employeeRelations.remove(employeeRelation);
+    }
+
+    @Override
+    public void addAssignedEvent(Event event) {
+        assignedEvents.add(event);
+    }
+
+    @Override
+    public void removeAssignedEvent(Event event) {
+        assignedEvents.remove(event);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CompanyImpl)) return false;
+
+        CompanyImpl company = (CompanyImpl) o;
+
+        if (avatarBytea != null ? !avatarBytea.equals(company.avatarBytea) : company.avatarBytea != null) return false;
+        if (info != null ? !info.equals(company.info) : company.info != null) return false;
+        if (status != company.status) return false;
+        if (!createdDate.equals(company.createdDate)) return false;
+        if (!createdBy.equals(company.createdBy)) return false;
+        if (!lastModifiedDate.equals(company.lastModifiedDate)) return false;
+        if (!lastModifiedBy.equals(company.lastModifiedBy)) return false;
+        if (!title.equals(company.title)) return false;
+        if (aliases != null ? !aliases.equals(company.aliases) : company.aliases != null) return false;
+        if (description != null ? !description.equals(company.description) : company.description != null) return false;
+        if (!employeeRelations.equals(company.employeeRelations)) return false;
+        return assignedEvents != null ? assignedEvents.equals(company.assignedEvents) : company.assignedEvents == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = avatarBytea != null ? avatarBytea.hashCode() : 0;
+        result = 31 * result + (info != null ? info.hashCode() : 0);
+        result = 31 * result + status.hashCode();
+        result = 31 * result + createdDate.hashCode();
+        result = 31 * result + createdBy.hashCode();
+        result = 31 * result + lastModifiedDate.hashCode();
+        result = 31 * result + lastModifiedBy.hashCode();
+        result = 31 * result + title.hashCode();
+        result = 31 * result + (aliases != null ? aliases.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + employeeRelations.hashCode();
+        result = 31 * result + (assignedEvents != null ? assignedEvents.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "CompanyImpl{" +
+                "id=" + id +
+                ", avatarBytea=" + avatarBytea +
+                ", info=" + info +
+                ", status=" + status +
+                ", createdDate=" + createdDate +
+                ", createdBy=" + createdBy +
+                ", lastModifiedDate=" + lastModifiedDate +
+                ", lastModifiedBy=" + lastModifiedBy +
+                ", title='" + title + '\'' +
+                ", aliases=" + aliases +
+                ", description='" + description + '\'' +
+                ", employeeRelations=" + employeeRelations +
+                ", assignedEvents=" + assignedEvents +
+                '}';
     }
 }

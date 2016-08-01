@@ -2,11 +2,12 @@ package com.provectus.prodobro.actor.user;
 
 
 import com.provectus.prodobro.actor.Actor;
+import com.provectus.prodobro.actor.EmployeeRelation;
 import com.provectus.prodobro.event.Event;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Set;
 
 public interface User extends Actor {
 
@@ -26,19 +27,19 @@ public interface User extends Actor {
     Locale getLanguage();
 
     /**
-     * @return {@link Optional<CompanyRelation>} user`s company
+     * @return {@link Optional<EmployeeRelation>} user`s company
      */
-    Optional<CompanyRelation> getCompanyRelation();
+    Optional<EmployeeRelation> getEmployeeRelation();
 
     /**
-     * @return {@link List<Event>} of events, where {@link User} is assigned
+     * @return {@link Set<Event>} of events, where {@link User} is assigned
      */
-    List<Event> getUserAssignedEvents();
+    Set<Event> getAssignedEvents();
 
     /**
-     * @return {@link List<Event>} of events, {@link User} has created
+     * @return {@link Set<Event>} of events, {@link User} has created
      */
-    List<Event> getUserCreatedEvents();
+    Set<Event> getCreatedEvents();
 
     void setFirstName(String firstName);
 
@@ -52,10 +53,18 @@ public interface User extends Actor {
 
     void setLanguage(Locale language);
 
-    void setCompanyRelation(CompanyRelation companyRelation);
+    void setEmployeeRelation(EmployeeRelation employeeRelation);
 
-    void setUserAssignedEvents(List<Event> userAssignedEvents);
+    void setAssignedEvents(Set<Event> assignedEvents);
 
-    void setUserCreatedEvents(List<Event> userCreatedEvents);
+    void setCreatedEvents(Set<Event> createdEvents);
+
+    void addAssignedEvent(Event event);
+
+    void removeAssignedEvent(Event event);
+
+    void addCreatedEvent(Event event);
+
+    void removeCreatedEvent(Event event);
 
 }

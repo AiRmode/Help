@@ -5,8 +5,8 @@ public enum InfoType {
 
     EMAIL(1),
     SKYPE(2),
-    WEBSITE(3),
-    PHONE_NUMBER(4),
+    PHONE_NUMBER(3),
+    WEBSITE(4),
     IMAGE(5);
 
     private int id;

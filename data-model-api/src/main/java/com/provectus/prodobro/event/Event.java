@@ -7,8 +7,8 @@ import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.info.Info;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface Event {
 
@@ -16,7 +16,7 @@ public interface Event {
 
     String getTitle();
 
-    List<Info> getInfo();
+    Set<Info> getInfo();
 
     Optional<String> getDescription();
 
@@ -34,15 +34,15 @@ public interface Event {
 
     User getLastModifiedBy();
 
-    List<User> getAssignedUsers();
+    Set<User> getAssignedUsers();
 
-    List<Company> getAssignedCompanies();
+    Set<Company> getAssignedCompanies();
 
     void setId(int id);
 
     void setTitle(String title);
 
-    void setInfo(List<Info> info);
+    void setInfo(Set<Info> info);
 
     void setDescription(String description);
 
@@ -60,8 +60,20 @@ public interface Event {
 
     void setLastModifiedBy(User lastModifiedBy);
 
-    void setAssignedUsers(List<User> assignedUsers);
+    void addInfo(Info info);
 
-    void setAssignedCompanies(List<Company> assignedCompanies);
+    void removeInfo(Info info);
+
+    void setAssignedUsers(Set<User> assignedUsers);
+
+    void setAssignedCompanies(Set<Company> assignedCompanies);
+
+    void addAssignedUser(User user);
+
+    void removeAssignedUser(User user);
+
+    void addAssignedCompany(Company company);
+
+    void removeAssignedCompany(Company company);
 
 }

@@ -4,8 +4,8 @@ package com.provectus.prodobro.actor.shelter;
 import com.provectus.prodobro.actor.Actor;
 import com.provectus.prodobro.event.Event;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface Shelter extends Actor {
 
@@ -20,7 +20,7 @@ public interface Shelter extends Actor {
      */
     Optional<Event> getEvent();
 
-    List<Tag> getTags();
+    Set<Tag> getTags();
 
     void setTitle(String title);
 
@@ -30,7 +30,10 @@ public interface Shelter extends Actor {
 
     void setEvent(Event event);
 
-    void setTags(List<Tag> tags);
+    void setTags(Set<Tag> tags);
 
+    void addTag(Tag tag);
+
+    void removeTag(Tag tag);
 
 }

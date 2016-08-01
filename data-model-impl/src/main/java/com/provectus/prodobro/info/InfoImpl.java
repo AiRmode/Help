@@ -10,6 +10,12 @@ public class InfoImpl implements Info {
     public InfoImpl() {
     }
 
+    public InfoImpl(int id, InfoType type, String info) {
+        this.id = id;
+        this.type = type;
+        this.info = info;
+    }
+
     @Override
     public int getId() {
         return id;
@@ -38,5 +44,33 @@ public class InfoImpl implements Info {
     @Override
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof InfoImpl)) return false;
+
+        InfoImpl info1 = (InfoImpl) o;
+
+        if (type != info1.type) return false;
+        return info.equals(info1.info);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = type.hashCode();
+        result = 31 * result + info.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "InfoImpl{" +
+                "id=" + id +
+                ", type=" + type +
+                ", info='" + info + '\'' +
+                '}';
     }
 }
