@@ -2,23 +2,21 @@ package com.provectus.prodobro.actor.company;
 
 
 import com.provectus.prodobro.actor.ActorStatus;
-import com.provectus.prodobro.actor.user.CompanyRelation;
-import com.provectus.prodobro.actor.user.CompanyRelationImpl;
+import com.provectus.prodobro.actor.EmployeeRelation;
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.event.Event;
 import com.provectus.prodobro.info.Info;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.TreeSet;
 
 public class CompanyImpl implements Company {
 
     private int id;
     private Optional<byte[]> avatarBytea;
-    private Set<Info> info;
+    private Set<Info> info = new TreeSet<>();
     private ActorStatus status;
     private Timestamp createdDate;
     private User createdBy;
@@ -26,11 +24,10 @@ public class CompanyImpl implements Company {
     private User lastModifiedBy;
 
     private String title;
-    private Set<String> aliases;
+    private Set<String> aliases = new TreeSet<>();
     private String description;
-    private Set<User> users;
-    private Set<User> admins;
-    private Set<Event> assignedEvents;
+    private Set<EmployeeRelation> employeeRelations = new TreeSet<>();
+    private Set<Event> assignedEvents = new TreeSet<>();
 
     public CompanyImpl() {
     }
@@ -91,13 +88,8 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    @Override
-    public Set<User> getAdmins() {
-        return admins;
+    public Set<EmployeeRelation> getEmployeeRelations() {
+        return employeeRelations;
     }
 
     @Override
@@ -161,13 +153,8 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    @Override
-    public void setAdmins(Set<User> admins) {
-        this.admins = admins;
+    public void setEmployeeRelations(Set<EmployeeRelation> employeeRelations) {
+        this.employeeRelations = employeeRelations;
     }
 
     @Override
@@ -186,29 +173,6 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public void addUser(User user) {
-        user.setCompanyRelation(new CompanyRelationImpl(
-                this, // Adding company
-                false // Adding isAdmin
-        ));
-        users.add(user);
-    }
-
-    @Override
-    public void addAdmin(User admin) {
-        admin.setCompanyRelation(new CompanyRelationImpl(
-                this,
-                true
-        ));
-        admins.add(admin);
-    }
-
-    @Override
-    public void removeUser(User user) {
-        users.remove(user);
-    }
-
-    @Override
     public void addAlias(String alias) {
         aliases.add(alias);
     }
@@ -219,8 +183,13 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public void removeAdmin(User admin) {
-        admins.remove(admin);
+    public void addEmployeeRelation(EmployeeRelation employeeRelation) {
+        employeeRelations.add(employeeRelation);
+    }
+
+    @Override
+    public void removeEmployeeRelation(EmployeeRelation employeeRelation) {
+        employeeRelations.remove(employeeRelation);
     }
 
     @Override
@@ -250,8 +219,7 @@ public class CompanyImpl implements Company {
         if (!title.equals(company.title)) return false;
         if (aliases != null ? !aliases.equals(company.aliases) : company.aliases != null) return false;
         if (description != null ? !description.equals(company.description) : company.description != null) return false;
-        if (!users.equals(company.users)) return false;
-        if (!admins.equals(company.admins)) return false;
+        if (!employeeRelations.equals(company.employeeRelations)) return false;
         return assignedEvents != null ? assignedEvents.equals(company.assignedEvents) : company.assignedEvents == null;
 
     }
@@ -268,8 +236,7 @@ public class CompanyImpl implements Company {
         result = 31 * result + title.hashCode();
         result = 31 * result + (aliases != null ? aliases.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + users.hashCode();
-        result = 31 * result + admins.hashCode();
+        result = 31 * result + employeeRelations.hashCode();
         result = 31 * result + (assignedEvents != null ? assignedEvents.hashCode() : 0);
         return result;
     }
@@ -288,8 +255,7 @@ public class CompanyImpl implements Company {
                 ", title='" + title + '\'' +
                 ", aliases=" + aliases +
                 ", description='" + description + '\'' +
-                ", users=" + users +
-                ", admins=" + admins +
+                ", employeeRelations=" + employeeRelations +
                 ", assignedEvents=" + assignedEvents +
                 '}';
     }

@@ -1,18 +1,22 @@
-package com.provectus.prodobro.actor.user;
+package com.provectus.prodobro.actor;
 
 
 import com.provectus.prodobro.actor.company.Company;
+import com.provectus.prodobro.actor.user.User;
 
-public class CompanyRelationImpl implements CompanyRelation {
+public class EmployeeRelationImpl implements EmployeeRelation {
 
     private int id;
+    private User user;
     private Company company;
     private boolean isAdmin;
 
-    public CompanyRelationImpl() {
+    public EmployeeRelationImpl() {
     }
 
-    public CompanyRelationImpl(Company company, boolean isAdmin) {
+    public EmployeeRelationImpl(int id, User user, Company company, boolean isAdmin) {
+        this.id = id;
+        this.user = user;
         this.company = company;
         this.isAdmin = isAdmin;
     }
@@ -20,6 +24,11 @@ public class CompanyRelationImpl implements CompanyRelation {
     @Override
     public int getId() {
         return id;
+    }
+
+    @Override
+    public User getUser() {
+        return user;
     }
 
     @Override
@@ -38,6 +47,11 @@ public class CompanyRelationImpl implements CompanyRelation {
     }
 
     @Override
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
     public void setCompany(Company company) {
         this.company = company;
     }
@@ -49,26 +63,29 @@ public class CompanyRelationImpl implements CompanyRelation {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CompanyRelationImpl)) return false;
+        if (!(o instanceof EmployeeRelationImpl)) return false;
 
-        CompanyRelationImpl that = (CompanyRelationImpl) o;
+        EmployeeRelationImpl that = (EmployeeRelationImpl) o;
 
         if (isAdmin != that.isAdmin) return false;
+        if (!user.equals(that.user)) return false;
         return company.equals(that.company);
 
     }
 
     @Override
     public int hashCode() {
-        int result = company.hashCode();
+        int result = user.hashCode();
+        result = 31 * result + company.hashCode();
         result = 31 * result + (isAdmin ? 1 : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "CompanyRelationImpl{" +
+        return "EmployeeRelationImpl{" +
                 "id=" + id +
+                ", user=" + user +
                 ", company=" + company +
                 ", isAdmin=" + isAdmin +
                 '}';

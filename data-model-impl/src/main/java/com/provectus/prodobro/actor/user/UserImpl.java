@@ -2,20 +2,21 @@ package com.provectus.prodobro.actor.user;
 
 
 import com.provectus.prodobro.actor.ActorStatus;
+import com.provectus.prodobro.actor.EmployeeRelation;
 import com.provectus.prodobro.event.Event;
 import com.provectus.prodobro.info.Info;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class UserImpl implements User {
 
     private int id;
     private Optional<byte[]> avatarBytea;
-    private Set<Info> info;
+    private Set<Info> info = new TreeSet<>();
     private ActorStatus status;
     private Timestamp createdDate;
     private User createdBy;
@@ -28,9 +29,9 @@ public class UserImpl implements User {
     private String passHash;
     private String phoneNumber;
     private Locale language;
-    private Optional<CompanyRelation> companyRelation;
-    private Set<Event> asignedEvents;
-    private Set<Event> createdEvents;
+    private Optional<EmployeeRelation> employeeRelation;
+    private Set<Event> asignedEvents = new TreeSet<>();
+    private Set<Event> createdEvents = new TreeSet<>();
 
     public UserImpl() {
     }
@@ -106,8 +107,8 @@ public class UserImpl implements User {
     }
 
     @Override
-    public Optional<CompanyRelation> getCompanyRelation() {
-        return this.companyRelation;
+    public Optional<EmployeeRelation> getEmployeeRelation() {
+        return this.employeeRelation;
     }
 
     @Override
@@ -191,8 +192,8 @@ public class UserImpl implements User {
     }
 
     @Override
-    public void setCompanyRelation(CompanyRelation companyRelation) {
-        this.companyRelation = Optional.ofNullable(companyRelation);
+    public void setEmployeeRelation(EmployeeRelation employeeRelation) {
+        this.employeeRelation = Optional.ofNullable(employeeRelation);
     }
 
     @Override
@@ -255,7 +256,7 @@ public class UserImpl implements User {
         if (!passHash.equals(user.passHash)) return false;
         if (phoneNumber != null ? !phoneNumber.equals(user.phoneNumber) : user.phoneNumber != null) return false;
         if (!language.equals(user.language)) return false;
-        if (companyRelation != null ? !companyRelation.equals(user.companyRelation) : user.companyRelation != null)
+        if (employeeRelation != null ? !employeeRelation.equals(user.employeeRelation) : user.employeeRelation != null)
             return false;
         if (asignedEvents != null ? !asignedEvents.equals(user.asignedEvents) : user.asignedEvents != null)
             return false;
@@ -278,7 +279,7 @@ public class UserImpl implements User {
         result = 31 * result + passHash.hashCode();
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         result = 31 * result + language.hashCode();
-        result = 31 * result + (companyRelation != null ? companyRelation.hashCode() : 0);
+        result = 31 * result + (employeeRelation != null ? employeeRelation.hashCode() : 0);
         result = 31 * result + (asignedEvents != null ? asignedEvents.hashCode() : 0);
         result = 31 * result + (createdEvents != null ? createdEvents.hashCode() : 0);
         return result;
@@ -301,7 +302,7 @@ public class UserImpl implements User {
                 ", passHash='" + passHash + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", language=" + language +
-                ", companyRelation=" + companyRelation +
+                ", employeeRelation=" + employeeRelation +
                 ", asignedEvents=" + asignedEvents +
                 ", createdEvents=" + createdEvents +
                 '}';

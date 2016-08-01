@@ -2,6 +2,7 @@ package com.provectus.prodobro.actor.company;
 
 
 import com.provectus.prodobro.actor.Actor;
+import com.provectus.prodobro.actor.EmployeeRelation;
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.event.Event;
 
@@ -19,12 +20,7 @@ public interface Company extends Actor {
     /**
      * @return {@link Set<User>} of assigned users
      */
-    Set<User> getUsers();
-
-    /**
-     * @return {@link Set<User>} of admin users
-     */
-    Set<User> getAdmins();
+    Set<EmployeeRelation> getEmployeeRelations();
 
     /**
      * @return {@link List<User>} of company assigned events
@@ -37,9 +33,7 @@ public interface Company extends Actor {
 
     void setDescription(String description);
 
-    void setUsers(Set<User> users);
-
-    void setAdmins(Set<User> admins);
+    void setEmployeeRelations(Set<EmployeeRelation> employeeRelations);
 
     void setAssignedEvents(Set<Event> assignedEvents);
 
@@ -47,13 +41,9 @@ public interface Company extends Actor {
 
     void removeAlias(String alias);
 
-    void addUser(User user);
+    void addEmployeeRelation(EmployeeRelation employeeRelation);
 
-    void addAdmin(User admin);
-
-    void removeUser(User user);
-
-    void removeAdmin(User admin);
+    void removeEmployeeRelation(EmployeeRelation employeeRelation);
 
     void addAssignedEvent(Event event);
 

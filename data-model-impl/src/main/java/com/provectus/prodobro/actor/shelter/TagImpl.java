@@ -1,14 +1,14 @@
 package com.provectus.prodobro.actor.shelter;
 
 
-import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class TagImpl implements Tag {
 
     private int id;
     private String title;
-    private Set<Shelter> shelters;
+    private Set<Shelter> shelters = new TreeSet<>();
 
     public TagImpl() {
     }

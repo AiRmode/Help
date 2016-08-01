@@ -10,6 +10,12 @@ public class InfoImpl implements Info {
     public InfoImpl() {
     }
 
+    public InfoImpl(int id, InfoType type, String info) {
+        this.id = id;
+        this.type = type;
+        this.info = info;
+    }
+
     @Override
     public int getId() {
         return id;

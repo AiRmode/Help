@@ -2,9 +2,9 @@ package com.provectus.prodobro.actor.user;
 
 
 import com.provectus.prodobro.actor.Actor;
+import com.provectus.prodobro.actor.EmployeeRelation;
 import com.provectus.prodobro.event.Event;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
@@ -27,9 +27,9 @@ public interface User extends Actor {
     Locale getLanguage();
 
     /**
-     * @return {@link Optional<CompanyRelation>} user`s company
+     * @return {@link Optional<EmployeeRelation>} user`s company
      */
-    Optional<CompanyRelation> getCompanyRelation();
+    Optional<EmployeeRelation> getEmployeeRelation();
 
     /**
      * @return {@link Set<Event>} of events, where {@link User} is assigned
@@ -53,7 +53,7 @@ public interface User extends Actor {
 
     void setLanguage(Locale language);
 
-    void setCompanyRelation(CompanyRelation companyRelation);
+    void setEmployeeRelation(EmployeeRelation employeeRelation);
 
     void setAssignedEvents(Set<Event> assignedEvents);
 

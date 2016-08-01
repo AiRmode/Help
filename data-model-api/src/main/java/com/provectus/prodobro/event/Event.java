@@ -7,7 +7,6 @@ import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.info.Info;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 

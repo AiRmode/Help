@@ -4,7 +4,6 @@ package com.provectus.prodobro.actor.shelter;
 import com.provectus.prodobro.actor.Actor;
 import com.provectus.prodobro.event.Event;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 

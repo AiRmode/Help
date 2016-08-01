@@ -7,15 +7,15 @@ import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.info.Info;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class EventImpl implements Event {
 
     private int id;
     private String title;
-    private Set<Info> info;
+    private Set<Info> info = new TreeSet<>();
     private Optional<String> description;
     private Shelter shelter;
     private Timestamp date;
@@ -24,8 +24,8 @@ public class EventImpl implements Event {
     private User createdBy;
     private Timestamp lastModifiedDate;
     private User lastModifiedBy;
-    private Set<User> assignedUsers;
-    private Set<Company> assignedCompanies;
+    private Set<User> assignedUsers = new TreeSet<>();
+    private Set<Company> assignedCompanies = new TreeSet<>();
 
     public EventImpl() {
     }

@@ -7,15 +7,15 @@ import com.provectus.prodobro.event.Event;
 import com.provectus.prodobro.info.Info;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class ShelterImpl implements Shelter {
 
     private int id;
     private Optional<byte[]> avatarBytea;
-    private Set<Info> info;
+    private Set<Info> info = new TreeSet<>();
     private ActorStatus status;
     private Timestamp createdDate;
     private User createdBy;
@@ -26,7 +26,7 @@ public class ShelterImpl implements Shelter {
     private Optional<String> description;
     private ShelterType type;
     private Optional<Event> event;
-    private Set<Tag> tags;
+    private Set<Tag> tags = new TreeSet<>();
 
     public ShelterImpl() {
     }

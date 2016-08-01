@@ -1,7 +1,6 @@
 package com.provectus.prodobro.actor.shelter;
 
 
-import java.util.List;
 import java.util.Set;
 
 
