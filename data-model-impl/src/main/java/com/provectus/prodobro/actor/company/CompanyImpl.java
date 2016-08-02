@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class CompanyImpl implements Company {
 
@@ -90,6 +91,21 @@ public class CompanyImpl implements Company {
     @Override
     public Set<EmployeeRelation> getEmployeeRelations() {
         return employeeRelations;
+    }
+
+    @Override
+    public Set<User> getUsers() {
+        return employeeRelations.stream()
+                .map(EmployeeRelation::getUser)
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<User> getAdmins() {
+        return employeeRelations.stream()
+                .filter(EmployeeRelation::isAdmin)
+                .map(EmployeeRelation::getUser)
+                .collect(Collectors.toSet());
     }
 
     @Override

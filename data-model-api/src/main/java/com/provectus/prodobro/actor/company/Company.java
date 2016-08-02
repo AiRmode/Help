@@ -18,12 +18,16 @@ public interface Company extends Actor {
     String getDescription();
 
     /**
-     * @return {@link Set<User>} of assigned users
+     * @return {@link Set<EmployeeRelation>} of assigned users
      */
     Set<EmployeeRelation> getEmployeeRelations();
 
+    Set<User> getUsers();
+
+    Set<User> getAdmins();
+
     /**
-     * @return {@link List<User>} of company assigned events
+     * @return {@link Set<User>} of company assigned events
      */
     Set<Event> getAssignedEvents();
 

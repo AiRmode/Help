@@ -24,7 +24,7 @@ public interface Actor {
     /**
      * Information: Photos, Emails, Websites, etc.
      *
-     * @return {@link List<Info>} of Actor`s information
+     * @return {@link Set<Info>} of Actor`s information
      */
     Set<Info> getInfo();
 

@@ -56,6 +56,7 @@ public class EmployeeRelationImpl implements EmployeeRelation {
         this.company = company;
     }
 
+    @Override
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
