@@ -2,33 +2,33 @@ BEGIN;
 --ROLLBACK;
 
 
-DROP TABLE IF EXISTS schema_name."User" CASCADE;
-DROP TABLE IF EXISTS schema_name."User_info" CASCADE;
-DROP TABLE IF EXISTS schema_name."User_info_type" CASCADE;
-DROP TABLE IF EXISTS schema_name."User_status" CASCADE;
-DROP TABLE IF EXISTS schema_name."User_avatar" CASCADE;
-DROP TABLE IF EXISTS schema_name."Company" CASCADE;
-DROP TABLE IF EXISTS schema_name."Company_info" CASCADE;
-DROP TABLE IF EXISTS schema_name."Company_info_type" CASCADE;
-DROP TABLE IF EXISTS schema_name."Company_status" CASCADE;
-DROP TABLE IF EXISTS schema_name."Company_avatar" CASCADE;
-DROP TABLE IF EXISTS schema_name."Company_alias" CASCADE;
-DROP TABLE IF EXISTS schema_name."Shelter" CASCADE;
-DROP TABLE IF EXISTS schema_name."Shelter_type" CASCADE;
-DROP TABLE IF EXISTS schema_name."Shelter_info" CASCADE;
-DROP TABLE IF EXISTS schema_name."Shelter_info_type" CASCADE;
-DROP TABLE IF EXISTS schema_name."Shelter_status" CASCADE;
-DROP TABLE IF EXISTS schema_name."Shelter_avatar" CASCADE;
-DROP TABLE IF EXISTS schema_name."Tag" CASCADE;
-DROP TABLE IF EXISTS schema_name."Event" CASCADE;
-DROP TABLE IF EXISTS schema_name."Event_info" CASCADE;
-DROP TABLE IF EXISTS schema_name."Event_info_type" CASCADE;
-DROP TABLE IF EXISTS schema_name."UserToCompany" CASCADE;
-DROP TABLE IF EXISTS schema_name."CompanyToEvent" CASCADE;
-DROP TABLE IF EXISTS schema_name."UserToEvent" CASCADE;
-DROP TABLE IF EXISTS schema_name."TagToShelter" CASCADE;
+DROP TABLE IF EXISTS dev."User" CASCADE;
+DROP TABLE IF EXISTS dev."User_info" CASCADE;
+DROP TABLE IF EXISTS dev."User_info_type" CASCADE;
+DROP TABLE IF EXISTS dev."User_status" CASCADE;
+DROP TABLE IF EXISTS dev."User_avatar" CASCADE;
+DROP TABLE IF EXISTS dev."Company" CASCADE;
+DROP TABLE IF EXISTS dev."Company_info" CASCADE;
+DROP TABLE IF EXISTS dev."Company_info_type" CASCADE;
+DROP TABLE IF EXISTS dev."Company_status" CASCADE;
+DROP TABLE IF EXISTS dev."Company_avatar" CASCADE;
+DROP TABLE IF EXISTS dev."Company_alias" CASCADE;
+DROP TABLE IF EXISTS dev."Shelter" CASCADE;
+DROP TABLE IF EXISTS dev."Shelter_type" CASCADE;
+DROP TABLE IF EXISTS dev."Shelter_info" CASCADE;
+DROP TABLE IF EXISTS dev."Shelter_info_type" CASCADE;
+DROP TABLE IF EXISTS dev."Shelter_status" CASCADE;
+DROP TABLE IF EXISTS dev."Shelter_avatar" CASCADE;
+DROP TABLE IF EXISTS dev."Tag" CASCADE;
+DROP TABLE IF EXISTS dev."Event" CASCADE;
+DROP TABLE IF EXISTS dev."Event_info" CASCADE;
+DROP TABLE IF EXISTS dev."Event_info_type" CASCADE;
+DROP TABLE IF EXISTS dev."UserToCompany" CASCADE;
+DROP TABLE IF EXISTS dev."CompanyToEvent" CASCADE;
+DROP TABLE IF EXISTS dev."UserToEvent" CASCADE;
+DROP TABLE IF EXISTS dev."TagToShelter" CASCADE;
 
-CREATE TABLE schema_name."User" (
+CREATE TABLE dev."User" (
 	id SERIAL NOT NULL,
 	first_name VARCHAR(255) NOT NULL,
 	last_name VARCHAR(255) NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE schema_name."User" (
 	UNIQUE (email, phone_num)
 );
 
-CREATE TABLE schema_name."User_info" (
+CREATE TABLE dev."User_info" (
 	id SERIAL NOT NULL,
 	user_id INTEGER NOT NULL,
 	info VARCHAR(255) NOT NULL,
@@ -55,26 +55,26 @@ CREATE TABLE schema_name."User_info" (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE schema_name."User_info_type" (
+CREATE TABLE dev."User_info_type" (
 	id SERIAL NOT NULL,
 	type VARCHAR(30) NOT NULL,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE schema_name."User_status" (
+CREATE TABLE dev."User_status" (
 	id SERIAL NOT NULL,
 	title VARCHAR(20) NOT NULL,
 	PRIMARY KEY (id),
 	UNIQUE (title)
 );
 
-CREATE TABLE schema_name."User_avatar" (
+CREATE TABLE dev."User_avatar" (
 	id SERIAL NOT NULL,
 	avatar BYTEA NOT NULL,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE schema_name."Company" (
+CREATE TABLE dev."Company" (
 	id SERIAL NOT NULL,
 	title VARCHAR(255) NOT NULL,
 	description TEXT,
@@ -88,7 +88,7 @@ CREATE TABLE schema_name."Company" (
 	UNIQUE (title)
 );
 
-CREATE TABLE schema_name."Company_info" (
+CREATE TABLE dev."Company_info" (
 	id SERIAL NOT NULL,
 	company_id INTEGER NOT NULL,
 	info VARCHAR(255) NOT NULL,
@@ -96,26 +96,26 @@ CREATE TABLE schema_name."Company_info" (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE schema_name."Company_info_type" (
+CREATE TABLE dev."Company_info_type" (
 	id SERIAL NOT NULL,
 	type VARCHAR(30) NOT NULL,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE schema_name."Company_status" (
+CREATE TABLE dev."Company_status" (
 	id SERIAL NOT NULL,
 	title VARCHAR(20) NOT NULL,
 	PRIMARY KEY (id),
 	UNIQUE (title)
 );
 
-CREATE TABLE schema_name."Company_avatar" (
+CREATE TABLE dev."Company_avatar" (
 	id SERIAL NOT NULL,
 	avatar BYTEA NOT NULL,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE schema_name."Company_alias" (
+CREATE TABLE dev."Company_alias" (
 	id SERIAL NOT NULL,
 	alias VARCHAR NOT NULL,
 	company_id VARCHAR NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE schema_name."Company_alias" (
 	UNIQUE (alias)
 );
 
-CREATE TABLE schema_name."Shelter" (
+CREATE TABLE dev."Shelter" (
 	id SERIAL NOT NULL,
 	title VARCHAR(255) NOT NULL,
 	description TEXT,
@@ -138,14 +138,14 @@ CREATE TABLE schema_name."Shelter" (
 	UNIQUE (title)
 );
 
-CREATE TABLE schema_name."Shelter_type" (
+CREATE TABLE dev."Shelter_type" (
 	id SERIAL NOT NULL,
 	title VARCHAR(20) NOT NULL,
 	PRIMARY KEY (id),
 	UNIQUE (title)
 );
 
-CREATE TABLE schema_name."Shelter_info" (
+CREATE TABLE dev."Shelter_info" (
 	id SERIAL NOT NULL,
 	shelter_id INTEGER NOT NULL,
 	info VARCHAR(255) NOT NULL,
@@ -153,33 +153,33 @@ CREATE TABLE schema_name."Shelter_info" (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE schema_name."Shelter_info_type" (
+CREATE TABLE dev."Shelter_info_type" (
 	id SERIAL NOT NULL,
 	type VARCHAR(30) NOT NULL,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE schema_name."Shelter_status" (
+CREATE TABLE dev."Shelter_status" (
 	id SERIAL NOT NULL,
 	title VARCHAR(20) NOT NULL,
 	PRIMARY KEY (id),
 	UNIQUE (title)
 );
 
-CREATE TABLE schema_name."Shelter_avatar" (
+CREATE TABLE dev."Shelter_avatar" (
 	id SERIAL NOT NULL,
 	avatar BYTEA NOT NULL,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE schema_name."Tag" (
+CREATE TABLE dev."Tag" (
 	id SERIAL NOT NULL,
 	title VARCHAR(50) NOT NULL,
 	PRIMARY KEY (id),
 	UNIQUE (title)
 );
 
-CREATE TABLE schema_name."Event" (
+CREATE TABLE dev."Event" (
 	id SERIAL NOT NULL,
 	title VARCHAR(255) NOT NULL,
 	description TEXT,
@@ -193,7 +193,7 @@ CREATE TABLE schema_name."Event" (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE schema_name."Event_info" (
+CREATE TABLE dev."Event_info" (
 	id SERIAL NOT NULL,
 	event_id INTEGER NOT NULL,
 	info VARCHAR(255) NOT NULL,
@@ -201,13 +201,13 @@ CREATE TABLE schema_name."Event_info" (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE schema_name."Event_info_type" (
+CREATE TABLE dev."Event_info_type" (
 	id SERIAL NOT NULL,
 	type VARCHAR(30) NOT NULL,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE schema_name."UserToCompany" (
+CREATE TABLE dev."UserToCompany" (
 	id SERIAL NOT NULL,
 	user_id INTEGER NOT NULL,
 	company_id INTEGER NOT NULL,
@@ -215,69 +215,69 @@ CREATE TABLE schema_name."UserToCompany" (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE schema_name."CompanyToEvent" (
+CREATE TABLE dev."CompanyToEvent" (
 	id SERIAL NOT NULL,
 	event_id INTEGER NOT NULL,
 	company_id INTEGER NOT NULL,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE schema_name."UserToEvent" (
+CREATE TABLE dev."UserToEvent" (
 	id SERIAL NOT NULL,
 	event_id INTEGER NOT NULL,
 	user_id INTEGER NOT NULL,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE schema_name."TagToShelter" (
+CREATE TABLE dev."TagToShelter" (
 	id SERIAL NOT NULL,
 	shelter_id INTEGER NOT NULL,
 	tag_id INTEGER NOT NULL,
 	PRIMARY KEY (id)
 );
 
-ALTER TABLE schema_name."User" ADD FOREIGN KEY (status_id) REFERENCES schema_name."User_status"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
-ALTER TABLE schema_name."User" ADD FOREIGN KEY (avatar_id) REFERENCES schema_name."User_avatar"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE SET NULL;
-ALTER TABLE schema_name."User" ADD FOREIGN KEY (created_by_id) REFERENCES schema_name."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
-ALTER TABLE schema_name."User" ADD FOREIGN KEY (last_modified_by_id) REFERENCES schema_name."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE dev."User" ADD FOREIGN KEY (status_id) REFERENCES dev."User_status"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE dev."User" ADD FOREIGN KEY (avatar_id) REFERENCES dev."User_avatar"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE SET NULL;
+ALTER TABLE dev."User" ADD FOREIGN KEY (created_by_id) REFERENCES dev."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE dev."User" ADD FOREIGN KEY (last_modified_by_id) REFERENCES dev."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
 
-ALTER TABLE schema_name."User_info" ADD FOREIGN KEY (user_id) REFERENCES schema_name."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE schema_name."User_info" ADD FOREIGN KEY (info_type_id) REFERENCES schema_name."User_info_type"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE dev."User_info" ADD FOREIGN KEY (user_id) REFERENCES dev."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE dev."User_info" ADD FOREIGN KEY (info_type_id) REFERENCES dev."User_info_type"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
 
-ALTER TABLE schema_name."Company" ADD FOREIGN KEY (status_id) REFERENCES schema_name."Company_status"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
-ALTER TABLE schema_name."Company" ADD FOREIGN KEY (avatar_id) REFERENCES schema_name."Company_avatar"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE SET NULL;
-ALTER TABLE schema_name."Company" ADD FOREIGN KEY (created_by_id) REFERENCES schema_name."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
-ALTER TABLE schema_name."Company" ADD FOREIGN KEY (last_modified_by_id) REFERENCES schema_name."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE dev."Company" ADD FOREIGN KEY (status_id) REFERENCES dev."Company_status"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE dev."Company" ADD FOREIGN KEY (avatar_id) REFERENCES dev."Company_avatar"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE SET NULL;
+ALTER TABLE dev."Company" ADD FOREIGN KEY (created_by_id) REFERENCES dev."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE dev."Company" ADD FOREIGN KEY (last_modified_by_id) REFERENCES dev."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
 
-ALTER TABLE schema_name."Company_info" ADD FOREIGN KEY (company_id) REFERENCES schema_name."Company"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE schema_name."Company_info" ADD FOREIGN KEY (info_type_id) REFERENCES schema_name."Company_info_type"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE dev."Company_info" ADD FOREIGN KEY (company_id) REFERENCES dev."Company"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE dev."Company_info" ADD FOREIGN KEY (info_type_id) REFERENCES dev."Company_info_type"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
 
-ALTER TABLE schema_name."Shelter" ADD FOREIGN KEY (status_id) REFERENCES schema_name."Shelter_status"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
-ALTER TABLE schema_name."Shelter" ADD FOREIGN KEY (avatar_id) REFERENCES schema_name."Shelter_avatar"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE SET NULL;
-ALTER TABLE schema_name."Shelter" ADD FOREIGN KEY (type_id) REFERENCES schema_name."Shelter_type"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
-ALTER TABLE schema_name."Shelter" ADD FOREIGN KEY (created_by_id) REFERENCES schema_name."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
-ALTER TABLE schema_name."Shelter" ADD FOREIGN KEY (last_modified_by_id) REFERENCES schema_name."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE dev."Shelter" ADD FOREIGN KEY (status_id) REFERENCES dev."Shelter_status"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE dev."Shelter" ADD FOREIGN KEY (avatar_id) REFERENCES dev."Shelter_avatar"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE SET NULL;
+ALTER TABLE dev."Shelter" ADD FOREIGN KEY (type_id) REFERENCES dev."Shelter_type"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE dev."Shelter" ADD FOREIGN KEY (created_by_id) REFERENCES dev."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE dev."Shelter" ADD FOREIGN KEY (last_modified_by_id) REFERENCES dev."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
 
-ALTER TABLE schema_name."Shelter_info" ADD FOREIGN KEY (shelter_id) REFERENCES schema_name."Shelter"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE schema_name."Shelter_info" ADD FOREIGN KEY (info_type_id) REFERENCES schema_name."Shelter_info_type"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE dev."Shelter_info" ADD FOREIGN KEY (shelter_id) REFERENCES dev."Shelter"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE dev."Shelter_info" ADD FOREIGN KEY (info_type_id) REFERENCES dev."Shelter_info_type"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
 
-ALTER TABLE schema_name."Event" ADD FOREIGN KEY (shelter_id) REFERENCES schema_name."Shelter"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
-ALTER TABLE schema_name."Event" ADD FOREIGN KEY (created_by_id) REFERENCES schema_name."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
-ALTER TABLE schema_name."Event" ADD FOREIGN KEY (last_modified_by_id) REFERENCES schema_name."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE dev."Event" ADD FOREIGN KEY (shelter_id) REFERENCES dev."Shelter"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE dev."Event" ADD FOREIGN KEY (created_by_id) REFERENCES dev."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE dev."Event" ADD FOREIGN KEY (last_modified_by_id) REFERENCES dev."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
 
-ALTER TABLE schema_name."Event_info" ADD FOREIGN KEY (event_id) REFERENCES schema_name."Event"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE schema_name."Event_info" ADD FOREIGN KEY (info_type_id) REFERENCES schema_name."Event_info_type"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE dev."Event_info" ADD FOREIGN KEY (event_id) REFERENCES dev."Event"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE dev."Event_info" ADD FOREIGN KEY (info_type_id) REFERENCES dev."Event_info_type"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
 
-ALTER TABLE schema_name."UserToCompany" ADD FOREIGN KEY (user_id) REFERENCES schema_name."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE schema_name."UserToCompany" ADD FOREIGN KEY (company_id) REFERENCES schema_name."Company"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE dev."UserToCompany" ADD FOREIGN KEY (user_id) REFERENCES dev."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE dev."UserToCompany" ADD FOREIGN KEY (company_id) REFERENCES dev."Company"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE schema_name."CompanyToEvent" ADD FOREIGN KEY (event_id) REFERENCES schema_name."Event"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE schema_name."CompanyToEvent" ADD FOREIGN KEY (company_id) REFERENCES schema_name."Company"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE dev."CompanyToEvent" ADD FOREIGN KEY (event_id) REFERENCES dev."Event"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE dev."CompanyToEvent" ADD FOREIGN KEY (company_id) REFERENCES dev."Company"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE schema_name."UserToEvent" ADD FOREIGN KEY (event_id) REFERENCES schema_name."Event"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE schema_name."UserToEvent" ADD FOREIGN KEY (user_id) REFERENCES schema_name."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE dev."UserToEvent" ADD FOREIGN KEY (event_id) REFERENCES dev."Event"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE dev."UserToEvent" ADD FOREIGN KEY (user_id) REFERENCES dev."User"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
 
-ALTER TABLE schema_name."TagToShelter" ADD FOREIGN KEY (shelter_id) REFERENCES schema_name."Shelter"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE schema_name."TagToShelter" ADD FOREIGN KEY (tag_id) REFERENCES schema_name."Tag"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE dev."TagToShelter" ADD FOREIGN KEY (shelter_id) REFERENCES dev."Shelter"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE dev."TagToShelter" ADD FOREIGN KEY (tag_id) REFERENCES dev."Tag"(id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
 
 COMMIT;
