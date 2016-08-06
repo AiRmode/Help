@@ -227,14 +227,14 @@ public class ShelterImpl implements Shelter {
                 "id=" + id +
                 ", avatarBytea=" + Arrays.toString(avatarBytea) +
                 ", info=" + info +
-                ", status=" + status +
+                ", status=" + status.name() +
                 ", createdDate=" + createdDate +
                 ", createdBy=" + createdBy +
                 ", lastModifiedDate=" + lastModifiedDate +
                 ", lastModifiedBy=" + lastModifiedBy +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", type=" + type +
+                ", type=" + type.name() +
                 ", event=" + event +
                 ", tags=" + tags +
                 '}';

@@ -69,7 +69,7 @@ public class InfoImpl implements Info {
     public String toString() {
         return "InfoImpl{" +
                 "id=" + id +
-                ", type=" + type +
+                ", type=" + type.name() +
                 ", info='" + info + '\'' +
                 '}';
     }

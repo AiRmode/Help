@@ -288,7 +288,7 @@ public class UserImpl implements User {
                 "id=" + id +
                 ", avatarBytea=" + Arrays.toString(avatarBytea) +
                 ", info=" + info +
-                ", status=" + status +
+                ", status=" + status.name() +
                 ", createdDate=" + createdDate +
                 ", createdBy=" + createdBy +
                 ", lastModifiedDate=" + lastModifiedDate +
