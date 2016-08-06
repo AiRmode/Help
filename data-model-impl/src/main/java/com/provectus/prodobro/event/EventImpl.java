@@ -16,7 +16,7 @@ public class EventImpl implements Event {
     private int id;
     private String title;
     private Set<Info> info = new TreeSet<>();
-    private Optional<String> description;
+    private String description;
     private Shelter shelter;
     private Timestamp date;
     private boolean accessible;
@@ -47,7 +47,7 @@ public class EventImpl implements Event {
 
     @Override
     public Optional<String> getDescription() {
-        return description;
+        return Optional.ofNullable(description);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class EventImpl implements Event {
 
     @Override
     public void setDescription(String description) {
-        this.description = Optional.ofNullable(description);
+        this.description = description;
     }
 
     @Override
@@ -199,7 +199,7 @@ public class EventImpl implements Event {
 
         if (accessible != event.accessible) return false;
         if (!title.equals(event.title)) return false;
-        if (info != null ? !info.equals(event.info) : event.info != null) return false;
+        if (!info.equals(event.info)) return false;
         if (description != null ? !description.equals(event.description) : event.description != null) return false;
         if (!shelter.equals(event.shelter)) return false;
         if (!date.equals(event.date)) return false;
@@ -207,16 +207,15 @@ public class EventImpl implements Event {
         if (!createdBy.equals(event.createdBy)) return false;
         if (!lastModifiedDate.equals(event.lastModifiedDate)) return false;
         if (!lastModifiedBy.equals(event.lastModifiedBy)) return false;
-        if (assignedUsers != null ? !assignedUsers.equals(event.assignedUsers) : event.assignedUsers != null)
-            return false;
-        return assignedCompanies != null ? assignedCompanies.equals(event.assignedCompanies) : event.assignedCompanies == null;
+        if (!assignedUsers.equals(event.assignedUsers)) return false;
+        return assignedCompanies.equals(event.assignedCompanies);
 
     }
 
     @Override
     public int hashCode() {
         int result = title.hashCode();
-        result = 31 * result + (info != null ? info.hashCode() : 0);
+        result = 31 * result + info.hashCode();
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + shelter.hashCode();
         result = 31 * result + date.hashCode();
@@ -225,8 +224,8 @@ public class EventImpl implements Event {
         result = 31 * result + createdBy.hashCode();
         result = 31 * result + lastModifiedDate.hashCode();
         result = 31 * result + lastModifiedBy.hashCode();
-        result = 31 * result + (assignedUsers != null ? assignedUsers.hashCode() : 0);
-        result = 31 * result + (assignedCompanies != null ? assignedCompanies.hashCode() : 0);
+        result = 31 * result + assignedUsers.hashCode();
+        result = 31 * result + assignedCompanies.hashCode();
         return result;
     }
 
@@ -236,7 +235,7 @@ public class EventImpl implements Event {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", info=" + info +
-                ", description=" + description +
+                ", description='" + description + '\'' +
                 ", shelter=" + shelter +
                 ", date=" + date +
                 ", accessible=" + accessible +

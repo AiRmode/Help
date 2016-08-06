@@ -7,6 +7,7 @@ import com.provectus.prodobro.event.Event;
 import com.provectus.prodobro.info.Info;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
@@ -14,7 +15,7 @@ import java.util.TreeSet;
 public class ShelterImpl implements Shelter {
 
     private int id;
-    private Optional<byte[]> avatarBytea;
+    private byte[] avatarBytea;
     private Set<Info> info = new TreeSet<>();
     private ActorStatus status;
     private Timestamp createdDate;
@@ -23,9 +24,9 @@ public class ShelterImpl implements Shelter {
     private User lastModifiedBy;
 
     private String title;
-    private Optional<String> description;
+    private String description;
     private ShelterType type;
-    private Optional<Event> event;
+    private Event event;
     private Set<Tag> tags = new TreeSet<>();
 
     public ShelterImpl() {
@@ -38,7 +39,7 @@ public class ShelterImpl implements Shelter {
 
     @Override
     public Optional<byte[]> getAvatarBytea() {
-        return avatarBytea;
+        return Optional.ofNullable(avatarBytea);
     }
 
     @Override
@@ -78,7 +79,7 @@ public class ShelterImpl implements Shelter {
 
     @Override
     public Optional<String> getDescription() {
-        return description;
+        return Optional.ofNullable(description);
     }
 
     @Override
@@ -88,7 +89,7 @@ public class ShelterImpl implements Shelter {
 
     @Override
     public Optional<Event> getEvent() {
-        return event;
+        return Optional.ofNullable(event);
     }
 
     @Override
@@ -103,7 +104,7 @@ public class ShelterImpl implements Shelter {
 
     @Override
     public void setAvatarBytea(byte[] avatarBytea) {
-        this.avatarBytea = Optional.ofNullable(avatarBytea);
+        this.avatarBytea = avatarBytea;
     }
 
     @Override
@@ -143,7 +144,7 @@ public class ShelterImpl implements Shelter {
 
     @Override
     public void setDescription(String description) {
-        this.description = Optional.ofNullable(description);
+        this.description = description;
     }
 
     @Override
@@ -153,7 +154,7 @@ public class ShelterImpl implements Shelter {
 
     @Override
     public void setEvent(Event event) {
-        this.event = Optional.ofNullable(event);
+        this.event = event;
     }
 
     @Override
@@ -188,8 +189,8 @@ public class ShelterImpl implements Shelter {
 
         ShelterImpl shelter = (ShelterImpl) o;
 
-        if (avatarBytea != null ? !avatarBytea.equals(shelter.avatarBytea) : shelter.avatarBytea != null) return false;
-        if (info != null ? !info.equals(shelter.info) : shelter.info != null) return false;
+        if (!Arrays.equals(avatarBytea, shelter.avatarBytea)) return false;
+        if (!info.equals(shelter.info)) return false;
         if (status != shelter.status) return false;
         if (!createdDate.equals(shelter.createdDate)) return false;
         if (!createdBy.equals(shelter.createdBy)) return false;
@@ -199,14 +200,14 @@ public class ShelterImpl implements Shelter {
         if (description != null ? !description.equals(shelter.description) : shelter.description != null) return false;
         if (type != shelter.type) return false;
         if (event != null ? !event.equals(shelter.event) : shelter.event != null) return false;
-        return tags != null ? tags.equals(shelter.tags) : shelter.tags == null;
+        return tags.equals(shelter.tags);
 
     }
 
     @Override
     public int hashCode() {
-        int result = avatarBytea != null ? avatarBytea.hashCode() : 0;
-        result = 31 * result + (info != null ? info.hashCode() : 0);
+        int result = Arrays.hashCode(avatarBytea);
+        result = 31 * result + info.hashCode();
         result = 31 * result + status.hashCode();
         result = 31 * result + createdDate.hashCode();
         result = 31 * result + createdBy.hashCode();
@@ -216,7 +217,7 @@ public class ShelterImpl implements Shelter {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + type.hashCode();
         result = 31 * result + (event != null ? event.hashCode() : 0);
-        result = 31 * result + (tags != null ? tags.hashCode() : 0);
+        result = 31 * result + tags.hashCode();
         return result;
     }
 
@@ -224,7 +225,7 @@ public class ShelterImpl implements Shelter {
     public String toString() {
         return "ShelterImpl{" +
                 "id=" + id +
-                ", avatarBytea=" + avatarBytea +
+                ", avatarBytea=" + Arrays.toString(avatarBytea) +
                 ", info=" + info +
                 ", status=" + status +
                 ", createdDate=" + createdDate +
@@ -232,7 +233,7 @@ public class ShelterImpl implements Shelter {
                 ", lastModifiedDate=" + lastModifiedDate +
                 ", lastModifiedBy=" + lastModifiedBy +
                 ", title='" + title + '\'' +
-                ", description=" + description +
+                ", description='" + description + '\'' +
                 ", type=" + type +
                 ", event=" + event +
                 ", tags=" + tags +

@@ -8,6 +8,7 @@ import com.provectus.prodobro.event.Event;
 import com.provectus.prodobro.info.Info;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 public class CompanyImpl implements Company {
 
     private int id;
-    private Optional<byte[]> avatarBytea;
+    private byte[] avatarBytea;
     private Set<Info> info = new TreeSet<>();
     private ActorStatus status;
     private Timestamp createdDate;
@@ -40,7 +41,7 @@ public class CompanyImpl implements Company {
 
     @Override
     public Optional<byte[]> getAvatarBytea() {
-        return avatarBytea;
+        return Optional.ofNullable(avatarBytea);
     }
 
     @Override
@@ -120,7 +121,7 @@ public class CompanyImpl implements Company {
 
     @Override
     public void setAvatarBytea(byte[] avatarBytea) {
-        this.avatarBytea = Optional.ofNullable(avatarBytea);
+        this.avatarBytea = avatarBytea;
     }
 
     @Override
@@ -225,35 +226,35 @@ public class CompanyImpl implements Company {
 
         CompanyImpl company = (CompanyImpl) o;
 
-        if (avatarBytea != null ? !avatarBytea.equals(company.avatarBytea) : company.avatarBytea != null) return false;
-        if (info != null ? !info.equals(company.info) : company.info != null) return false;
+        if (!Arrays.equals(avatarBytea, company.avatarBytea)) return false;
+        if (!info.equals(company.info)) return false;
         if (status != company.status) return false;
         if (!createdDate.equals(company.createdDate)) return false;
         if (!createdBy.equals(company.createdBy)) return false;
         if (!lastModifiedDate.equals(company.lastModifiedDate)) return false;
         if (!lastModifiedBy.equals(company.lastModifiedBy)) return false;
         if (!title.equals(company.title)) return false;
-        if (aliases != null ? !aliases.equals(company.aliases) : company.aliases != null) return false;
+        if (!aliases.equals(company.aliases)) return false;
         if (description != null ? !description.equals(company.description) : company.description != null) return false;
         if (!employeeRelations.equals(company.employeeRelations)) return false;
-        return assignedEvents != null ? assignedEvents.equals(company.assignedEvents) : company.assignedEvents == null;
+        return assignedEvents.equals(company.assignedEvents);
 
     }
 
     @Override
     public int hashCode() {
-        int result = avatarBytea != null ? avatarBytea.hashCode() : 0;
-        result = 31 * result + (info != null ? info.hashCode() : 0);
+        int result = Arrays.hashCode(avatarBytea);
+        result = 31 * result + info.hashCode();
         result = 31 * result + status.hashCode();
         result = 31 * result + createdDate.hashCode();
         result = 31 * result + createdBy.hashCode();
         result = 31 * result + lastModifiedDate.hashCode();
         result = 31 * result + lastModifiedBy.hashCode();
         result = 31 * result + title.hashCode();
-        result = 31 * result + (aliases != null ? aliases.hashCode() : 0);
+        result = 31 * result + aliases.hashCode();
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + employeeRelations.hashCode();
-        result = 31 * result + (assignedEvents != null ? assignedEvents.hashCode() : 0);
+        result = 31 * result + assignedEvents.hashCode();
         return result;
     }
 
@@ -261,7 +262,7 @@ public class CompanyImpl implements Company {
     public String toString() {
         return "CompanyImpl{" +
                 "id=" + id +
-                ", avatarBytea=" + avatarBytea +
+                ", avatarBytea=" + Arrays.toString(avatarBytea) +
                 ", info=" + info +
                 ", status=" + status +
                 ", createdDate=" + createdDate +

@@ -7,15 +7,13 @@ import com.provectus.prodobro.event.Event;
 import com.provectus.prodobro.info.Info;
 
 import java.sql.Timestamp;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
+
 
 public class UserImpl implements User {
 
     private int id;
-    private Optional<byte[]> avatarBytea;
+    private byte[] avatarBytea;
     private Set<Info> info = new TreeSet<>();
     private ActorStatus status;
     private Timestamp createdDate;
@@ -29,7 +27,7 @@ public class UserImpl implements User {
     private String passHash;
     private String phoneNumber;
     private Locale language;
-    private Optional<EmployeeRelation> employeeRelation;
+    private EmployeeRelation employeeRelation;
     private Set<Event> asignedEvents = new TreeSet<>();
     private Set<Event> createdEvents = new TreeSet<>();
 
@@ -43,7 +41,7 @@ public class UserImpl implements User {
 
     @Override
     public Optional<byte[]> getAvatarBytea() {
-        return avatarBytea;
+        return Optional.ofNullable(avatarBytea);
     }
 
     @Override
@@ -108,7 +106,7 @@ public class UserImpl implements User {
 
     @Override
     public Optional<EmployeeRelation> getEmployeeRelation() {
-        return this.employeeRelation;
+        return Optional.ofNullable(employeeRelation);
     }
 
     @Override
@@ -128,7 +126,7 @@ public class UserImpl implements User {
 
     @Override
     public void setAvatarBytea(byte[] avatarBytea) {
-        this.avatarBytea = Optional.ofNullable(avatarBytea);
+        this.avatarBytea = avatarBytea;
     }
 
     @Override
@@ -193,7 +191,7 @@ public class UserImpl implements User {
 
     @Override
     public void setEmployeeRelation(EmployeeRelation employeeRelation) {
-        this.employeeRelation = Optional.ofNullable(employeeRelation);
+        this.employeeRelation = employeeRelation;
     }
 
     @Override
@@ -243,45 +241,44 @@ public class UserImpl implements User {
 
         UserImpl user = (UserImpl) o;
 
-        if (avatarBytea != null ? !avatarBytea.equals(user.avatarBytea) : user.avatarBytea != null) return false;
-        if (info != null ? !info.equals(user.info) : user.info != null) return false;
+        if (!Arrays.equals(avatarBytea, user.avatarBytea)) return false;
+        if (!info.equals(user.info)) return false;
         if (status != user.status) return false;
         if (!createdDate.equals(user.createdDate)) return false;
         if (!createdBy.equals(user.createdBy)) return false;
         if (!lastModifiedDate.equals(user.lastModifiedDate)) return false;
         if (!lastModifiedBy.equals(user.lastModifiedBy)) return false;
         if (!firstName.equals(user.firstName)) return false;
-        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
+        if (!lastName.equals(user.lastName)) return false;
         if (!email.equals(user.email)) return false;
         if (!passHash.equals(user.passHash)) return false;
-        if (phoneNumber != null ? !phoneNumber.equals(user.phoneNumber) : user.phoneNumber != null) return false;
+        if (!phoneNumber.equals(user.phoneNumber)) return false;
         if (!language.equals(user.language)) return false;
         if (employeeRelation != null ? !employeeRelation.equals(user.employeeRelation) : user.employeeRelation != null)
             return false;
-        if (asignedEvents != null ? !asignedEvents.equals(user.asignedEvents) : user.asignedEvents != null)
-            return false;
-        return createdEvents != null ? createdEvents.equals(user.createdEvents) : user.createdEvents == null;
+        if (!asignedEvents.equals(user.asignedEvents)) return false;
+        return createdEvents.equals(user.createdEvents);
 
     }
 
     @Override
     public int hashCode() {
-        int result = avatarBytea != null ? avatarBytea.hashCode() : 0;
-        result = 31 * result + (info != null ? info.hashCode() : 0);
+        int result = Arrays.hashCode(avatarBytea);
+        result = 31 * result + info.hashCode();
         result = 31 * result + status.hashCode();
         result = 31 * result + createdDate.hashCode();
         result = 31 * result + createdBy.hashCode();
         result = 31 * result + lastModifiedDate.hashCode();
         result = 31 * result + lastModifiedBy.hashCode();
         result = 31 * result + firstName.hashCode();
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + lastName.hashCode();
         result = 31 * result + email.hashCode();
         result = 31 * result + passHash.hashCode();
-        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + phoneNumber.hashCode();
         result = 31 * result + language.hashCode();
         result = 31 * result + (employeeRelation != null ? employeeRelation.hashCode() : 0);
-        result = 31 * result + (asignedEvents != null ? asignedEvents.hashCode() : 0);
-        result = 31 * result + (createdEvents != null ? createdEvents.hashCode() : 0);
+        result = 31 * result + asignedEvents.hashCode();
+        result = 31 * result + createdEvents.hashCode();
         return result;
     }
 
@@ -289,7 +286,7 @@ public class UserImpl implements User {
     public String toString() {
         return "UserImpl{" +
                 "id=" + id +
-                ", avatarBytea=" + avatarBytea +
+                ", avatarBytea=" + Arrays.toString(avatarBytea) +
                 ", info=" + info +
                 ", status=" + status +
                 ", createdDate=" + createdDate +
