@@ -1,7 +1,7 @@
-package com.provectus.prodobro.actor;
+package com.provectus.prodobro.additional.status;
 
 
-public enum ActorStatus {
+public enum StatusEnum {
     BANNED(-2),
     DELETED(-1),
     NOT_VERIFIED(0),
@@ -9,7 +9,7 @@ public enum ActorStatus {
 
     private int id;
 
-    ActorStatus(int id) {
+    StatusEnum(int id) {
         this.id = id;
     }
 

@@ -1,13 +1,28 @@
 package com.provectus.prodobro.actor.shelter;
 
 
+import javax.persistence.*;
 import java.util.Set;
 import java.util.TreeSet;
 
+@Entity
+@Table(name = "tag")
 public class TagImpl implements Tag {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "title")
     private String title;
+
+    @ManyToMany(targetEntity = ShelterImpl.class)
+    @JoinTable(
+            name = "shelter_tag",
+            joinColumns = @JoinColumn(name = "tag_id"),
+            inverseJoinColumns = @JoinColumn(name = "shelter_id")
+    )
     private Set<Shelter> shelters = new TreeSet<>();
 
     public TagImpl() {

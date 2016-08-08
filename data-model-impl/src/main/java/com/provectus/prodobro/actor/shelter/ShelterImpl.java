@@ -1,32 +1,74 @@
 package com.provectus.prodobro.actor.shelter;
 
 
-import com.provectus.prodobro.actor.ActorStatus;
+import com.provectus.prodobro.actor.event.Event;
+import com.provectus.prodobro.actor.event.EventImpl;
 import com.provectus.prodobro.actor.user.User;
-import com.provectus.prodobro.event.Event;
-import com.provectus.prodobro.info.Info;
+import com.provectus.prodobro.actor.user.UserImpl;
+import com.provectus.prodobro.additional.avatar.Avatar;
+import com.provectus.prodobro.additional.info.Info;
+import com.provectus.prodobro.additional.status.Status;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
+@Entity
+@Table(name = "shelter")
 public class ShelterImpl implements Shelter {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-    private byte[] avatarBytea;
+
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = ShelterAvatar.class)
+    @JoinColumn(name = "avatar_id")
+    private Avatar avatar;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", targetEntity = ShelterInfo.class)
     private Set<Info> info = new TreeSet<>();
-    private ActorStatus status;
+
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = ShelterStatus.class)
+    @JoinColumn(name = "status_id")
+    private Status status;
+
+    @Column(name = "created_date")
     private Timestamp createdDate;
+
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserImpl.class)
+    @JoinColumn(name = "created_by_id")
     private User createdBy;
+
+    @Column(name = "last_modified_date")
     private Timestamp lastModifiedDate;
+
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserImpl.class)
+    @JoinColumn(name = "last_modified_by_id")
     private User lastModifiedBy;
 
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "description")
     private String description;
+
+    @OneToOne(targetEntity = ShelterTypeImpl.class)
+    @JoinColumn(name = "type_id")
     private ShelterType type;
+
+    @OneToOne(mappedBy = "shelter", targetEntity = EventImpl.class)
     private Event event;
+
+
+    @ManyToMany(targetEntity = TagImpl.class)
+    @JoinTable(
+            name = "shelter_tag",
+            joinColumns = @JoinColumn(name = "shelter_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
     private Set<Tag> tags = new TreeSet<>();
 
     public ShelterImpl() {
@@ -39,7 +81,12 @@ public class ShelterImpl implements Shelter {
 
     @Override
     public Optional<byte[]> getAvatarBytea() {
-        return Optional.ofNullable(avatarBytea);
+        return Optional.ofNullable(avatar.getBytea());
+    }
+
+    @Override
+    public Optional<Avatar> getAvatar() {
+        return Optional.ofNullable(avatar);
     }
 
     @Override
@@ -48,7 +95,7 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
-    public ActorStatus getStatus() {
+    public Status getStatus() {
         return status;
     }
 
@@ -103,8 +150,8 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
-    public void setAvatarBytea(byte[] avatarBytea) {
-        this.avatarBytea = avatarBytea;
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
     }
 
     @Override
@@ -113,7 +160,7 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
-    public void setStatus(ActorStatus status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -182,61 +229,4 @@ public class ShelterImpl implements Shelter {
         tags.remove(tag);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ShelterImpl)) return false;
-
-        ShelterImpl shelter = (ShelterImpl) o;
-
-        if (!Arrays.equals(avatarBytea, shelter.avatarBytea)) return false;
-        if (!info.equals(shelter.info)) return false;
-        if (status != shelter.status) return false;
-        if (!createdDate.equals(shelter.createdDate)) return false;
-        if (!createdBy.equals(shelter.createdBy)) return false;
-        if (!lastModifiedDate.equals(shelter.lastModifiedDate)) return false;
-        if (!lastModifiedBy.equals(shelter.lastModifiedBy)) return false;
-        if (!title.equals(shelter.title)) return false;
-        if (description != null ? !description.equals(shelter.description) : shelter.description != null) return false;
-        if (type != shelter.type) return false;
-        if (event != null ? !event.equals(shelter.event) : shelter.event != null) return false;
-        return tags.equals(shelter.tags);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Arrays.hashCode(avatarBytea);
-        result = 31 * result + info.hashCode();
-        result = 31 * result + status.hashCode();
-        result = 31 * result + createdDate.hashCode();
-        result = 31 * result + createdBy.hashCode();
-        result = 31 * result + lastModifiedDate.hashCode();
-        result = 31 * result + lastModifiedBy.hashCode();
-        result = 31 * result + title.hashCode();
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + type.hashCode();
-        result = 31 * result + (event != null ? event.hashCode() : 0);
-        result = 31 * result + tags.hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "ShelterImpl{" +
-                "id=" + id +
-                ", avatarBytea=" + Arrays.toString(avatarBytea) +
-                ", info=" + info +
-                ", status=" + status.name() +
-                ", createdDate=" + createdDate +
-                ", createdBy=" + createdBy +
-                ", lastModifiedDate=" + lastModifiedDate +
-                ", lastModifiedBy=" + lastModifiedBy +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", type=" + type.name() +
-                ", event=" + event +
-                ", tags=" + tags +
-                '}';
-    }
 }

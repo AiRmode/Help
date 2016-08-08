@@ -2,23 +2,33 @@ package com.provectus.prodobro.actor;
 
 
 import com.provectus.prodobro.actor.company.Company;
+import com.provectus.prodobro.actor.company.CompanyImpl;
 import com.provectus.prodobro.actor.user.User;
+import com.provectus.prodobro.actor.user.UserImpl;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "company_user")
 public class EmployeeRelationImpl implements EmployeeRelation {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserImpl.class)
+    @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne(targetEntity = CompanyImpl.class)
+    @JoinColumn(name = "company_id")
     private Company company;
+
+    @Column(name = "is_admin")
     private boolean isAdmin;
 
     public EmployeeRelationImpl() {
-    }
-
-    public EmployeeRelationImpl(int id, User user, Company company, boolean isAdmin) {
-        this.id = id;
-        this.user = user;
-        this.company = company;
-        this.isAdmin = isAdmin;
     }
 
     @Override

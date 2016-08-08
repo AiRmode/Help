@@ -1,10 +1,11 @@
-package com.provectus.prodobro.event;
+package com.provectus.prodobro.actor.event;
 
 
 import com.provectus.prodobro.actor.company.Company;
 import com.provectus.prodobro.actor.shelter.Shelter;
 import com.provectus.prodobro.actor.user.User;
-import com.provectus.prodobro.info.Info;
+import com.provectus.prodobro.additional.avatar.Avatar;
+import com.provectus.prodobro.additional.info.Info;
 
 import java.sql.Timestamp;
 import java.util.Optional;
@@ -15,6 +16,10 @@ public interface Event {
     int getId();
 
     String getTitle();
+
+    Optional<Avatar> getAvatar();
+
+    Optional<byte[]> getAvatarBytea();
 
     Set<Info> getInfo();
 

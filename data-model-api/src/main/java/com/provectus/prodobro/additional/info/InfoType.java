@@ -1,7 +1,7 @@
-package com.provectus.prodobro.actor.shelter;
+package com.provectus.prodobro.additional.info;
 
 
-public interface ShelterType {
+public interface InfoType {
 
     int getId();
 

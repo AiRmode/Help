@@ -1,7 +1,7 @@
-package com.provectus.prodobro.info;
+package com.provectus.prodobro.additional.info;
 
 
-public enum InfoType {
+public enum InfoTypeEnum {
 
     EMAIL(1),
     SKYPE(2),
@@ -11,7 +11,7 @@ public enum InfoType {
 
     private int id;
 
-    InfoType(int id) {
+    InfoTypeEnum(int id) {
         this.id = id;
     }
 

@@ -1,35 +1,84 @@
 package com.provectus.prodobro.actor.user;
 
 
-import com.provectus.prodobro.actor.ActorStatus;
 import com.provectus.prodobro.actor.EmployeeRelation;
-import com.provectus.prodobro.event.Event;
-import com.provectus.prodobro.info.Info;
+import com.provectus.prodobro.actor.EmployeeRelationImpl;
+import com.provectus.prodobro.actor.event.Event;
+import com.provectus.prodobro.actor.event.EventImpl;
+import com.provectus.prodobro.additional.avatar.Avatar;
+import com.provectus.prodobro.additional.info.Info;
+import com.provectus.prodobro.additional.status.Status;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
-
+@Entity
+@Table(name = "user")
 public class UserImpl implements User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-    private byte[] avatarBytea;
+
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserAvatar.class)
+    @JoinColumn(name = "avatar_id")
+    private Avatar avatar;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", targetEntity = UserInfo.class)
     private Set<Info> info = new TreeSet<>();
-    private ActorStatus status;
+
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserStatus.class)
+    @JoinColumn(name = "status_id")
+    private Status status;
+
+    @Column(name = "created_date")
     private Timestamp createdDate;
+
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserImpl.class)
+    @JoinColumn(name = "created_by_id")
     private User createdBy;
+
+    @Column(name = "last_modified_date")
     private Timestamp lastModifiedDate;
+
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserImpl.class)
+    @JoinColumn(name = "last_modified_by_id")
     private User lastModifiedBy;
 
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "pass_hash")
     private String passHash;
+
+    @Column(name = "phone_num")
     private String phoneNumber;
+
+    @Column(name = "locale_lang")
     private Locale language;
+
+    @OneToOne(mappedBy = "user", targetEntity = EmployeeRelationImpl.class)
     private EmployeeRelation employeeRelation;
-    private Set<Event> asignedEvents = new TreeSet<>();
-    private Set<Event> createdEvents = new TreeSet<>();
+
+    @ManyToMany(targetEntity = EventImpl.class)
+    @JoinTable(
+            name = "user_event",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private Set<Event> assignedEvents = new TreeSet<>();
 
     public UserImpl() {
     }
@@ -40,8 +89,13 @@ public class UserImpl implements User {
     }
 
     @Override
+    public Optional<Avatar> getAvatar() {
+        return Optional.ofNullable(avatar);
+    }
+
+    @Override
     public Optional<byte[]> getAvatarBytea() {
-        return Optional.ofNullable(avatarBytea);
+        return Optional.ofNullable(avatar.getBytea());
     }
 
     @Override
@@ -50,7 +104,7 @@ public class UserImpl implements User {
     }
 
     @Override
-    public ActorStatus getStatus() {
+    public Status getStatus() {
         return status;
     }
 
@@ -111,12 +165,16 @@ public class UserImpl implements User {
 
     @Override
     public Set<Event> getAssignedEvents() {
-        return asignedEvents;
+        return assignedEvents;
     }
 
     @Override
     public Set<Event> getCreatedEvents() {
-        return createdEvents;
+        return assignedEvents.stream().filter(
+                line -> line.getShelter()
+                        .getCreatedBy()
+                        .equals(this)
+        ).collect(Collectors.toSet());
     }
 
     @Override
@@ -125,8 +183,8 @@ public class UserImpl implements User {
     }
 
     @Override
-    public void setAvatarBytea(byte[] avatarBytea) {
-        this.avatarBytea = avatarBytea;
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
     }
 
     @Override
@@ -135,7 +193,7 @@ public class UserImpl implements User {
     }
 
     @Override
-    public void setStatus(ActorStatus status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -196,12 +254,7 @@ public class UserImpl implements User {
 
     @Override
     public void setAssignedEvents(Set<Event> assignedEvents) {
-        this.asignedEvents = assignedEvents;
-    }
-
-    @Override
-    public void setCreatedEvents(Set<Event> createdEvents) {
-        this.createdEvents = createdEvents;
+        this.assignedEvents = assignedEvents;
     }
 
     @Override
@@ -216,83 +269,25 @@ public class UserImpl implements User {
 
     @Override
     public void addAssignedEvent(Event event) {
-        asignedEvents.add(event);
+        assignedEvents.add(event);
     }
 
     @Override
     public void removeAssignedEvent(Event event) {
-        asignedEvents.remove(event);
-    }
-
-    @Override
-    public void addCreatedEvent(Event event) {
-        createdEvents.add(event);
-    }
-
-    @Override
-    public void removeCreatedEvent(Event event) {
-        createdEvents.remove(event);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserImpl)) return false;
-
-        UserImpl user = (UserImpl) o;
-
-        if (!Arrays.equals(avatarBytea, user.avatarBytea)) return false;
-        if (!info.equals(user.info)) return false;
-        if (status != user.status) return false;
-        if (!createdDate.equals(user.createdDate)) return false;
-        if (!createdBy.equals(user.createdBy)) return false;
-        if (!lastModifiedDate.equals(user.lastModifiedDate)) return false;
-        if (!lastModifiedBy.equals(user.lastModifiedBy)) return false;
-        if (!firstName.equals(user.firstName)) return false;
-        if (!lastName.equals(user.lastName)) return false;
-        if (!email.equals(user.email)) return false;
-        if (!passHash.equals(user.passHash)) return false;
-        if (!phoneNumber.equals(user.phoneNumber)) return false;
-        if (!language.equals(user.language)) return false;
-        if (employeeRelation != null ? !employeeRelation.equals(user.employeeRelation) : user.employeeRelation != null)
-            return false;
-        if (!asignedEvents.equals(user.asignedEvents)) return false;
-        return createdEvents.equals(user.createdEvents);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Arrays.hashCode(avatarBytea);
-        result = 31 * result + info.hashCode();
-        result = 31 * result + status.hashCode();
-        result = 31 * result + createdDate.hashCode();
-        result = 31 * result + createdBy.hashCode();
-        result = 31 * result + lastModifiedDate.hashCode();
-        result = 31 * result + lastModifiedBy.hashCode();
-        result = 31 * result + firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
-        result = 31 * result + email.hashCode();
-        result = 31 * result + passHash.hashCode();
-        result = 31 * result + phoneNumber.hashCode();
-        result = 31 * result + language.hashCode();
-        result = 31 * result + (employeeRelation != null ? employeeRelation.hashCode() : 0);
-        result = 31 * result + asignedEvents.hashCode();
-        result = 31 * result + createdEvents.hashCode();
-        return result;
+        assignedEvents.remove(event);
     }
 
     @Override
     public String toString() {
         return "UserImpl{" +
                 "id=" + id +
-                ", avatarBytea=" + Arrays.toString(avatarBytea) +
+                ", avatar=" + avatar +
+                ", status=" + status +
                 ", info=" + info +
-                ", status=" + status.name() +
                 ", createdDate=" + createdDate +
-                ", createdBy=" + createdBy +
+                ", createdBy=" + createdBy.getId() +
                 ", lastModifiedDate=" + lastModifiedDate +
-                ", lastModifiedBy=" + lastModifiedBy +
+                ", lastModifiedBy=" + lastModifiedBy.getId() +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
@@ -300,8 +295,7 @@ public class UserImpl implements User {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", language=" + language +
                 ", employeeRelation=" + employeeRelation +
-                ", asignedEvents=" + asignedEvents +
-                ", createdEvents=" + createdEvents +
+                ", assignedEvents=" + assignedEvents +
                 '}';
     }
 }

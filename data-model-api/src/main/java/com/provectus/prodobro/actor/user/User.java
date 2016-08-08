@@ -1,15 +1,41 @@
 package com.provectus.prodobro.actor.user;
 
 
-import com.provectus.prodobro.actor.Actor;
 import com.provectus.prodobro.actor.EmployeeRelation;
-import com.provectus.prodobro.event.Event;
+import com.provectus.prodobro.actor.event.Event;
+import com.provectus.prodobro.additional.avatar.Avatar;
+import com.provectus.prodobro.additional.info.Info;
+import com.provectus.prodobro.additional.status.Status;
 
+import java.sql.Timestamp;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 
-public interface User extends Actor {
+public interface User {
+
+    int getId();
+
+    Optional<Avatar> getAvatar();
+
+    Optional<byte[]> getAvatarBytea();
+
+    /**
+     * Information: Photos, Emails, Websites, etc.
+     *
+     * @return {@link Set<Info>} of Actor`s information
+     */
+    Set<Info> getInfo();
+
+    Status getStatus();
+
+    Timestamp getCreatedDate();
+
+    User getCreatedBy();
+
+    Timestamp getLastModifiedDate();
+
+    User getLastModifiedBy();
 
     String getFirstName();
 
@@ -41,6 +67,26 @@ public interface User extends Actor {
      */
     Set<Event> getCreatedEvents();
 
+    void setId(int id);
+
+    void setAvatar(Avatar avatar);
+
+    void setInfo(Set<Info> info);
+
+    void setStatus(Status status);
+
+    void setCreatedDate(Timestamp createdDate);
+
+    void setCreatedBy(User createdBy);
+
+    void setLastModifiedDate(Timestamp lastModifiedDate);
+
+    void setLastModifiedBy(User lastModifiedBy);
+
+    void addInfo(Info info);
+
+    void removeInfo(Info info);
+
     void setFirstName(String firstName);
 
     void setLastName(String lastName);
@@ -57,14 +103,8 @@ public interface User extends Actor {
 
     void setAssignedEvents(Set<Event> assignedEvents);
 
-    void setCreatedEvents(Set<Event> createdEvents);
-
     void addAssignedEvent(Event event);
 
     void removeAssignedEvent(Event event);
-
-    void addCreatedEvent(Event event);
-
-    void removeCreatedEvent(Event event);
 
 }
