@@ -103,6 +103,13 @@
             <version>9.4.1209</version>
         </dependency>
 
+        <!-- FindBugs -->
+        <dependency>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>findbugs-maven-plugin</artifactId>
+            <version>3.0.4</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -118,5 +125,20 @@
             </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>3.0.4</version>
+                <configuration>
+                    <xmlOutput>true</xmlOutput>
+                    <!-- Output report -->
+                    <xmlOutputDirectory>target/site</xmlOutputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>

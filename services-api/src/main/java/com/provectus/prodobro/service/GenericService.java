@@ -1,5 +1,7 @@
 package com.provectus.prodobro.service;
 
 
-public interface UserService {
+public interface GenericService<T> {
+
+
 }
