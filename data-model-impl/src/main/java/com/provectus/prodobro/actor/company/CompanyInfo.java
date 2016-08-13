@@ -1,8 +1,8 @@
 package com.provectus.prodobro.actor.company;
 
 
-import com.provectus.prodobro.additional.info.Info;
-import com.provectus.prodobro.additional.info.InfoType;
+import com.provectus.prodobro.shared.info.Info;
+import com.provectus.prodobro.shared.info.InfoTypeEnum;
 
 import javax.persistence.*;
 
@@ -22,9 +22,9 @@ public class CompanyInfo implements Info<Company> {
     @Column(name = "info")
     private String info;
 
-    @OneToOne(targetEntity = CompanyInfoType.class)
-    @JoinColumn(name = "info_type_id")
-    private InfoType type;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "info_type")
+    private InfoTypeEnum type;
 
     public CompanyInfo() {
     }
@@ -45,8 +45,8 @@ public class CompanyInfo implements Info<Company> {
     }
 
     @Override
-    public InfoType getType() {
-        return type;
+    public String getType() {
+        return type.name();
     }
 
     @Override
@@ -65,7 +65,7 @@ public class CompanyInfo implements Info<Company> {
     }
 
     @Override
-    public void setType(InfoType type) {
-        this.type = type;
+    public void setType(String type) {
+        this.type = InfoTypeEnum.valueOf(type);
     }
 }

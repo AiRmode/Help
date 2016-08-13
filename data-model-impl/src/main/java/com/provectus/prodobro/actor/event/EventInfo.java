@@ -1,9 +1,8 @@
 package com.provectus.prodobro.actor.event;
 
 
-import com.provectus.prodobro.actor.shelter.ShelterInfoType;
-import com.provectus.prodobro.additional.info.Info;
-import com.provectus.prodobro.additional.info.InfoType;
+import com.provectus.prodobro.shared.info.Info;
+import com.provectus.prodobro.shared.info.InfoTypeEnum;
 
 import javax.persistence.*;
 
@@ -23,9 +22,9 @@ public class EventInfo implements Info<Event> {
     @Column(name = "info")
     private String info;
 
-    @OneToOne(targetEntity = ShelterInfoType.class)
-    @JoinColumn(name = "info_type_id")
-    private InfoType type;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "info_type")
+    private InfoTypeEnum type;
 
     public EventInfo() {
     }
@@ -41,8 +40,8 @@ public class EventInfo implements Info<Event> {
     }
 
     @Override
-    public InfoType getType() {
-        return type;
+    public String getType() {
+        return type.name();
     }
 
     @Override
@@ -61,8 +60,8 @@ public class EventInfo implements Info<Event> {
     }
 
     @Override
-    public void setType(InfoType type) {
-        this.type = type;
+    public void setType(String type) {
+        this.type = InfoTypeEnum.valueOf(type);
     }
 
     @Override

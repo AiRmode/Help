@@ -4,8 +4,8 @@ package com.provectus.prodobro.actor.event;
 import com.provectus.prodobro.actor.company.Company;
 import com.provectus.prodobro.actor.shelter.Shelter;
 import com.provectus.prodobro.actor.user.User;
-import com.provectus.prodobro.additional.avatar.Avatar;
-import com.provectus.prodobro.additional.info.Info;
+import com.provectus.prodobro.shared.avatar.Avatar;
+import com.provectus.prodobro.shared.info.Info;
 
 import java.sql.Timestamp;
 import java.util.Optional;

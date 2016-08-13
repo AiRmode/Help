@@ -1,4 +1,4 @@
-package com.provectus.prodobro.additional.info;
+package com.provectus.prodobro.shared.info;
 
 
 public interface Info<T> {
@@ -9,7 +9,7 @@ public interface Info<T> {
 
     String getInfo();
 
-    InfoType getType();
+    String getType();
 
     void setId(int id);
 
@@ -17,6 +17,6 @@ public interface Info<T> {
 
     void setInfo(String info);
 
-    void setType(InfoType type);
+    void setType(String type);
 
 }

@@ -7,14 +7,14 @@ import com.provectus.prodobro.actor.shelter.Shelter;
 import com.provectus.prodobro.actor.shelter.ShelterImpl;
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.actor.user.UserImpl;
-import com.provectus.prodobro.additional.avatar.Avatar;
-import com.provectus.prodobro.additional.info.Info;
+import com.provectus.prodobro.shared.avatar.Avatar;
+import com.provectus.prodobro.shared.info.Info;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.TreeSet;
 
 @Entity
 @Table(name = "event")
@@ -29,7 +29,7 @@ public class EventImpl implements Event {
     private String title;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", targetEntity = EventInfo.class)
-    private Set<Info> info = new TreeSet<>();
+    private Set<Info> info = new HashSet<>();
 
     @Column(name = "description")
     private String description;
@@ -64,7 +64,7 @@ public class EventImpl implements Event {
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<User> assignedUsers = new TreeSet<>();
+    private Set<User> assignedUsers = new HashSet<>();
 
     @ManyToMany(targetEntity = CompanyImpl.class)
     @JoinTable(
@@ -72,7 +72,7 @@ public class EventImpl implements Event {
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "company_id")
     )
-    private Set<Company> assignedCompanies = new TreeSet<>();
+    private Set<Company> assignedCompanies = new HashSet<>();
 
     public EventImpl() {
     }

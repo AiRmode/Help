@@ -5,15 +5,15 @@ import com.provectus.prodobro.actor.event.Event;
 import com.provectus.prodobro.actor.event.EventImpl;
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.actor.user.UserImpl;
-import com.provectus.prodobro.additional.avatar.Avatar;
-import com.provectus.prodobro.additional.info.Info;
-import com.provectus.prodobro.additional.status.Status;
+import com.provectus.prodobro.shared.avatar.Avatar;
+import com.provectus.prodobro.shared.info.Info;
+import com.provectus.prodobro.shared.status.Status;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.TreeSet;
 
 @Entity
 @Table(name = "shelter")
@@ -29,7 +29,7 @@ public class ShelterImpl implements Shelter {
     private Avatar avatar;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", targetEntity = ShelterInfo.class)
-    private Set<Info> info = new TreeSet<>();
+    private Set<Info> info = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = ShelterStatus.class)
     @JoinColumn(name = "status_id")
@@ -69,7 +69,7 @@ public class ShelterImpl implements Shelter {
             joinColumns = @JoinColumn(name = "shelter_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
-    private Set<Tag> tags = new TreeSet<>();
+    private Set<Tag> tags = new HashSet<>();
 
     public ShelterImpl() {
     }

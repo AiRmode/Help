@@ -1,8 +1,8 @@
 package com.provectus.prodobro.actor.shelter;
 
 
-import com.provectus.prodobro.additional.status.Status;
-import com.provectus.prodobro.additional.status.StatusEnum;
+import com.provectus.prodobro.shared.status.Status;
+import com.provectus.prodobro.shared.status.StatusEnum;
 
 import javax.persistence.*;
 

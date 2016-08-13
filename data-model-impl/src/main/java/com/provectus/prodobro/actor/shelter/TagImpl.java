@@ -2,8 +2,8 @@ package com.provectus.prodobro.actor.shelter;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 @Entity
 @Table(name = "tag")
@@ -23,7 +23,7 @@ public class TagImpl implements Tag {
             joinColumns = @JoinColumn(name = "tag_id"),
             inverseJoinColumns = @JoinColumn(name = "shelter_id")
     )
-    private Set<Shelter> shelters = new TreeSet<>();
+    private Set<Shelter> shelters = new HashSet<>();
 
     public TagImpl() {
     }

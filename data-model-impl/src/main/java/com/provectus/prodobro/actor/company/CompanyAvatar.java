@@ -1,7 +1,7 @@
 package com.provectus.prodobro.actor.company;
 
 
-import com.provectus.prodobro.additional.avatar.Avatar;
+import com.provectus.prodobro.shared.avatar.Avatar;
 
 import javax.persistence.*;
 

@@ -1,4 +1,4 @@
-package com.provectus.prodobro.additional.status;
+package com.provectus.prodobro.shared.status;
 
 
 public interface Status {

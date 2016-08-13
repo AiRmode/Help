@@ -1,4 +1,4 @@
-package com.provectus.prodobro.additional.avatar;
+package com.provectus.prodobro.shared.avatar;
 
 
 public interface Avatar {

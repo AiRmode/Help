@@ -1,20 +1,20 @@
 package com.provectus.prodobro.actor.user;
 
 
-import com.provectus.prodobro.actor.EmployeeRelation;
-import com.provectus.prodobro.actor.EmployeeRelationImpl;
 import com.provectus.prodobro.actor.event.Event;
 import com.provectus.prodobro.actor.event.EventImpl;
-import com.provectus.prodobro.additional.avatar.Avatar;
-import com.provectus.prodobro.additional.info.Info;
-import com.provectus.prodobro.additional.status.Status;
+import com.provectus.prodobro.actor.relation.EmployeeRelation;
+import com.provectus.prodobro.actor.relation.EmployeeRelationImpl;
+import com.provectus.prodobro.shared.avatar.Avatar;
+import com.provectus.prodobro.shared.info.Info;
+import com.provectus.prodobro.shared.status.Status;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 @Entity
@@ -31,7 +31,7 @@ public class UserImpl implements User {
     private Avatar avatar;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", targetEntity = UserInfo.class)
-    private Set<Info> info = new TreeSet<>();
+    private Set<Info> info = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = UserStatus.class)
     @JoinColumn(name = "status_id")
@@ -78,7 +78,7 @@ public class UserImpl implements User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
-    private Set<Event> assignedEvents = new TreeSet<>();
+    private Set<Event> assignedEvents = new HashSet<>();
 
     public UserImpl() {
     }
@@ -277,25 +277,4 @@ public class UserImpl implements User {
         assignedEvents.remove(event);
     }
 
-    @Override
-    public String toString() {
-        return "UserImpl{" +
-                "id=" + id +
-                ", avatar=" + avatar +
-                ", status=" + status +
-                ", info=" + info +
-                ", createdDate=" + createdDate +
-                ", createdBy=" + createdBy.getId() +
-                ", lastModifiedDate=" + lastModifiedDate +
-                ", lastModifiedBy=" + lastModifiedBy.getId() +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", passHash='" + passHash + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", language=" + language +
-                ", employeeRelation=" + employeeRelation +
-                ", assignedEvents=" + assignedEvents +
-                '}';
-    }
 }

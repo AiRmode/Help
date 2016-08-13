@@ -1,21 +1,21 @@
 package com.provectus.prodobro.actor.company;
 
 
-import com.provectus.prodobro.actor.EmployeeRelation;
-import com.provectus.prodobro.actor.EmployeeRelationImpl;
 import com.provectus.prodobro.actor.event.Event;
 import com.provectus.prodobro.actor.event.EventImpl;
+import com.provectus.prodobro.actor.relation.EmployeeRelation;
+import com.provectus.prodobro.actor.relation.EmployeeRelationImpl;
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.actor.user.UserImpl;
-import com.provectus.prodobro.additional.avatar.Avatar;
-import com.provectus.prodobro.additional.info.Info;
-import com.provectus.prodobro.additional.status.Status;
+import com.provectus.prodobro.shared.avatar.Avatar;
+import com.provectus.prodobro.shared.info.Info;
+import com.provectus.prodobro.shared.status.Status;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 @Entity
@@ -33,7 +33,7 @@ public class CompanyImpl implements Company {
     private Avatar avatar;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", targetEntity = CompanyInfo.class)
-    private Set<Info> info = new TreeSet<>();
+    private Set<Info> info = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = CompanyStatus.class)
     @JoinColumn(name = "status_id")
@@ -57,13 +57,13 @@ public class CompanyImpl implements Company {
     private String title;
 
     @OneToMany(mappedBy = "company", targetEntity = CompanyAliasImpl.class)
-    private Set<CompanyAlias> aliases = new TreeSet<>();
+    private Set<CompanyAlias> aliases = new HashSet<>();
 
     @Column(name = "description")
     private String description;
 
     @OneToMany(mappedBy = "company", targetEntity = EmployeeRelationImpl.class)
-    private Set<EmployeeRelation> employeeRelations = new TreeSet<>();
+    private Set<EmployeeRelation> employeeRelations = new HashSet<>();
 
     @ManyToMany(targetEntity = EventImpl.class)
     @JoinTable(
@@ -71,7 +71,7 @@ public class CompanyImpl implements Company {
             joinColumns = @JoinColumn(name = "company_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
-    private Set<Event> assignedEvents = new TreeSet<>();
+    private Set<Event> assignedEvents = new HashSet<>();
 
     public CompanyImpl() {
     }

@@ -1,7 +1,7 @@
 package com.provectus.prodobro.actor.user;
 
 
-import com.provectus.prodobro.additional.avatar.Avatar;
+import com.provectus.prodobro.shared.avatar.Avatar;
 
 import javax.persistence.*;
 import java.util.Arrays;

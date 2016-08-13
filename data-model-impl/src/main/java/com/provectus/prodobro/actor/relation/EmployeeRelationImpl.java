@@ -1,4 +1,4 @@
-package com.provectus.prodobro.actor;
+package com.provectus.prodobro.actor.relation;
 
 
 import com.provectus.prodobro.actor.company.Company;

@@ -1,7 +1,7 @@
 package com.provectus.prodobro.actor.user;
 
-import com.provectus.prodobro.additional.info.Info;
-import com.provectus.prodobro.additional.info.InfoType;
+import com.provectus.prodobro.shared.info.Info;
+import com.provectus.prodobro.shared.info.InfoTypeEnum;
 
 import javax.persistence.*;
 
@@ -21,9 +21,9 @@ public class UserInfo implements Info<User> {
     @Column(name = "info")
     private String info;
 
-    @OneToOne(targetEntity = UserInfoType.class)
-    @JoinColumn(name = "info_type_id")
-    private InfoType type;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "info_type")
+    private InfoTypeEnum type;
 
     @Override
     public int getId() {
@@ -41,8 +41,8 @@ public class UserInfo implements Info<User> {
     }
 
     @Override
-    public InfoType getType() {
-        return type;
+    public String getType() {
+        return type.name();
     }
 
     @Override
@@ -61,17 +61,7 @@ public class UserInfo implements Info<User> {
     }
 
     @Override
-    public void setType(InfoType type) {
-        this.type = type;
-    }
-
-    @Override
-    public String toString() {
-        return "UserInfo{" +
-                "id=" + id +
-                ", owner=" + owner.getId() +
-                ", info='" + info + '\'' +
-                ", type=" + type +
-                '}';
+    public void setType(String type) {
+        this.type = InfoTypeEnum.valueOf(type);
     }
 }

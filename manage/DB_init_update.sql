@@ -48,16 +48,10 @@ CREATE TABLE schema_name."user" (
 );
 
 CREATE TABLE schema_name."user_info" (
-  id           SERIAL       NOT NULL,
-  user_id      INTEGER      NOT NULL,
-  info         VARCHAR(255) NOT NULL,
-  info_type_id INTEGER      NOT NULL,
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE schema_name."user_info_type" (
-  id   SERIAL      NOT NULL,
-  type VARCHAR(30) NOT NULL,
+  id        SERIAL       NOT NULL,
+  user_id   INTEGER      NOT NULL,
+  info      VARCHAR(255) NOT NULL,
+  info_type VARCHAR(50)  NOT NULL,
   PRIMARY KEY (id)
 );
 
@@ -89,16 +83,10 @@ CREATE TABLE schema_name."company" (
 );
 
 CREATE TABLE schema_name."company_info" (
-  id           SERIAL       NOT NULL,
-  company_id   INTEGER      NOT NULL,
-  info         VARCHAR(255) NOT NULL,
-  info_type_id INTEGER      NOT NULL,
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE schema_name."company_info_type" (
-  id   SERIAL      NOT NULL,
-  type VARCHAR(30) NOT NULL,
+  id         SERIAL       NOT NULL,
+  company_id INTEGER      NOT NULL,
+  info       VARCHAR(255) NOT NULL,
+  info_type  VARCHAR(50)  NOT NULL,
   PRIMARY KEY (id)
 );
 
@@ -146,16 +134,10 @@ CREATE TABLE schema_name."shelter_type" (
 );
 
 CREATE TABLE schema_name."shelter_info" (
-  id           SERIAL       NOT NULL,
-  shelter_id   INTEGER      NOT NULL,
-  info         VARCHAR(255) NOT NULL,
-  info_type_id INTEGER      NOT NULL,
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE schema_name."shelter_info_type" (
-  id   SERIAL      NOT NULL,
-  type VARCHAR(30) NOT NULL,
+  id         SERIAL       NOT NULL,
+  shelter_id INTEGER      NOT NULL,
+  info       VARCHAR(255) NOT NULL,
+  info_type  VARCHAR(50)  NOT NULL,
   PRIMARY KEY (id)
 );
 
@@ -194,16 +176,10 @@ CREATE TABLE schema_name."event" (
 );
 
 CREATE TABLE schema_name."event_info" (
-  id           SERIAL       NOT NULL,
-  event_id     INTEGER      NOT NULL,
-  info         VARCHAR(255) NOT NULL,
-  info_type_id INTEGER      NOT NULL,
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE schema_name."event_info_type" (
-  id   SERIAL      NOT NULL,
-  type VARCHAR(30) NOT NULL,
+  id        SERIAL       NOT NULL,
+  event_id  INTEGER      NOT NULL,
+  info      VARCHAR(255) NOT NULL,
+  info_type VARCHAR(50)  NOT NULL,
   PRIMARY KEY (id)
 );
 
@@ -241,8 +217,6 @@ ALTER TABLE schema_name."user"
 
 ALTER TABLE schema_name."user_info"
   ADD FOREIGN KEY (user_id) REFERENCES schema_name."user" (id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE schema_name."user_info"
-  ADD FOREIGN KEY (info_type_id) REFERENCES schema_name."user_info_type" (id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
 
 ALTER TABLE schema_name."company"
   ADD FOREIGN KEY (status_id) REFERENCES schema_name."company_status" (id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
@@ -255,8 +229,6 @@ ALTER TABLE schema_name."company"
 
 ALTER TABLE schema_name."company_info"
   ADD FOREIGN KEY (company_id) REFERENCES schema_name."company" (id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE schema_name."company_info"
-  ADD FOREIGN KEY (info_type_id) REFERENCES schema_name."company_info_type" (id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
 
 ALTER TABLE schema_name."shelter"
   ADD FOREIGN KEY (status_id) REFERENCES schema_name."shelter_status" (id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
@@ -271,8 +243,6 @@ ALTER TABLE schema_name."shelter"
 
 ALTER TABLE schema_name."shelter_info"
   ADD FOREIGN KEY (shelter_id) REFERENCES schema_name."shelter" (id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE schema_name."shelter_info"
-  ADD FOREIGN KEY (info_type_id) REFERENCES schema_name."shelter_info_type" (id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
 
 ALTER TABLE schema_name."event"
   ADD FOREIGN KEY (shelter_id) REFERENCES schema_name."shelter" (id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
@@ -283,8 +253,6 @@ ALTER TABLE schema_name."event"
 
 ALTER TABLE schema_name."event_info"
   ADD FOREIGN KEY (event_id) REFERENCES schema_name."event" (id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE schema_name."event_info"
-  ADD FOREIGN KEY (info_type_id) REFERENCES schema_name."event_info_type" (id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
 
 ALTER TABLE schema_name."company_user"
   ADD FOREIGN KEY (user_id) REFERENCES schema_name."user" (id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;

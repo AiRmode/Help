@@ -1,8 +1,8 @@
 package com.provectus.prodobro.actor.company;
 
 
-import com.provectus.prodobro.additional.status.Status;
-import com.provectus.prodobro.additional.status.StatusEnum;
+import com.provectus.prodobro.shared.status.Status;
+import com.provectus.prodobro.shared.status.StatusEnum;
 
 import javax.persistence.*;
 

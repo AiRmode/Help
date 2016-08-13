@@ -32,8 +32,8 @@
                 <value>com.provectus.prodobro.actor.shelter</value>
                 <value>com.provectus.prodobro.actor.user</value>
                 <value>com.provectus.prodobro.actor.event</value>
-                <value>com.provectus.prodobro.additional.info</value>
-                <value>com.provectus.prodobro.additional.status</value>
+                <value>com.provectus.prodobro.shared.info</value>
+                <value>com.provectus.prodobro.shared.status</value>
             </list>
         </property>
         <property name="hibernateProperties">
