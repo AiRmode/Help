@@ -1,14 +1,28 @@
 package com.provectus.prodobro.actor.shelter;
 
 
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
+@Entity
+@Table(name = "tag")
 public class TagImpl implements Tag {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "title")
     private String title;
-    private Set<Shelter> shelters = new TreeSet<>();
+
+    @ManyToMany(
+            fetch = FetchType.EAGER,
+            mappedBy = "tags",
+            targetEntity = ShelterImpl.class
+    )
+    private Set<Shelter> shelters = new HashSet<>();
 
     public TagImpl() {
     }
@@ -44,16 +58,6 @@ public class TagImpl implements Tag {
     }
 
     @Override
-    public void addShelter(Shelter shelter) {
-        shelters.add(shelter);
-    }
-
-    @Override
-    public void removeShelter(Shelter shelter) {
-        shelters.remove(shelter);
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof TagImpl)) return false;
@@ -61,23 +65,14 @@ public class TagImpl implements Tag {
         TagImpl tag = (TagImpl) o;
 
         if (!title.equals(tag.title)) return false;
-        return shelters != null ? shelters.equals(tag.shelters) : tag.shelters == null;
+        return shelters.equals(tag.shelters);
 
     }
 
     @Override
     public int hashCode() {
         int result = title.hashCode();
-        result = 31 * result + (shelters != null ? shelters.hashCode() : 0);
+        result = 31 * result + shelters.hashCode();
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "TagImpl{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", shelters=" + shelters +
-                '}';
     }
 }

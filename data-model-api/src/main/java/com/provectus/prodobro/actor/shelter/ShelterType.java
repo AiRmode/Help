@@ -1,17 +1,13 @@
 package com.provectus.prodobro.actor.shelter;
 
 
-public enum ShelterType {
-    HUMAN(1),
-    ANIMAL(2);
+public interface ShelterType {
 
-    private int id;
+    int getId();
 
-    ShelterType(int id) {
-        this.id = id;
-    }
+    String getType();
 
-    public int getId() {
-        return this.id;
-    }
+    void setId(int id);
+
+    void setType(String type);
 }

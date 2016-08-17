@@ -1,19 +1,41 @@
 package com.provectus.prodobro.actor.user;
 
 
-import com.provectus.prodobro.actor.Actor;
-import com.provectus.prodobro.actor.EmployeeRelation;
-import com.provectus.prodobro.event.Event;
+import com.provectus.prodobro.actor.event.Event;
+import com.provectus.prodobro.actor.relation.EmployeeRelation;
+import com.provectus.prodobro.shared.avatar.Avatar;
+import com.provectus.prodobro.shared.info.Info;
+import com.provectus.prodobro.shared.status.Status;
 
+import java.sql.Timestamp;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 
-public interface User extends Actor {
+public interface User {
 
-    String getFirstName();
+    int getId();
 
-    String getLastName();
+    Optional<Avatar> getAvatar();
+
+    /**
+     * Information: Photos, Emails, Websites, etc.
+     *
+     * @return {@link Set<Info>} of Actor`s information
+     */
+    Set<Info> getInfo();
+
+    Status getStatus();
+
+    Timestamp getCreatedDate();
+
+    User getCreatedBy();
+
+    Timestamp getLastModifiedDate();
+
+    User getLastModifiedBy();
+
+    String getName();
 
     String getEmail();
 
@@ -41,9 +63,23 @@ public interface User extends Actor {
      */
     Set<Event> getCreatedEvents();
 
-    void setFirstName(String firstName);
+    void setId(int id);
 
-    void setLastName(String lastName);
+    void setAvatar(Avatar avatar);
+
+    void setInfo(Set<Info> info);
+
+    void setStatus(Status status);
+
+    void setCreatedDate(Timestamp createdDate);
+
+    void setCreatedBy(User createdBy);
+
+    void setLastModifiedDate(Timestamp lastModifiedDate);
+
+    void setLastModifiedBy(User lastModifiedBy);
+
+    void setName(String name);
 
     void setEmail(String email);
 
@@ -56,15 +92,5 @@ public interface User extends Actor {
     void setEmployeeRelation(EmployeeRelation employeeRelation);
 
     void setAssignedEvents(Set<Event> assignedEvents);
-
-    void setCreatedEvents(Set<Event> createdEvents);
-
-    void addAssignedEvent(Event event);
-
-    void removeAssignedEvent(Event event);
-
-    void addCreatedEvent(Event event);
-
-    void removeCreatedEvent(Event event);
 
 }
