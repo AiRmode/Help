@@ -1,7 +1,7 @@
 package com.provectus.prodobro.actor.shelter;
 
 
-import java.util.List;
+import java.util.Set;
 
 
 public interface Tag {
@@ -10,9 +10,11 @@ public interface Tag {
 
     String getTitle();
 
-    List<Shelter> getShelters();
+    Set<Shelter> getShelters();
+
+    void setId(int id);
 
     void setTitle(String title);
 
-    void setShelters(List<Shelter> shelters);
+    void setShelters(Set<Shelter> shelters);
 }

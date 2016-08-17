@@ -12,6 +12,6 @@
 
     <artifactId>web-api</artifactId>
 
-    <packaging>pom</packaging>
+    <packaging>war</packaging>
 
 </project>
