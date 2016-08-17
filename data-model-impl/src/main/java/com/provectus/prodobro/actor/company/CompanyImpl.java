@@ -32,7 +32,12 @@ public class CompanyImpl implements Company {
     @JoinColumn(name = "avatar_id")
     private Avatar avatar;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", targetEntity = CompanyInfo.class)
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy = "owner",
+            targetEntity = CompanyInfo.class
+    )
     private Set<Info> info = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = CompanyStatus.class)
@@ -42,34 +47,44 @@ public class CompanyImpl implements Company {
     @Column(name = "created_date")
     private Timestamp createdDate;
 
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserImpl.class)
+    @OneToOne(targetEntity = UserImpl.class)
     @JoinColumn(name = "created_by_id")
     private User createdBy;
 
     @Column(name = "last_modified_date")
     private Timestamp lastModifiedDate;
 
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserImpl.class)
+    @OneToOne(targetEntity = UserImpl.class)
     @JoinColumn(name = "last_modified_by_id")
     private User lastModifiedBy;
 
     @Column(name = "title")
     private String title;
 
-    @OneToMany(mappedBy = "company", targetEntity = CompanyAliasImpl.class)
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy = "company",
+            targetEntity = CompanyAliasImpl.class
+    )
     private Set<CompanyAlias> aliases = new HashSet<>();
 
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "company", targetEntity = EmployeeRelationImpl.class)
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy = "company",
+            targetEntity = EmployeeRelationImpl.class
+    )
     private Set<EmployeeRelation> employeeRelations = new HashSet<>();
 
-    @ManyToMany(targetEntity = EventImpl.class)
-    @JoinTable(
-            name = "company_event",
-            joinColumns = @JoinColumn(name = "company_id"),
-            inverseJoinColumns = @JoinColumn(name = "event_id")
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy = "assignedCompanies",
+            targetEntity = EventImpl.class
     )
     private Set<Event> assignedEvents = new HashSet<>();
 
@@ -84,11 +99,6 @@ public class CompanyImpl implements Company {
     @Override
     public Optional<Avatar> getAvatar() {
         return Optional.ofNullable(avatar);
-    }
-
-    @Override
-    public Optional<byte[]> getAvatarBytea() {
-        return Optional.ofNullable(avatar.getBytea());
     }
 
     @Override
@@ -232,44 +242,41 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public void addInfo(Info info) {
-        this.info.add(info);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CompanyImpl)) return false;
+
+        CompanyImpl company = (CompanyImpl) o;
+
+        if (avatar != null ? !avatar.equals(company.avatar) : company.avatar != null) return false;
+        if (!info.equals(company.info)) return false;
+        if (!status.equals(company.status)) return false;
+        if (!createdDate.equals(company.createdDate)) return false;
+        if (!createdBy.equals(company.createdBy)) return false;
+        if (!lastModifiedDate.equals(company.lastModifiedDate)) return false;
+        if (!lastModifiedBy.equals(company.lastModifiedBy)) return false;
+        if (!title.equals(company.title)) return false;
+        if (!aliases.equals(company.aliases)) return false;
+        if (description != null ? !description.equals(company.description) : company.description != null) return false;
+        if (!employeeRelations.equals(company.employeeRelations)) return false;
+        return assignedEvents.equals(company.assignedEvents);
+
     }
 
     @Override
-    public void removeInfo(Info info) {
-        this.info.remove(info);
+    public int hashCode() {
+        int result = avatar != null ? avatar.hashCode() : 0;
+        result = 31 * result + info.hashCode();
+        result = 31 * result + status.hashCode();
+        result = 31 * result + createdDate.hashCode();
+        result = 31 * result + createdBy.hashCode();
+        result = 31 * result + lastModifiedDate.hashCode();
+        result = 31 * result + lastModifiedBy.hashCode();
+        result = 31 * result + title.hashCode();
+        result = 31 * result + aliases.hashCode();
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + employeeRelations.hashCode();
+        result = 31 * result + assignedEvents.hashCode();
+        return result;
     }
-
-    @Override
-    public void addAlias(CompanyAlias alias) {
-        aliases.add(alias);
-    }
-
-    @Override
-    public void removeAlias(CompanyAlias alias) {
-        aliases.remove(alias);
-    }
-
-    @Override
-    public void addEmployeeRelation(EmployeeRelation employeeRelation) {
-        employeeRelations.add(employeeRelation);
-    }
-
-    @Override
-    public void removeEmployeeRelation(EmployeeRelation employeeRelation) {
-        employeeRelations.remove(employeeRelation);
-    }
-
-    @Override
-    public void addAssignedEvent(Event event) {
-        assignedEvents.add(event);
-    }
-
-    @Override
-    public void removeAssignedEvent(Event event) {
-        assignedEvents.remove(event);
-    }
-
-
 }

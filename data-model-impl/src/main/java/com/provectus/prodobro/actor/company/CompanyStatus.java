@@ -38,4 +38,20 @@ public class CompanyStatus implements Status {
     public void setStatus(String status) {
         this.status = StatusEnum.valueOf(status);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CompanyStatus)) return false;
+
+        CompanyStatus that = (CompanyStatus) o;
+
+        return status == that.status;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return status.hashCode();
+    }
 }

@@ -30,7 +30,12 @@ public class UserImpl implements User {
     @JoinColumn(name = "avatar_id")
     private Avatar avatar;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", targetEntity = UserInfo.class)
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy = "owner",
+            targetEntity = UserInfo.class
+    )
     private Set<Info> info = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = UserStatus.class)
@@ -40,22 +45,19 @@ public class UserImpl implements User {
     @Column(name = "created_date")
     private Timestamp createdDate;
 
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserImpl.class)
+    @OneToOne(targetEntity = UserImpl.class)
     @JoinColumn(name = "created_by_id")
     private User createdBy;
 
     @Column(name = "last_modified_date")
     private Timestamp lastModifiedDate;
 
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserImpl.class)
+    @OneToOne(targetEntity = UserImpl.class)
     @JoinColumn(name = "last_modified_by_id")
     private User lastModifiedBy;
 
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "email")
     private String email;
@@ -69,14 +71,18 @@ public class UserImpl implements User {
     @Column(name = "locale_lang")
     private Locale language;
 
-    @OneToOne(mappedBy = "user", targetEntity = EmployeeRelationImpl.class)
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            mappedBy = "user",
+            targetEntity = EmployeeRelationImpl.class
+    )
     private EmployeeRelation employeeRelation;
 
-    @ManyToMany(targetEntity = EventImpl.class)
-    @JoinTable(
-            name = "user_event",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "event_id")
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy = "assignedUsers",
+            targetEntity = EventImpl.class
     )
     private Set<Event> assignedEvents = new HashSet<>();
 
@@ -91,11 +97,6 @@ public class UserImpl implements User {
     @Override
     public Optional<Avatar> getAvatar() {
         return Optional.ofNullable(avatar);
-    }
-
-    @Override
-    public Optional<byte[]> getAvatarBytea() {
-        return Optional.ofNullable(avatar.getBytea());
     }
 
     @Override
@@ -129,13 +130,8 @@ public class UserImpl implements User {
     }
 
     @Override
-    public String getFirstName() {
-        return firstName;
-    }
-
-    @Override
-    public String getLastName() {
-        return lastName;
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -218,13 +214,8 @@ public class UserImpl implements User {
     }
 
     @Override
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    @Override
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -258,23 +249,46 @@ public class UserImpl implements User {
     }
 
     @Override
-    public void addInfo(Info info) {
-        this.info.add(info);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserImpl)) return false;
+
+        UserImpl user = (UserImpl) o;
+
+        if (avatar != null ? !avatar.equals(user.avatar) : user.avatar != null) return false;
+        if (!info.equals(user.info)) return false;
+        if (!status.equals(user.status)) return false;
+        if (!createdDate.equals(user.createdDate)) return false;
+        if (!createdBy.equals(user.createdBy)) return false;
+        if (!lastModifiedDate.equals(user.lastModifiedDate)) return false;
+        if (!lastModifiedBy.equals(user.lastModifiedBy)) return false;
+        if (!name.equals(user.name)) return false;
+        if (!email.equals(user.email)) return false;
+        if (!passHash.equals(user.passHash)) return false;
+        if (!phoneNumber.equals(user.phoneNumber)) return false;
+        if (!language.equals(user.language)) return false;
+        if (employeeRelation != null ? !employeeRelation.equals(user.employeeRelation) : user.employeeRelation != null)
+            return false;
+        return assignedEvents.equals(user.assignedEvents);
+
     }
 
     @Override
-    public void removeInfo(Info info) {
-        this.info.remove(info);
+    public int hashCode() {
+        int result = avatar != null ? avatar.hashCode() : 0;
+        result = 31 * result + info.hashCode();
+        result = 31 * result + status.hashCode();
+        result = 31 * result + createdDate.hashCode();
+        result = 31 * result + createdBy.hashCode();
+        result = 31 * result + lastModifiedDate.hashCode();
+        result = 31 * result + lastModifiedBy.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + passHash.hashCode();
+        result = 31 * result + phoneNumber.hashCode();
+        result = 31 * result + language.hashCode();
+        result = 31 * result + (employeeRelation != null ? employeeRelation.hashCode() : 0);
+        result = 31 * result + assignedEvents.hashCode();
+        return result;
     }
-
-    @Override
-    public void addAssignedEvent(Event event) {
-        assignedEvents.add(event);
-    }
-
-    @Override
-    public void removeAssignedEvent(Event event) {
-        assignedEvents.remove(event);
-    }
-
 }

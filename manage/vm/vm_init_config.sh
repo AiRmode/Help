@@ -7,15 +7,21 @@ sudo usermod -a -G sudo user
 
 #install docker
 wget -qO- https://get.docker.com/ | sh
-#install docker-compose
+
+#install python pip
 sudo apt-get -y install python-pip
+
+#updating locale
+export LC_ALL=C
+
+#install docker-compose
 sudo pip install docker-compose
 
 #install mc
 sudo apt-get install mc
 
 #add user to docker group
-sudo useermod -aG docker user
+sudo usermod -aG docker user
 
 #swith to user
 su - user
@@ -35,6 +41,7 @@ sudo apt-get install git
 
 #create postgres
 git clone https://github.com/docker-library/postgres
-cd cd postgres/9.6
-docker build -t postgres96test .
-docker run -d --name mypostgres -e POSTGRES_PASSWORD=postpassword -p 5432:5432 postgres96test
+cd postgres
+cd 9.5
+docker build -t postgres95test .
+docker run -d --name mypostgres -e POSTGRES_PASSWORD=postpassword -p 5432:5432 postgres95test

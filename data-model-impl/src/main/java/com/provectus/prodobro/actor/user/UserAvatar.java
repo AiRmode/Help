@@ -39,10 +39,18 @@ public class UserAvatar implements Avatar {
     }
 
     @Override
-    public String toString() {
-        return "UserAvatar{" +
-                "id=" + id +
-                ", bytea=" + Arrays.toString(bytea) +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserAvatar)) return false;
+
+        UserAvatar that = (UserAvatar) o;
+
+        return Arrays.equals(bytea, that.bytea);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(bytea);
     }
 }

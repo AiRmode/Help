@@ -17,7 +17,7 @@ public class EmployeeRelationImpl implements EmployeeRelation {
     @Column(name = "id")
     private int id;
 
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserImpl.class)
+    @OneToOne(targetEntity = UserImpl.class)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -90,15 +90,5 @@ public class EmployeeRelationImpl implements EmployeeRelation {
         result = 31 * result + company.hashCode();
         result = 31 * result + (isAdmin ? 1 : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "EmployeeRelationImpl{" +
-                "id=" + id +
-                ", user=" + user +
-                ", company=" + company +
-                ", isAdmin=" + isAdmin +
-                '}';
     }
 }

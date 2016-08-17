@@ -19,8 +19,6 @@ public interface Event {
 
     Optional<Avatar> getAvatar();
 
-    Optional<byte[]> getAvatarBytea();
-
     Set<Info> getInfo();
 
     Optional<String> getDescription();
@@ -65,20 +63,8 @@ public interface Event {
 
     void setLastModifiedBy(User lastModifiedBy);
 
-    void addInfo(Info info);
-
-    void removeInfo(Info info);
-
     void setAssignedUsers(Set<User> assignedUsers);
 
     void setAssignedCompanies(Set<Company> assignedCompanies);
-
-    void addAssignedUser(User user);
-
-    void removeAssignedUser(User user);
-
-    void addAssignedCompany(Company company);
-
-    void removeAssignedCompany(Company company);
 
 }

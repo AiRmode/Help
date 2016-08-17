@@ -17,8 +17,6 @@ public interface Shelter {
 
     Optional<Avatar> getAvatar();
 
-    Optional<byte[]> getAvatarBytea();
-
     /**
      * Information: Photos, Emails, Websites, etc.
      *
@@ -65,10 +63,6 @@ public interface Shelter {
 
     void setLastModifiedBy(User lastModifiedBy);
 
-    void addInfo(Info info);
-
-    void removeInfo(Info info);
-
     void setTitle(String title);
 
     void setDescription(String description);
@@ -78,9 +72,5 @@ public interface Shelter {
     void setEvent(Event event);
 
     void setTags(Set<Tag> tags);
-
-    void addTag(Tag tag);
-
-    void removeTag(Tag tag);
 
 }

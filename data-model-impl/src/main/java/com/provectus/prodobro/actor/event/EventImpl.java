@@ -28,13 +28,18 @@ public class EventImpl implements Event {
     @Column(name = "title")
     private String title;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", targetEntity = EventInfo.class)
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy = "owner",
+            targetEntity = EventInfo.class
+    )
     private Set<Info> info = new HashSet<>();
 
     @Column(name = "description")
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = ShelterImpl.class)
+    @OneToOne(targetEntity = ShelterImpl.class)
     @JoinColumn(name = "shelter_id")
     private Shelter shelter;
 
@@ -47,18 +52,22 @@ public class EventImpl implements Event {
     @Column(name = "created_date")
     private Timestamp createdDate;
 
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserImpl.class)
+    @OneToOne(targetEntity = UserImpl.class)
     @JoinColumn(name = "created_by_id")
     private User createdBy;
 
     @Column(name = "last_modified_date")
     private Timestamp lastModifiedDate;
 
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserImpl.class)
+    @OneToOne(targetEntity = UserImpl.class)
     @JoinColumn(name = "last_modified_by_id")
     private User lastModifiedBy;
 
-    @ManyToMany(targetEntity = UserImpl.class)
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            targetEntity = UserImpl.class
+    )
     @JoinTable(
             name = "user_event",
             joinColumns = @JoinColumn(name = "event_id"),
@@ -66,7 +75,11 @@ public class EventImpl implements Event {
     )
     private Set<User> assignedUsers = new HashSet<>();
 
-    @ManyToMany(targetEntity = CompanyImpl.class)
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            targetEntity = CompanyImpl.class
+    )
     @JoinTable(
             name = "company_event",
             joinColumns = @JoinColumn(name = "event_id"),
@@ -90,11 +103,6 @@ public class EventImpl implements Event {
     @Override
     public Optional<Avatar> getAvatar() {
         return shelter.getAvatar();
-    }
-
-    @Override
-    public Optional<byte[]> getAvatarBytea() {
-        return Optional.ofNullable(shelter.getAvatar().get().getBytea());
     }
 
     @Override
@@ -218,33 +226,41 @@ public class EventImpl implements Event {
     }
 
     @Override
-    public void addInfo(Info info) {
-        this.info.add(info);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EventImpl)) return false;
+
+        EventImpl event = (EventImpl) o;
+
+        if (accessible != event.accessible) return false;
+        if (!title.equals(event.title)) return false;
+        if (!info.equals(event.info)) return false;
+        if (description != null ? !description.equals(event.description) : event.description != null) return false;
+        if (!shelter.equals(event.shelter)) return false;
+        if (!date.equals(event.date)) return false;
+        if (!createdDate.equals(event.createdDate)) return false;
+        if (!createdBy.equals(event.createdBy)) return false;
+        if (!lastModifiedDate.equals(event.lastModifiedDate)) return false;
+        if (!lastModifiedBy.equals(event.lastModifiedBy)) return false;
+        if (!assignedUsers.equals(event.assignedUsers)) return false;
+        return assignedCompanies.equals(event.assignedCompanies);
+
     }
 
     @Override
-    public void removeInfo(Info info) {
-        this.info.remove(info);
+    public int hashCode() {
+        int result = title.hashCode();
+        result = 31 * result + info.hashCode();
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + shelter.hashCode();
+        result = 31 * result + date.hashCode();
+        result = 31 * result + (accessible ? 1 : 0);
+        result = 31 * result + createdDate.hashCode();
+        result = 31 * result + createdBy.hashCode();
+        result = 31 * result + lastModifiedDate.hashCode();
+        result = 31 * result + lastModifiedBy.hashCode();
+        result = 31 * result + assignedUsers.hashCode();
+        result = 31 * result + assignedCompanies.hashCode();
+        return result;
     }
-
-    @Override
-    public void addAssignedUser(User user) {
-        assignedUsers.add(user);
-    }
-
-    @Override
-    public void removeAssignedUser(User user) {
-        assignedUsers.remove(user);
-    }
-
-    @Override
-    public void addAssignedCompany(Company company) {
-        assignedCompanies.add(company);
-    }
-
-    @Override
-    public void removeAssignedCompany(Company company) {
-        assignedCompanies.remove(company);
-    }
-
 }

@@ -18,8 +18,6 @@ public interface User {
 
     Optional<Avatar> getAvatar();
 
-    Optional<byte[]> getAvatarBytea();
-
     /**
      * Information: Photos, Emails, Websites, etc.
      *
@@ -37,9 +35,7 @@ public interface User {
 
     User getLastModifiedBy();
 
-    String getFirstName();
-
-    String getLastName();
+    String getName();
 
     String getEmail();
 
@@ -83,13 +79,7 @@ public interface User {
 
     void setLastModifiedBy(User lastModifiedBy);
 
-    void addInfo(Info info);
-
-    void removeInfo(Info info);
-
-    void setFirstName(String firstName);
-
-    void setLastName(String lastName);
+    void setName(String name);
 
     void setEmail(String email);
 
@@ -102,9 +92,5 @@ public interface User {
     void setEmployeeRelation(EmployeeRelation employeeRelation);
 
     void setAssignedEvents(Set<Event> assignedEvents);
-
-    void addAssignedEvent(Event event);
-
-    void removeAssignedEvent(Event event);
 
 }

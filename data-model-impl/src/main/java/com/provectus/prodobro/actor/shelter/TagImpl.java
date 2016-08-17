@@ -17,11 +17,10 @@ public class TagImpl implements Tag {
     @Column(name = "title")
     private String title;
 
-    @ManyToMany(targetEntity = ShelterImpl.class)
-    @JoinTable(
-            name = "shelter_tag",
-            joinColumns = @JoinColumn(name = "tag_id"),
-            inverseJoinColumns = @JoinColumn(name = "shelter_id")
+    @ManyToMany(
+            fetch = FetchType.EAGER,
+            mappedBy = "tags",
+            targetEntity = ShelterImpl.class
     )
     private Set<Shelter> shelters = new HashSet<>();
 
@@ -59,16 +58,6 @@ public class TagImpl implements Tag {
     }
 
     @Override
-    public void addShelter(Shelter shelter) {
-        shelters.add(shelter);
-    }
-
-    @Override
-    public void removeShelter(Shelter shelter) {
-        shelters.remove(shelter);
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof TagImpl)) return false;
@@ -85,14 +74,5 @@ public class TagImpl implements Tag {
         int result = title.hashCode();
         result = 31 * result + shelters.hashCode();
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "TagImpl{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", shelters=" + shelters +
-                '}';
     }
 }

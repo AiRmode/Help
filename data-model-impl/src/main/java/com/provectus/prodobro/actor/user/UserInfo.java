@@ -64,4 +64,25 @@ public class UserInfo implements Info<User> {
     public void setType(String type) {
         this.type = InfoTypeEnum.valueOf(type);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserInfo)) return false;
+
+        UserInfo userInfo = (UserInfo) o;
+
+        if (!owner.equals(userInfo.owner)) return false;
+        if (!info.equals(userInfo.info)) return false;
+        return type == userInfo.type;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = owner.hashCode();
+        result = 31 * result + info.hashCode();
+        result = 31 * result + type.hashCode();
+        return result;
+    }
 }

@@ -69,4 +69,24 @@ public class EventInfo implements Info<Event> {
         this.info = info;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EventInfo)) return false;
+
+        EventInfo eventInfo = (EventInfo) o;
+
+        if (!owner.equals(eventInfo.owner)) return false;
+        if (!info.equals(eventInfo.info)) return false;
+        return type == eventInfo.type;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = owner.hashCode();
+        result = 31 * result + info.hashCode();
+        result = 31 * result + type.hashCode();
+        return result;
+    }
 }

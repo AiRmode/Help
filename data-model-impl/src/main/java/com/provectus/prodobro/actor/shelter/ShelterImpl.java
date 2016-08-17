@@ -28,7 +28,12 @@ public class ShelterImpl implements Shelter {
     @JoinColumn(name = "avatar_id")
     private Avatar avatar;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", targetEntity = ShelterInfo.class)
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy = "owner",
+            targetEntity = ShelterInfo.class
+    )
     private Set<Info> info = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = ShelterStatus.class)
@@ -38,14 +43,14 @@ public class ShelterImpl implements Shelter {
     @Column(name = "created_date")
     private Timestamp createdDate;
 
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserImpl.class)
+    @OneToOne(targetEntity = UserImpl.class)
     @JoinColumn(name = "created_by_id")
     private User createdBy;
 
     @Column(name = "last_modified_date")
     private Timestamp lastModifiedDate;
 
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserImpl.class)
+    @OneToOne(targetEntity = UserImpl.class)
     @JoinColumn(name = "last_modified_by_id")
     private User lastModifiedBy;
 
@@ -55,15 +60,22 @@ public class ShelterImpl implements Shelter {
     @Column(name = "description")
     private String description;
 
-    @OneToOne(targetEntity = ShelterTypeImpl.class)
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = ShelterTypeImpl.class)
     @JoinColumn(name = "type_id")
     private ShelterType type;
 
-    @OneToOne(mappedBy = "shelter", targetEntity = EventImpl.class)
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            mappedBy = "shelter",
+            targetEntity = EventImpl.class
+    )
     private Event event;
 
-
-    @ManyToMany(targetEntity = TagImpl.class)
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            targetEntity = TagImpl.class
+    )
     @JoinTable(
             name = "shelter_tag",
             joinColumns = @JoinColumn(name = "shelter_id"),
@@ -77,11 +89,6 @@ public class ShelterImpl implements Shelter {
     @Override
     public int getId() {
         return id;
-    }
-
-    @Override
-    public Optional<byte[]> getAvatarBytea() {
-        return Optional.ofNullable(avatar.getBytea());
     }
 
     @Override
@@ -210,23 +217,41 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
-    public void addInfo(Info info) {
-        this.info.add(info);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ShelterImpl)) return false;
+
+        ShelterImpl shelter = (ShelterImpl) o;
+
+        if (avatar != null ? !avatar.equals(shelter.avatar) : shelter.avatar != null) return false;
+        if (!info.equals(shelter.info)) return false;
+        if (!status.equals(shelter.status)) return false;
+        if (!createdDate.equals(shelter.createdDate)) return false;
+        if (!createdBy.equals(shelter.createdBy)) return false;
+        if (!lastModifiedDate.equals(shelter.lastModifiedDate)) return false;
+        if (!lastModifiedBy.equals(shelter.lastModifiedBy)) return false;
+        if (!title.equals(shelter.title)) return false;
+        if (description != null ? !description.equals(shelter.description) : shelter.description != null) return false;
+        if (!type.equals(shelter.type)) return false;
+        if (event != null ? !event.equals(shelter.event) : shelter.event != null) return false;
+        return tags.equals(shelter.tags);
+
     }
 
     @Override
-    public void removeInfo(Info info) {
-        this.info.remove(info);
+    public int hashCode() {
+        int result = avatar != null ? avatar.hashCode() : 0;
+        result = 31 * result + info.hashCode();
+        result = 31 * result + status.hashCode();
+        result = 31 * result + createdDate.hashCode();
+        result = 31 * result + createdBy.hashCode();
+        result = 31 * result + lastModifiedDate.hashCode();
+        result = 31 * result + lastModifiedBy.hashCode();
+        result = 31 * result + title.hashCode();
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + type.hashCode();
+        result = 31 * result + (event != null ? event.hashCode() : 0);
+        result = 31 * result + tags.hashCode();
+        return result;
     }
-
-    @Override
-    public void addTag(Tag tag) {
-        tags.add(tag);
-    }
-
-    @Override
-    public void removeTag(Tag tag) {
-        tags.remove(tag);
-    }
-
 }

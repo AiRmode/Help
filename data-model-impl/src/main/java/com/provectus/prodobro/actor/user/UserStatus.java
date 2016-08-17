@@ -40,10 +40,18 @@ public class UserStatus implements Status {
     }
 
     @Override
-    public String toString() {
-        return "UserStatus{" +
-                "id=" + id +
-                ", status=" + status +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserStatus)) return false;
+
+        UserStatus that = (UserStatus) o;
+
+        return status == that.status;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return status.hashCode();
     }
 }

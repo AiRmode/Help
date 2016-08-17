@@ -35,4 +35,20 @@ public class ShelterTypeImpl implements ShelterType {
     public void setType(String type) {
         this.type = ShelterTypeEnum.valueOf(type);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ShelterTypeImpl)) return false;
+
+        ShelterTypeImpl that = (ShelterTypeImpl) o;
+
+        return type == that.type;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return type.hashCode();
+    }
 }

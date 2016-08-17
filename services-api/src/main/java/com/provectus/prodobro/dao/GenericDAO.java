@@ -1,12 +1,17 @@
 package com.provectus.prodobro.dao;
 
-public interface GenericDAO<T> {
+import java.io.Serializable;
+import java.util.List;
+
+public interface GenericDAO<T, PK extends Serializable> {
 
     void create(T object);
 
-    T read(int id);
+    T get(PK id);
 
     void update(T object);
 
-    void delete(T object);
+    void remove(T object);
+
+    List<T> getAll();
 }

@@ -17,8 +17,4 @@ public interface Tag {
     void setTitle(String title);
 
     void setShelters(Set<Shelter> shelters);
-
-    void addShelter(Shelter shelter);
-
-    void removeShelter(Shelter shelter);
 }

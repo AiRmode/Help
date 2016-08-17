@@ -41,11 +41,19 @@ public class ShelterStatus implements Status {
     }
 
     @Override
-    public String toString() {
-        return "UserStatus{" +
-                "id=" + id +
-                ", status=" + status +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ShelterStatus)) return false;
+
+        ShelterStatus that = (ShelterStatus) o;
+
+        return status == that.status;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return status.hashCode();
     }
 }
 

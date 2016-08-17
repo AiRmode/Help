@@ -15,6 +15,7 @@ public class CompanyAliasImpl implements CompanyAlias {
     private String alias;
 
     @ManyToOne(targetEntity = CompanyImpl.class)
+    @Column(name = "company_id")
     private Company company;
 
 
@@ -46,5 +47,24 @@ public class CompanyAliasImpl implements CompanyAlias {
     @Override
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CompanyAliasImpl)) return false;
+
+        CompanyAliasImpl that = (CompanyAliasImpl) o;
+
+        if (!alias.equals(that.alias)) return false;
+        return company.equals(that.company);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = alias.hashCode();
+        result = 31 * result + company.hashCode();
+        return result;
     }
 }

@@ -18,8 +18,6 @@ public interface Company {
 
     Optional<Avatar> getAvatar();
 
-    Optional<byte[]> getAvatarBytea();
-
     /**
      * Information: Photos, Emails, Websites, etc.
      *
@@ -75,10 +73,6 @@ public interface Company {
 
     void setLastModifiedBy(User lastModifiedBy);
 
-    void addInfo(Info info);
-
-    void removeInfo(Info info);
-
     void setTitle(String title);
 
     void setAliases(Set<CompanyAlias> aliases);
@@ -88,17 +82,5 @@ public interface Company {
     void setEmployeeRelations(Set<EmployeeRelation> employeeRelations);
 
     void setAssignedEvents(Set<Event> assignedEvents);
-
-    void addAlias(CompanyAlias alias);
-
-    void removeAlias(CompanyAlias alias);
-
-    void addEmployeeRelation(EmployeeRelation employeeRelation);
-
-    void removeEmployeeRelation(EmployeeRelation employeeRelation);
-
-    void addAssignedEvent(Event event);
-
-    void removeAssignedEvent(Event event);
 
 }

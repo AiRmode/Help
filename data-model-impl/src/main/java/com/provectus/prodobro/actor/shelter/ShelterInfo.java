@@ -65,4 +65,25 @@ public class ShelterInfo implements Info<Shelter> {
     public void setType(String type) {
         this.type = InfoTypeEnum.valueOf(type);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ShelterInfo)) return false;
+
+        ShelterInfo that = (ShelterInfo) o;
+
+        if (!owner.equals(that.owner)) return false;
+        if (!info.equals(that.info)) return false;
+        return type == that.type;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = owner.hashCode();
+        result = 31 * result + info.hashCode();
+        result = 31 * result + type.hashCode();
+        return result;
+    }
 }
