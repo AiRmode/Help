@@ -24,7 +24,7 @@ public class UserImpl implements User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = UserAvatar.class)
     @JoinColumn(name = "avatar_id")
@@ -68,6 +68,9 @@ public class UserImpl implements User {
     @Column(name = "phone_num")
     private String phoneNumber;
 
+    @Column(name = "is_superuser")
+    private boolean isSuperUser;
+
     @Column(name = "locale_lang")
     private Locale language;
 
@@ -90,7 +93,7 @@ public class UserImpl implements User {
     }
 
     @Override
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -150,6 +153,11 @@ public class UserImpl implements User {
     }
 
     @Override
+    public boolean isSuperUser() {
+        return isSuperUser;
+    }
+
+    @Override
     public Locale getLanguage() {
         return language;
     }
@@ -174,7 +182,7 @@ public class UserImpl implements User {
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -234,6 +242,11 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setSuperUser(boolean isSuperUser) {
+        this.isSuperUser = isSuperUser;
+    }
+
+    @Override
     public void setLanguage(Locale language) {
         this.language = language;
     }
@@ -248,47 +261,5 @@ public class UserImpl implements User {
         this.assignedEvents = assignedEvents;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserImpl)) return false;
 
-        UserImpl user = (UserImpl) o;
-
-        if (avatar != null ? !avatar.equals(user.avatar) : user.avatar != null) return false;
-        if (!info.equals(user.info)) return false;
-        if (!status.equals(user.status)) return false;
-        if (!createdDate.equals(user.createdDate)) return false;
-        if (!createdBy.equals(user.createdBy)) return false;
-        if (!lastModifiedDate.equals(user.lastModifiedDate)) return false;
-        if (!lastModifiedBy.equals(user.lastModifiedBy)) return false;
-        if (!name.equals(user.name)) return false;
-        if (!email.equals(user.email)) return false;
-        if (!passHash.equals(user.passHash)) return false;
-        if (!phoneNumber.equals(user.phoneNumber)) return false;
-        if (!language.equals(user.language)) return false;
-        if (employeeRelation != null ? !employeeRelation.equals(user.employeeRelation) : user.employeeRelation != null)
-            return false;
-        return assignedEvents.equals(user.assignedEvents);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = avatar != null ? avatar.hashCode() : 0;
-        result = 31 * result + info.hashCode();
-        result = 31 * result + status.hashCode();
-        result = 31 * result + createdDate.hashCode();
-        result = 31 * result + createdBy.hashCode();
-        result = 31 * result + lastModifiedDate.hashCode();
-        result = 31 * result + lastModifiedBy.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + email.hashCode();
-        result = 31 * result + passHash.hashCode();
-        result = 31 * result + phoneNumber.hashCode();
-        result = 31 * result + language.hashCode();
-        result = 31 * result + (employeeRelation != null ? employeeRelation.hashCode() : 0);
-        result = 31 * result + assignedEvents.hashCode();
-        return result;
-    }
 }

@@ -14,7 +14,7 @@ import java.util.Set;
 
 public interface User {
 
-    int getId();
+    Long getId();
 
     Optional<Avatar> getAvatar();
 
@@ -43,6 +43,8 @@ public interface User {
 
     String getPhoneNumber();
 
+    boolean isSuperUser();
+
     /**
      * @return User`s locale
      */
@@ -63,7 +65,7 @@ public interface User {
      */
     Set<Event> getCreatedEvents();
 
-    void setId(int id);
+    void setId(Long id);
 
     void setAvatar(Avatar avatar);
 
@@ -86,6 +88,8 @@ public interface User {
     void setPassHash(String passHash);
 
     void setPhoneNumber(String phoneNumber);
+
+    void setSuperUser(boolean isSuperUser);
 
     void setLanguage(Locale language);
 

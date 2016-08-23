@@ -1,14 +1,15 @@
-package com.provectus.prodobro.dao.actor;
+package com.provectus.prodobro.service.actor;
 
 
 import com.provectus.prodobro.actor.shelter.Shelter;
 import com.provectus.prodobro.actor.shelter.ShelterType;
-import com.provectus.prodobro.dao.GenericDAO;
 import com.provectus.prodobro.shared.status.Status;
 
 import java.util.List;
 
-public interface ShelterDAO extends GenericDAO<Shelter, Long> {
+public interface ShelterService {
+
+    void makeRemovedById(Long id);
 
     Shelter getByTitle(String title);
 

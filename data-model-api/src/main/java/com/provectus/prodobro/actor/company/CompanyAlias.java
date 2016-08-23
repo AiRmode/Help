@@ -3,13 +3,13 @@ package com.provectus.prodobro.actor.company;
 
 public interface CompanyAlias {
 
-    int getId();
+    Long getId();
 
     String getAlias();
 
     Company getCompany();
 
-    void setId(int id);
+    void setId(Long id);
 
     void setAlias(String alias);
 

@@ -22,7 +22,7 @@ public class ShelterImpl implements Shelter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = ShelterAvatar.class)
     @JoinColumn(name = "avatar_id")
@@ -87,7 +87,7 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -152,7 +152,7 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,13 +1,14 @@
-package com.provectus.prodobro.dao.actor;
+package com.provectus.prodobro.service.actor;
 
 
 import com.provectus.prodobro.actor.company.Company;
-import com.provectus.prodobro.dao.GenericDAO;
 import com.provectus.prodobro.shared.status.Status;
 
 import java.util.List;
 
-public interface CompanyDAO extends GenericDAO<Company, Long> {
+public interface CompanyService {
+
+    void makeRemovedById(Long id);
 
     Company getByTitle(String title);
 

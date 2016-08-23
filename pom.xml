@@ -14,8 +14,6 @@
     <modules>
         <module>data-model-api</module>
         <module>data-model-impl</module>
-        <module>security-api</module>
-        <module>security-api-impl</module>
         <module>services-api</module>
         <module>services-api-impl</module>
         <module>web-api</module>
@@ -93,6 +91,12 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
 

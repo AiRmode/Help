@@ -13,7 +13,7 @@ import java.util.Set;
 
 public interface Shelter {
 
-    int getId();
+    Long getId();
 
     Optional<Avatar> getAvatar();
 
@@ -47,7 +47,7 @@ public interface Shelter {
 
     Set<Tag> getTags();
 
-    void setId(int id);
+    void setId(Long id);
 
     void setAvatar(Avatar avatar);
 

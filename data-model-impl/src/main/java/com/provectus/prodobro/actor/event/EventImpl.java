@@ -23,7 +23,7 @@ public class EventImpl implements Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "title")
     private String title;
@@ -43,7 +43,7 @@ public class EventImpl implements Event {
     @JoinColumn(name = "shelter_id")
     private Shelter shelter;
 
-    @Column(name = "created_date")
+    @Column(name = "date")
     private Timestamp date;
 
     @Column(name = "is_accessible")
@@ -91,7 +91,7 @@ public class EventImpl implements Event {
     }
 
     @Override
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -161,7 +161,7 @@ public class EventImpl implements Event {
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,14 +1,15 @@
-package com.provectus.prodobro.dao.actor;
+package com.provectus.prodobro.service.actor;
 
 
 import com.provectus.prodobro.actor.event.Event;
-import com.provectus.prodobro.dao.GenericDAO;
 import com.provectus.prodobro.shared.status.Status;
 
 import java.sql.Timestamp;
 import java.util.List;
 
-public interface EventDAO extends GenericDAO<Event, Long> {
+public interface EventService {
+
+    void makeRemovedById(Long id);
 
     Event getByTitle(String title);
 

@@ -14,7 +14,7 @@ import java.util.Set;
 
 public interface Company {
 
-    int getId();
+    Long getId();
 
     Optional<Avatar> getAvatar();
 
@@ -57,7 +57,7 @@ public interface Company {
      */
     Set<Event> getAssignedEvents();
 
-    void setId(int id);
+    void setId(Long id);
 
     void setAvatar(Avatar avatar);
 

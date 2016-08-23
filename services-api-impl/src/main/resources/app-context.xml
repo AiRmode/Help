@@ -11,19 +11,18 @@
 
     <context:component-scan base-package="com.provectus.prodobro"/>
 
-    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
-
+    <tx:annotation-driven
+            transaction-manager="transactionManager"
+            proxy-target-class="true"/>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
-
     </bean>
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan">
             <list>
@@ -41,13 +40,14 @@
                 <prop key="hibernate.globally_quoted_identifiers">${hibernate.quoted_names}
                 </prop> <!-- Get all names quoted -->
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
-                <prop key="hibernate.show_sql">${hibernate.show_sql:false}</prop>
-                <prop key="hibernate.format_sql">${hibernate.format_sql:false}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+                <prop key="hibernate.max_fetch_depth">${hibernate.max_fetch_depth}</prop>
             </props>
         </property>
     </bean>
 
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 

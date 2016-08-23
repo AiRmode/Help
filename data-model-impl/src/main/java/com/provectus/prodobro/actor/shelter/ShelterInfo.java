@@ -13,7 +13,7 @@ public class ShelterInfo implements Info<Shelter> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @ManyToOne(targetEntity = ShelterImpl.class)
     @JoinColumn(name = "shelter_id")
@@ -27,7 +27,7 @@ public class ShelterInfo implements Info<Shelter> {
     private InfoTypeEnum type;
 
     @Override
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -47,7 +47,7 @@ public class ShelterInfo implements Info<Shelter> {
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface GenericDAO<T, PK extends Serializable> {
 
-    void create(T object);
+    void save(T object);
 
-    T get(PK id);
+    T getById(PK id);
 
     void update(T object);
 

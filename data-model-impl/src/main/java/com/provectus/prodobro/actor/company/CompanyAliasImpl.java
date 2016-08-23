@@ -9,18 +9,18 @@ public class CompanyAliasImpl implements CompanyAlias {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "alias")
     private String alias;
 
     @ManyToOne(targetEntity = CompanyImpl.class)
-    @Column(name = "company_id")
+    @JoinColumn(name = "company_id")
     private Company company;
 
 
     @Override
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -35,7 +35,7 @@ public class CompanyAliasImpl implements CompanyAlias {
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -56,15 +56,12 @@ public class CompanyAliasImpl implements CompanyAlias {
 
         CompanyAliasImpl that = (CompanyAliasImpl) o;
 
-        if (!alias.equals(that.alias)) return false;
-        return company.equals(that.company);
+        return alias.equals(that.alias);
 
     }
 
     @Override
     public int hashCode() {
-        int result = alias.hashCode();
-        result = 31 * result + company.hashCode();
-        return result;
+        return alias.hashCode();
     }
 }

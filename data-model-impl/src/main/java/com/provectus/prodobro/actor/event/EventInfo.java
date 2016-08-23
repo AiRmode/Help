@@ -13,7 +13,7 @@ public class EventInfo implements Info<Event> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @ManyToOne(targetEntity = EventImpl.class)
     @JoinColumn(name = "event_id")
@@ -30,7 +30,7 @@ public class EventInfo implements Info<Event> {
     }
 
     @Override
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -50,7 +50,7 @@ public class EventInfo implements Info<Event> {
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
