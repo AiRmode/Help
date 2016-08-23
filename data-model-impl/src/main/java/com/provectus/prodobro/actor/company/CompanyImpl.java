@@ -26,7 +26,7 @@ public class CompanyImpl implements Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = CompanyAvatar.class)
     @JoinColumn(name = "avatar_id")
@@ -92,7 +92,7 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -177,7 +177,7 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -248,35 +248,25 @@ public class CompanyImpl implements Company {
 
         CompanyImpl company = (CompanyImpl) o;
 
-        if (avatar != null ? !avatar.equals(company.avatar) : company.avatar != null) return false;
         if (!info.equals(company.info)) return false;
         if (!status.equals(company.status)) return false;
         if (!createdDate.equals(company.createdDate)) return false;
-        if (!createdBy.equals(company.createdBy)) return false;
         if (!lastModifiedDate.equals(company.lastModifiedDate)) return false;
-        if (!lastModifiedBy.equals(company.lastModifiedBy)) return false;
         if (!title.equals(company.title)) return false;
         if (!aliases.equals(company.aliases)) return false;
-        if (description != null ? !description.equals(company.description) : company.description != null) return false;
-        if (!employeeRelations.equals(company.employeeRelations)) return false;
-        return assignedEvents.equals(company.assignedEvents);
+        return description != null ? description.equals(company.description) : company.description == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = avatar != null ? avatar.hashCode() : 0;
-        result = 31 * result + info.hashCode();
+        int result = info.hashCode();
         result = 31 * result + status.hashCode();
         result = 31 * result + createdDate.hashCode();
-        result = 31 * result + createdBy.hashCode();
         result = 31 * result + lastModifiedDate.hashCode();
-        result = 31 * result + lastModifiedBy.hashCode();
         result = 31 * result + title.hashCode();
         result = 31 * result + aliases.hashCode();
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + employeeRelations.hashCode();
-        result = 31 * result + assignedEvents.hashCode();
         return result;
     }
 }

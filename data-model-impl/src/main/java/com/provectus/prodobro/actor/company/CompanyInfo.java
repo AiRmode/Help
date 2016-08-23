@@ -13,7 +13,7 @@ public class CompanyInfo implements Info<Company> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @ManyToOne(targetEntity = CompanyImpl.class)
     @JoinColumn(name = "company_id")
@@ -30,7 +30,7 @@ public class CompanyInfo implements Info<Company> {
     }
 
     @Override
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -50,7 +50,7 @@ public class CompanyInfo implements Info<Company> {
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -76,7 +76,6 @@ public class CompanyInfo implements Info<Company> {
 
         CompanyInfo that = (CompanyInfo) o;
 
-        if (!owner.equals(that.owner)) return false;
         if (!info.equals(that.info)) return false;
         return type == that.type;
 
@@ -84,8 +83,7 @@ public class CompanyInfo implements Info<Company> {
 
     @Override
     public int hashCode() {
-        int result = owner.hashCode();
-        result = 31 * result + info.hashCode();
+        int result = info.hashCode();
         result = 31 * result + type.hashCode();
         return result;
     }

@@ -13,7 +13,7 @@ import java.util.Set;
 
 public interface Event {
 
-    int getId();
+    Long getId();
 
     String getTitle();
 
@@ -41,7 +41,7 @@ public interface Event {
 
     Set<Company> getAssignedCompanies();
 
-    void setId(int id);
+    void setId(Long id);
 
     void setTitle(String title);
 

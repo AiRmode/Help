@@ -1,13 +1,16 @@
-package com.provectus.prodobro.dao.actor;
+package com.provectus.prodobro.service.actor;
 
 
 import com.provectus.prodobro.actor.user.User;
-import com.provectus.prodobro.dao.GenericDAO;
+import com.provectus.prodobro.service.GenericService;
 import com.provectus.prodobro.shared.status.Status;
 
 import java.util.List;
 
-public interface UserDAO extends GenericDAO<User, Long> {
+
+public interface UserService extends GenericService<User, Long> {
+
+    void makeRemovedById(Long id);
 
     List<User> getByName(String name);
 
@@ -16,4 +19,5 @@ public interface UserDAO extends GenericDAO<User, Long> {
     User getByPhoneNumber(String phoneNumber);
 
     User getByEmail(String email);
+
 }

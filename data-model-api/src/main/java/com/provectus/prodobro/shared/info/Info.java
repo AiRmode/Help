@@ -3,7 +3,7 @@ package com.provectus.prodobro.shared.info;
 
 public interface Info<T> {
 
-    int getId();
+    Long getId();
 
     T getOwner();
 
@@ -11,7 +11,7 @@ public interface Info<T> {
 
     String getType();
 
-    void setId(int id);
+    void setId(Long id);
 
     void setOwner(T owner);
 

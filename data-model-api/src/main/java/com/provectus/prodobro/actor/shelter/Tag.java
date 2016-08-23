@@ -6,13 +6,13 @@ import java.util.Set;
 
 public interface Tag {
 
-    int getId();
+    Long getId();
 
     String getTitle();
 
     Set<Shelter> getShelters();
 
-    void setId(int id);
+    void setId(Long id);
 
     void setTitle(String title);
 

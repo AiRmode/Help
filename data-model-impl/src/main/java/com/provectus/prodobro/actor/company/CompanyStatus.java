@@ -13,14 +13,14 @@ public class CompanyStatus implements Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "title")
     private StatusEnum status;
 
     @Override
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -30,7 +30,7 @@ public class CompanyStatus implements Status {
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

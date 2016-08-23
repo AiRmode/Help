@@ -61,8 +61,7 @@ CREATE TABLE schema_name."user_info" (
 CREATE TABLE schema_name."user_status" (
   id    SERIAL      NOT NULL,
   title VARCHAR(20) NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE (title)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE schema_name."user_avatar" (
@@ -96,8 +95,7 @@ CREATE TABLE schema_name."company_info" (
 CREATE TABLE schema_name."company_status" (
   id    SERIAL      NOT NULL,
   title VARCHAR(20) NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE (title)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE schema_name."company_avatar" (
@@ -132,8 +130,7 @@ CREATE TABLE schema_name."shelter" (
 CREATE TABLE schema_name."shelter_type" (
   id    SERIAL      NOT NULL,
   title VARCHAR(20) NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE (title)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE schema_name."shelter_info" (
@@ -147,8 +144,7 @@ CREATE TABLE schema_name."shelter_info" (
 CREATE TABLE schema_name."shelter_status" (
   id    SERIAL      NOT NULL,
   title VARCHAR(20) NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE (title)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE schema_name."shelter_avatar" (

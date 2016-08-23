@@ -3,11 +3,11 @@ package com.provectus.prodobro.shared.status;
 
 public interface Status {
 
-    int getId();
+    Long getId();
 
     String getStatus();
 
-    void setId(int id);
+    void setId(Long id);
 
     void setStatus(String status);
 }

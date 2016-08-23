@@ -6,7 +6,7 @@ import com.provectus.prodobro.actor.user.User;
 
 public interface EmployeeRelation {
 
-    int getId();
+    Long getId();
 
     User getUser();
 
@@ -14,7 +14,7 @@ public interface EmployeeRelation {
 
     boolean isAdmin();
 
-    void setId(int id);
+    void setId(Long id);
 
     void setUser(User user);
 
