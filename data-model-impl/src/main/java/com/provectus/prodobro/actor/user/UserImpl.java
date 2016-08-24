@@ -261,5 +261,12 @@ public class UserImpl implements User {
         this.assignedEvents = assignedEvents;
     }
 
-
+    @Override
+    public String toString() {
+        return "UserImpl{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

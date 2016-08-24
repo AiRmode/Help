@@ -1,10 +1,10 @@
-package com.provectus.prodobro.dao.user;
+package com.provectus.prodobro.dao;
 
 
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.actor.user.UserImpl;
 import com.provectus.prodobro.dao.actor.UserDAO;
-import com.provectus.prodobro.shared.status.Status;
+import com.provectus.prodobro.shared.status.StatusEnum;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +14,7 @@ import java.util.List;
 
 @Transactional
 @Repository("userDAO")
+@SuppressWarnings("unchecked")
 public class UserDAOImpl implements UserDAO {
 
     private SessionFactory sessionFactory;
@@ -23,6 +24,7 @@ public class UserDAOImpl implements UserDAO {
         sessionFactory.getCurrentSession().save(object);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public User getById(Long id) {
         return sessionFactory.getCurrentSession().get(UserImpl.class, id);
@@ -33,12 +35,6 @@ public class UserDAOImpl implements UserDAO {
         sessionFactory.getCurrentSession().update(object);
     }
 
-    /**
-     * Removing User from database is deprecated.
-     * For removing User change status to DELETED
-     * @param object User
-     */
-    @Deprecated
     @Override
     public void remove(User object) {
         sessionFactory.getCurrentSession().remove(object);
@@ -49,20 +45,38 @@ public class UserDAOImpl implements UserDAO {
     public List<User> getAll() {
         return sessionFactory
                 .getCurrentSession()
-                .createQuery("from UserImpl ")
+                .createQuery("from UserImpl")
                 .list();
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<User> getByName(String name) {
-        return null;
+        return sessionFactory
+                .getCurrentSession()
+                .createQuery("from UserImpl o where o.name=:name")
+                .setParameter("name", name)
+                .list();
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<User> getByStatus(Status status) {
-        return null;
+    public List<User> getByStatus(String status) {
+        return sessionFactory
+                .getCurrentSession()
+                .createQuery("select u from UserImpl u inner join u.status where u.status.status=:status")
+                .setParameter("status", StatusEnum.valueOf(status))
+                .list();
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<User> getByStatus(StatusEnum status) {
+        return sessionFactory
+                .getCurrentSession()
+                .createQuery("select u from UserImpl u inner join u.status where u.status.status=:status")
+                .setParameter("status", status)
+                .list();
     }
 
     @Transactional(readOnly = true)
@@ -70,7 +84,7 @@ public class UserDAOImpl implements UserDAO {
     public User getByPhoneNumber(String phoneNumber) {
         return (User) sessionFactory
                 .getCurrentSession()
-                .createQuery("from UserImpl where phone_num=:phone")
+                .createQuery("from UserImpl o where o.phone_num=:phone")
                 .setParameter("phone", phoneNumber)
                 .uniqueResult();
     }
