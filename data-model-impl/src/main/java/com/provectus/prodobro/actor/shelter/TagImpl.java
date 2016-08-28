@@ -64,15 +64,12 @@ public class TagImpl implements Tag {
 
         TagImpl tag = (TagImpl) o;
 
-        if (!title.equals(tag.title)) return false;
-        return shelters.equals(tag.shelters);
+        return title.equals(tag.title);
 
     }
 
     @Override
     public int hashCode() {
-        int result = title.hashCode();
-        result = 31 * result + shelters.hashCode();
-        return result;
+        return title.hashCode();
     }
 }

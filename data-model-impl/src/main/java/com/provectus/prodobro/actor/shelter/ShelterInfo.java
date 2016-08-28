@@ -73,7 +73,6 @@ public class ShelterInfo implements Info<Shelter> {
 
         ShelterInfo that = (ShelterInfo) o;
 
-        if (!owner.equals(that.owner)) return false;
         if (!info.equals(that.info)) return false;
         return type == that.type;
 
@@ -81,8 +80,7 @@ public class ShelterInfo implements Info<Shelter> {
 
     @Override
     public int hashCode() {
-        int result = owner.hashCode();
-        result = 31 * result + info.hashCode();
+        int result = info.hashCode();
         result = 31 * result + type.hashCode();
         return result;
     }

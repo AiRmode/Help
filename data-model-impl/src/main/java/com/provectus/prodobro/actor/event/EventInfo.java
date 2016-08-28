@@ -76,7 +76,6 @@ public class EventInfo implements Info<Event> {
 
         EventInfo eventInfo = (EventInfo) o;
 
-        if (!owner.equals(eventInfo.owner)) return false;
         if (!info.equals(eventInfo.info)) return false;
         return type == eventInfo.type;
 
@@ -84,8 +83,7 @@ public class EventInfo implements Info<Event> {
 
     @Override
     public int hashCode() {
-        int result = owner.hashCode();
-        result = 31 * result + info.hashCode();
+        int result = info.hashCode();
         result = 31 * result + type.hashCode();
         return result;
     }

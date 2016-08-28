@@ -262,11 +262,39 @@ public class UserImpl implements User {
     }
 
     @Override
-    public String toString() {
-        return "UserImpl{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserImpl)) return false;
+
+        UserImpl user = (UserImpl) o;
+
+        if (isSuperUser != user.isSuperUser) return false;
+        if (avatar != null ? !avatar.equals(user.avatar) : user.avatar != null) return false;
+        if (!info.equals(user.info)) return false;
+        if (!status.equals(user.status)) return false;
+        if (!createdDate.equals(user.createdDate)) return false;
+        if (!lastModifiedDate.equals(user.lastModifiedDate)) return false;
+        if (!name.equals(user.name)) return false;
+        if (!email.equals(user.email)) return false;
+        if (!passHash.equals(user.passHash)) return false;
+        if (!phoneNumber.equals(user.phoneNumber)) return false;
+        return language != null ? language.equals(user.language) : user.language == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = avatar != null ? avatar.hashCode() : 0;
+        result = 31 * result + info.hashCode();
+        result = 31 * result + status.hashCode();
+        result = 31 * result + createdDate.hashCode();
+        result = 31 * result + lastModifiedDate.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + passHash.hashCode();
+        result = 31 * result + phoneNumber.hashCode();
+        result = 31 * result + (isSuperUser ? 1 : 0);
+        result = 31 * result + (language != null ? language.hashCode() : 0);
+        return result;
     }
 }

@@ -72,7 +72,6 @@ public class ShelterImpl implements Shelter {
     private Event event;
 
     @ManyToMany(
-            cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
             targetEntity = TagImpl.class
     )
@@ -227,14 +226,10 @@ public class ShelterImpl implements Shelter {
         if (!info.equals(shelter.info)) return false;
         if (!status.equals(shelter.status)) return false;
         if (!createdDate.equals(shelter.createdDate)) return false;
-        if (!createdBy.equals(shelter.createdBy)) return false;
         if (!lastModifiedDate.equals(shelter.lastModifiedDate)) return false;
-        if (!lastModifiedBy.equals(shelter.lastModifiedBy)) return false;
         if (!title.equals(shelter.title)) return false;
         if (description != null ? !description.equals(shelter.description) : shelter.description != null) return false;
-        if (!type.equals(shelter.type)) return false;
-        if (event != null ? !event.equals(shelter.event) : shelter.event != null) return false;
-        return tags.equals(shelter.tags);
+        return type.equals(shelter.type);
 
     }
 
@@ -244,14 +239,10 @@ public class ShelterImpl implements Shelter {
         result = 31 * result + info.hashCode();
         result = 31 * result + status.hashCode();
         result = 31 * result + createdDate.hashCode();
-        result = 31 * result + createdBy.hashCode();
         result = 31 * result + lastModifiedDate.hashCode();
-        result = 31 * result + lastModifiedBy.hashCode();
         result = 31 * result + title.hashCode();
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + type.hashCode();
-        result = 31 * result + (event != null ? event.hashCode() : 0);
-        result = 31 * result + tags.hashCode();
         return result;
     }
 }

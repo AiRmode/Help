@@ -72,7 +72,6 @@ public class UserInfo implements Info<User> {
 
         UserInfo userInfo = (UserInfo) o;
 
-        if (!owner.equals(userInfo.owner)) return false;
         if (!info.equals(userInfo.info)) return false;
         return type == userInfo.type;
 
@@ -80,8 +79,7 @@ public class UserInfo implements Info<User> {
 
     @Override
     public int hashCode() {
-        int result = owner.hashCode();
-        result = 31 * result + info.hashCode();
+        int result = info.hashCode();
         result = 31 * result + type.hashCode();
         return result;
     }

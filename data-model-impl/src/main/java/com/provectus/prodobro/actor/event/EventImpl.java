@@ -236,14 +236,9 @@ public class EventImpl implements Event {
         if (!title.equals(event.title)) return false;
         if (!info.equals(event.info)) return false;
         if (description != null ? !description.equals(event.description) : event.description != null) return false;
-        if (!shelter.equals(event.shelter)) return false;
         if (!date.equals(event.date)) return false;
         if (!createdDate.equals(event.createdDate)) return false;
-        if (!createdBy.equals(event.createdBy)) return false;
-        if (!lastModifiedDate.equals(event.lastModifiedDate)) return false;
-        if (!lastModifiedBy.equals(event.lastModifiedBy)) return false;
-        if (!assignedUsers.equals(event.assignedUsers)) return false;
-        return assignedCompanies.equals(event.assignedCompanies);
+        return lastModifiedDate.equals(event.lastModifiedDate);
 
     }
 
@@ -252,15 +247,10 @@ public class EventImpl implements Event {
         int result = title.hashCode();
         result = 31 * result + info.hashCode();
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + shelter.hashCode();
         result = 31 * result + date.hashCode();
         result = 31 * result + (accessible ? 1 : 0);
         result = 31 * result + createdDate.hashCode();
-        result = 31 * result + createdBy.hashCode();
         result = 31 * result + lastModifiedDate.hashCode();
-        result = 31 * result + lastModifiedBy.hashCode();
-        result = 31 * result + assignedUsers.hashCode();
-        result = 31 * result + assignedCompanies.hashCode();
         return result;
     }
 }

@@ -20,7 +20,6 @@ public class CompanyDAOImpl implements CompanyDAO {
 
     private SessionFactory sessionFactory;
 
-
     @Override
     public void save(Company object) {
         sessionFactory.getCurrentSession().save(object);
