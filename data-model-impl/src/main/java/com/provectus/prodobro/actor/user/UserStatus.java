@@ -19,6 +19,13 @@ public class UserStatus implements Status {
     @Column(name = "title")
     private StatusEnum status;
 
+    public UserStatus() {
+    }
+
+    public UserStatus(StatusEnum status) {
+        this.status = status;
+    }
+
     @Override
     public Long getId() {
         return id;

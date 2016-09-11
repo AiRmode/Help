@@ -92,6 +92,13 @@ public class UserImpl implements User {
     public UserImpl() {
     }
 
+    public UserImpl(String name, String email, String passHash, String phoneNumber) {
+        this.name = name;
+        this.email = email;
+        this.passHash = passHash;
+        this.phoneNumber = phoneNumber;
+    }
+
     @Override
     public Long getId() {
         return id;
