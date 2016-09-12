@@ -9,12 +9,11 @@ import java.util.Optional;
 
 @Service("authChecker")
 public class AuthCheckerImpl implements AuthChecker {
-    private final String cookieName;
+    private String cookieName;
 
-    public AuthCheckerImpl(String cookieName) {
+    public void setCookieName(String cookieName) {
         this.cookieName = cookieName;
     }
-
 
     @Override
     public boolean isAllow(HttpServletRequest req) {
