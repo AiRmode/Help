@@ -31,23 +31,13 @@ public class UserInfo implements Info<User> {
     }
 
     @Override
-    public User getOwner() {
-        return owner;
-    }
-
-    @Override
-    public String getInfo() {
-        return info;
-    }
-
-    @Override
-    public String getType() {
-        return type.name();
-    }
-
-    @Override
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public User getOwner() {
+        return owner;
     }
 
     @Override
@@ -56,8 +46,18 @@ public class UserInfo implements Info<User> {
     }
 
     @Override
+    public String getInfo() {
+        return info;
+    }
+
+    @Override
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    @Override
+    public String getType() {
+        return type.name();
     }
 
     @Override

@@ -33,23 +33,23 @@ public class TagImpl implements Tag {
     }
 
     @Override
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public Set<Shelter> getShelters() {
-        return shelters;
-    }
-
-    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
     @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public Set<Shelter> getShelters() {
+        return shelters;
     }
 
     @Override

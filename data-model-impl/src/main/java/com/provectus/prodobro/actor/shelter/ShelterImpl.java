@@ -91,68 +91,13 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
-    public Optional<Avatar> getAvatar() {
-        return Optional.ofNullable(avatar);
-    }
-
-    @Override
-    public Set<Info> getInfo() {
-        return info;
-    }
-
-    @Override
-    public Status getStatus() {
-        return status;
-    }
-
-    @Override
-    public Timestamp getCreatedDate() {
-        return createdDate;
-    }
-
-    @Override
-    public User getCreatedBy() {
-        return createdBy;
-    }
-
-    @Override
-    public Timestamp getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    @Override
-    public User getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    @Override
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public Optional<String> getDescription() {
-        return Optional.ofNullable(description);
-    }
-
-    @Override
-    public ShelterType getType() {
-        return type;
-    }
-
-    @Override
-    public Optional<Event> getEvent() {
-        return Optional.ofNullable(event);
-    }
-
-    @Override
-    public Set<Tag> getTags() {
-        return tags;
-    }
-
-    @Override
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public Optional<Avatar> getAvatar() {
+        return Optional.ofNullable(avatar);
     }
 
     @Override
@@ -161,8 +106,18 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
+    public Set<Info> getInfo() {
+        return info;
+    }
+
+    @Override
     public void setInfo(Set<Info> info) {
         this.info = info;
+    }
+
+    @Override
+    public Status getStatus() {
+        return status;
     }
 
     @Override
@@ -171,8 +126,18 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
+    public Timestamp getCreatedDate() {
+        return createdDate;
+    }
+
+    @Override
     public void setCreatedDate(Timestamp createdDate) {
         this.createdDate = createdDate;
+    }
+
+    @Override
+    public User getCreatedBy() {
+        return createdBy;
     }
 
     @Override
@@ -181,8 +146,18 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
+    public Timestamp getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    @Override
     public void setLastModifiedDate(Timestamp lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
+    }
+
+    @Override
+    public User getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
     @Override
@@ -191,8 +166,18 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public Optional<String> getDescription() {
+        return Optional.ofNullable(description);
     }
 
     @Override
@@ -201,13 +186,28 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
+    public ShelterType getType() {
+        return type;
+    }
+
+    @Override
     public void setType(ShelterType type) {
         this.type = type;
     }
 
     @Override
+    public Optional<Event> getEvent() {
+        return Optional.ofNullable(event);
+    }
+
+    @Override
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    @Override
+    public Set<Tag> getTags() {
+        return tags;
     }
 
     @Override

@@ -20,31 +20,31 @@ import java.util.Optional;
 @RequestMapping("/company")
 public class CompanyController {
 
-	private CompanyService companyService;
-	private AuthChecker authChecker;
+    private CompanyService companyService;
+    private AuthChecker authChecker;
 
-	@Required
-	@Autowired
-	public void setUserService(CompanyService companyService) {
-		this.companyService = companyService;
-	}
+    @Required
+    @Autowired
+    public void setUserService(CompanyService companyService) {
+        this.companyService = companyService;
+    }
 
-	@Required
-	@Autowired
-	public void setAuthChecker(AuthChecker authChecker) {
-		this.authChecker = authChecker;
-	}
+    @Required
+    @Autowired
+    public void setAuthChecker(AuthChecker authChecker) {
+        this.authChecker = authChecker;
+    }
 
-	@RequestMapping(value = "/getById",
-			method = RequestMethod.GET,
-			produces = "application/json")
-	public ResponseEntity<Company> getUserById(HttpServletRequest req, @RequestParam Long id) {
-		Optional<Cookie> token = authChecker.getToken(req);
-		if (token.isPresent()) {
-			return new ResponseEntity<>(companyService.getById(id), HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-	}
+    @RequestMapping(value = "/getById",
+            method = RequestMethod.GET,
+            produces = "application/json")
+    public ResponseEntity<Company> getUserById(HttpServletRequest req, @RequestParam Long id) {
+        Optional<Cookie> token = authChecker.getToken(req);
+        if (token.isPresent()) {
+            return new ResponseEntity<>(companyService.getById(id), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    }
 
 
 }

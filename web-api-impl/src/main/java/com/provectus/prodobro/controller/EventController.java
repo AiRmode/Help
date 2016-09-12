@@ -20,31 +20,31 @@ import java.util.Optional;
 @RequestMapping("/event")
 public class EventController {
 
-	private EventService eventService;
-	private AuthChecker authChecker;
+    private EventService eventService;
+    private AuthChecker authChecker;
 
-	@Required
-	@Autowired
-	public void setUserService(EventService eventService) {
-		this.eventService = eventService;
-	}
+    @Required
+    @Autowired
+    public void setUserService(EventService eventService) {
+        this.eventService = eventService;
+    }
 
-	@Required
-	@Autowired
-	public void setAuthChecker(AuthChecker authChecker) {
-		this.authChecker = authChecker;
-	}
+    @Required
+    @Autowired
+    public void setAuthChecker(AuthChecker authChecker) {
+        this.authChecker = authChecker;
+    }
 
-	@RequestMapping(value = "/getById",
-			method = RequestMethod.GET,
-			produces = "application/json")
-	public ResponseEntity<Event> getUserById(HttpServletRequest req, @RequestParam Long id) {
-		Optional<Cookie> token = authChecker.getToken(req);
-		if (token.isPresent()) {
-			return new ResponseEntity<>(eventService.getById(id), HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-	}
+    @RequestMapping(value = "/getById",
+            method = RequestMethod.GET,
+            produces = "application/json")
+    public ResponseEntity<Event> getUserById(HttpServletRequest req, @RequestParam Long id) {
+        Optional<Cookie> token = authChecker.getToken(req);
+        if (token.isPresent()) {
+            return new ResponseEntity<>(eventService.getById(id), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    }
 
 
 }

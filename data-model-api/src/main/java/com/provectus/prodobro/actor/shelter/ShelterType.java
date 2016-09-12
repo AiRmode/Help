@@ -5,9 +5,9 @@ public interface ShelterType {
 
     Long getId();
 
-    String getType();
-
     void setId(Long id);
+
+    String getType();
 
     void setType(String type);
 }

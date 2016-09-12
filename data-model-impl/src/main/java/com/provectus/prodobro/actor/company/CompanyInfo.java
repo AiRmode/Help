@@ -35,23 +35,13 @@ public class CompanyInfo implements Info<Company> {
     }
 
     @Override
-    public Company getOwner() {
-        return owner;
-    }
-
-    @Override
-    public String getInfo() {
-        return info;
-    }
-
-    @Override
-    public String getType() {
-        return type.name();
-    }
-
-    @Override
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public Company getOwner() {
+        return owner;
     }
 
     @Override
@@ -60,8 +50,18 @@ public class CompanyInfo implements Info<Company> {
     }
 
     @Override
+    public String getInfo() {
+        return info;
+    }
+
+    @Override
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    @Override
+    public String getType() {
+        return type.name();
     }
 
     @Override

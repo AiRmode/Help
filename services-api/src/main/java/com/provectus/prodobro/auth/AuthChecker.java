@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 public interface AuthChecker {
-	boolean isAllow(HttpServletRequest req);
+    boolean isAllow(HttpServletRequest req);
 
-	Optional<Cookie> getToken(HttpServletRequest req);
+    Optional<Cookie> getToken(HttpServletRequest req);
 }

@@ -46,7 +46,7 @@ public class CompanyDAOImpl implements CompanyDAO {
     public List<Company> getAll() {
         return sessionFactory
                 .getCurrentSession()
-                .createQuery("from UserImpl")
+                .createQuery("from CompanyImpl")
                 .list();
     }
 
@@ -55,7 +55,7 @@ public class CompanyDAOImpl implements CompanyDAO {
     public Company getByTitle(String title) {
         return (Company) sessionFactory
                 .getCurrentSession()
-                .createQuery("from UserImpl o where o.title=:title")
+                .createQuery("from CompanyImpl o where o.title=:title")
                 .setParameter("title", title)
                 .uniqueResult();
     }

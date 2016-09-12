@@ -105,8 +105,18 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
     public Optional<Avatar> getAvatar() {
         return Optional.ofNullable(avatar);
+    }
+
+    @Override
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
     }
 
     @Override
@@ -115,8 +125,18 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setInfo(Set<Info> info) {
+        this.info = info;
+    }
+
+    @Override
     public Status getStatus() {
         return status;
+    }
+
+    @Override
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override
@@ -125,8 +145,18 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    @Override
     public User getCreatedBy() {
         return createdBy;
+    }
+
+    @Override
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
     }
 
     @Override
@@ -135,8 +165,18 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setLastModifiedDate(Timestamp lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
+    @Override
     public User getLastModifiedBy() {
         return lastModifiedBy;
+    }
+
+    @Override
+    public void setLastModifiedBy(User lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     @Override
@@ -145,8 +185,18 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -155,8 +205,18 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setPassHash(String passHash) {
+        this.passHash = passHash;
+    }
+
+    @Override
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    @Override
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     @Override
@@ -165,8 +225,18 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setSuperUser(boolean isSuperUser) {
+        this.isSuperUser = isSuperUser;
+    }
+
+    @Override
     public Locale getLanguage() {
         return language;
+    }
+
+    @Override
+    public void setLanguage(Locale language) {
+        this.language = language;
     }
 
     @Override
@@ -175,8 +245,18 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setEmployeeRelation(EmployeeRelation employeeRelation) {
+        this.employeeRelation = employeeRelation;
+    }
+
+    @Override
     public Set<Event> getAssignedEvents() {
         return assignedEvents;
+    }
+
+    @Override
+    public void setAssignedEvents(Set<Event> assignedEvents) {
+        this.assignedEvents = assignedEvents;
     }
 
     @Override
@@ -186,86 +266,6 @@ public class UserImpl implements User {
                         .getCreatedBy()
                         .equals(this)
         ).collect(Collectors.toSet());
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public void setAvatar(Avatar avatar) {
-        this.avatar = avatar;
-    }
-
-    @Override
-    public void setInfo(Set<Info> info) {
-        this.info = info;
-    }
-
-    @Override
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    @Override
-    public void setCreatedDate(Timestamp createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    @Override
-    public void setCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    @Override
-    public void setLastModifiedDate(Timestamp lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
-
-    @Override
-    public void setLastModifiedBy(User lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public void setPassHash(String passHash) {
-        this.passHash = passHash;
-    }
-
-    @Override
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    @Override
-    public void setSuperUser(boolean isSuperUser) {
-        this.isSuperUser = isSuperUser;
-    }
-
-    @Override
-    public void setLanguage(Locale language) {
-        this.language = language;
-    }
-
-    @Override
-    public void setEmployeeRelation(EmployeeRelation employeeRelation) {
-        this.employeeRelation = employeeRelation;
-    }
-
-    @Override
-    public void setAssignedEvents(Set<Event> assignedEvents) {
-        this.assignedEvents = assignedEvents;
     }
 
     @Override

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableWebMvc
 @ComponentScan({"com.provectus.prodobro.controller"})
 @ImportResource({"classpath:/applicationContext-services.xml",
-		"classpath:/auth-context.xml"})
+        "classpath:/auth-context.xml"})
 public class WebConfig extends WebMvcConfigurerAdapter {
 
 }

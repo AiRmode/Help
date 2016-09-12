@@ -84,7 +84,7 @@ public class UserDAOImpl implements UserDAO {
     public User getByPhoneNumber(String phoneNumber) {
         return (User) sessionFactory
                 .getCurrentSession()
-                .createQuery("from UserImpl o where o.phone_num=:phone")
+                .createQuery("from UserImpl where phone_num=:phone")
                 .setParameter("phone", phoneNumber)
                 .uniqueResult();
     }

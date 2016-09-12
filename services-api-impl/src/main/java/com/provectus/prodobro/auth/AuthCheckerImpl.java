@@ -9,29 +9,29 @@ import java.util.Optional;
 
 @Service("authChecker")
 public class AuthCheckerImpl implements AuthChecker {
-	private final String cookieName;
+    private final String cookieName;
 
-	public AuthCheckerImpl(String cookieName) {
-		this.cookieName = cookieName;
-	}
+    public AuthCheckerImpl(String cookieName) {
+        this.cookieName = cookieName;
+    }
 
 
-	@Override
-	public boolean isAllow(HttpServletRequest req) {
-		return false;
-	}
+    @Override
+    public boolean isAllow(HttpServletRequest req) {
+        return false;
+    }
 
-	@Override
-	public Optional<Cookie> getToken(HttpServletRequest req) {
-		Cookie[] cookies = req.getCookies();
+    @Override
+    public Optional<Cookie> getToken(HttpServletRequest req) {
+        Cookie[] cookies = req.getCookies();
 
-		if (cookies == null) {
-			return Optional.ofNullable(null);
-		}
+        if (cookies == null) {
+            return Optional.ofNullable(null);
+        }
 
-		return Arrays.stream(cookies)
-				.filter(cookie -> cookie.getName().equals(cookieName))
-				.limit(1)
-				.findFirst();
-	}
+        return Arrays.stream(cookies)
+                .filter(cookie -> cookie.getName().equals(cookieName))
+                .limit(1)
+                .findFirst();
+    }
 }

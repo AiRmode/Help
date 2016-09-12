@@ -96,8 +96,18 @@ public class EventImpl implements Event {
     }
 
     @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
     public String getTitle() {
         return title;
+    }
+
+    @Override
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
@@ -111,68 +121,13 @@ public class EventImpl implements Event {
     }
 
     @Override
-    public Optional<String> getDescription() {
-        return Optional.ofNullable(description);
-    }
-
-    @Override
-    public Shelter getShelter() {
-        return shelter;
-    }
-
-    @Override
-    public Timestamp getDate() {
-        return date;
-    }
-
-    @Override
-    public boolean isAccessible() {
-        return accessible;
-    }
-
-    @Override
-    public Timestamp getCreatedDate() {
-        return createdDate;
-    }
-
-    @Override
-    public User getCreatedBy() {
-        return createdBy;
-    }
-
-    @Override
-    public Timestamp getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    @Override
-    public User getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    @Override
-    public Set<User> getAssignedUsers() {
-        return assignedUsers;
-    }
-
-    @Override
-    public Set<Company> getAssignedCompanies() {
-        return assignedCompanies;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Override
     public void setInfo(Set<Info> info) {
         this.info = info;
+    }
+
+    @Override
+    public Optional<String> getDescription() {
+        return Optional.ofNullable(description);
     }
 
     @Override
@@ -181,8 +136,18 @@ public class EventImpl implements Event {
     }
 
     @Override
+    public Shelter getShelter() {
+        return shelter;
+    }
+
+    @Override
     public void setShelter(Shelter shelter) {
         this.shelter = shelter;
+    }
+
+    @Override
+    public Timestamp getDate() {
+        return date;
     }
 
     @Override
@@ -191,8 +156,18 @@ public class EventImpl implements Event {
     }
 
     @Override
+    public boolean isAccessible() {
+        return accessible;
+    }
+
+    @Override
     public void setAccessible(boolean accessible) {
         this.accessible = accessible;
+    }
+
+    @Override
+    public Timestamp getCreatedDate() {
+        return createdDate;
     }
 
     @Override
@@ -201,8 +176,18 @@ public class EventImpl implements Event {
     }
 
     @Override
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    @Override
     public void setCreatedBy(User createdBy) {
         this.createdBy = createdBy;
+    }
+
+    @Override
+    public Timestamp getLastModifiedDate() {
+        return lastModifiedDate;
     }
 
     @Override
@@ -211,13 +196,28 @@ public class EventImpl implements Event {
     }
 
     @Override
+    public User getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    @Override
     public void setLastModifiedBy(User lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
     }
 
     @Override
+    public Set<User> getAssignedUsers() {
+        return assignedUsers;
+    }
+
+    @Override
     public void setAssignedUsers(Set<User> assignedUsers) {
         this.assignedUsers = assignedUsers;
+    }
+
+    @Override
+    public Set<Company> getAssignedCompanies() {
+        return assignedCompanies;
     }
 
     @Override

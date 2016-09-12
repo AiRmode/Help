@@ -32,23 +32,13 @@ public class ShelterInfo implements Info<Shelter> {
     }
 
     @Override
-    public Shelter getOwner() {
-        return owner;
-    }
-
-    @Override
-    public String getInfo() {
-        return info;
-    }
-
-    @Override
-    public String getType() {
-        return type.name();
-    }
-
-    @Override
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public Shelter getOwner() {
+        return owner;
     }
 
     @Override
@@ -57,8 +47,18 @@ public class ShelterInfo implements Info<Shelter> {
     }
 
     @Override
+    public String getInfo() {
+        return info;
+    }
+
+    @Override
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    @Override
+    public String getType() {
+        return type.name();
     }
 
     @Override

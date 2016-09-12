@@ -5,9 +5,9 @@ public interface Avatar {
 
     Long getId();
 
-    byte[] getBytea();
-
     void setId(Long id);
+
+    byte[] getBytea();
 
     void setBytea(byte[] bytea);
 }
