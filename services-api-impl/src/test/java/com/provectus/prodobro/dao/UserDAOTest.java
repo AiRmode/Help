@@ -1,20 +1,10 @@
 package com.provectus.prodobro.dao;
 
-import com.provectus.prodobro.actor.company.Company;
-import com.provectus.prodobro.actor.company.CompanyImpl;
-import com.provectus.prodobro.actor.company.CompanyStatus;
-import com.provectus.prodobro.actor.event.Event;
-import com.provectus.prodobro.actor.shelter.Shelter;
-import com.provectus.prodobro.actor.shelter.Tag;
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.actor.user.UserImpl;
 import com.provectus.prodobro.actor.user.UserStatus;
-import com.provectus.prodobro.dao.actor.CompanyDAO;
-import com.provectus.prodobro.dao.actor.EventDAO;
-import com.provectus.prodobro.dao.actor.ShelterDAO;
 import com.provectus.prodobro.dao.actor.UserDAO;
 import com.provectus.prodobro.shared.status.Status;
-import com.provectus.prodobro.shared.status.StatusEnum;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,35 +21,15 @@ import java.util.List;
 
 @ContextConfiguration(locations = "classpath:applicationContext-services.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
-public class TestDAO {
+public class UserDAOTest {
 
     @Autowired
     private UserDAO userDAO;
-    @Autowired
-    private CompanyDAO companyDAO;
-    @Autowired
-    private ShelterDAO shelterDAO;
-    @Autowired
-    private EventDAO eventDAO;
-    @Autowired
-    private TagDAO tagDAO;
 
     private User user;
-    private Company company;
-    private Shelter shelter;
-    private Event event;
-    private Tag tag;
 
     @Before
-    public void setUpTestData() {
-        initUser();
-        initCompany();
-        initShelter();
-        initEvent();
-        initTag();
-    }
-
-    private void initUser() {
+    public void setUpData() {
         user = new UserImpl();
         user.setName("User");
         user.setEmail("Email");
@@ -75,87 +45,17 @@ public class TestDAO {
         user.setLastModifiedDate(timestamp);
     }
 
-    private void initCompany() {
-        company = new CompanyImpl();
-        company.setTitle("Provectus");
-
-        Status status = new CompanyStatus();
-        status.setStatus("ACTIVE");
-        company.setStatus(status);
-
-        company.setCreatedBy(user);
-        company.setLastModifiedBy(user);
-
-        Timestamp timestamp = new Timestamp(new Date().getTime());
-        company.setCreatedDate(timestamp);
-        company.setLastModifiedDate(timestamp);
-    }
-
-    private void initShelter() {
-    }
-
-    private void initEvent() {
-    }
-
-    private void initTag() {
-    }
-
     @Test
     @Transactional
     @Rollback
-    public void allDAOTest() {
+    public void userDAOTest() {
         userDAO.save(user);
-
         getUserByIdTest();
         getAllUsersTest();
         getUsersByNameTest();
         getUsersByStatusTest();
         getUserByPhoneNumberTest();
         getUserByEmailTest();
-
-        companyDAO.save(company);
-        getCompanyById();
-        getAllCompanies();
-        getCompanyByTitle();
-        getCompaniesByStatus();
-    }
-
-    private void getCompaniesByStatus() {
-        List<Company> companies = companyDAO.getByStatus(StatusEnum.ACTIVE);
-
-        Assert.assertEquals(1, companies.size());
-        Assert.assertEquals(company.getTitle(), companies.get(0).getTitle());
-        Assert.assertEquals(company.getId(), companies.get(0).getId());
-        Assert.assertEquals(company.getCreatedBy(), companies.get(0).getCreatedBy());
-        Assert.assertEquals(company.getCreatedDate(), companies.get(0).getCreatedDate());
-    }
-
-    private void getCompanyByTitle() {
-        Company companyFromDB = companyDAO.getByTitle(company.getTitle());
-
-        Assert.assertEquals(company.getId(), companyFromDB.getId());
-        Assert.assertEquals(company.getStatus(), companyFromDB.getStatus());
-        Assert.assertEquals(company.getCreatedBy(), companyFromDB.getCreatedBy());
-        Assert.assertEquals(company.getCreatedDate(), companyFromDB.getCreatedDate());
-    }
-
-    private void getAllCompanies() {
-        List<Company> companies = companyDAO.getAll();
-
-        Assert.assertEquals(1, companies.size());
-        Assert.assertEquals(company.getTitle(), companies.get(0).getTitle());
-        Assert.assertEquals(company.getId(), companies.get(0).getId());
-        Assert.assertEquals(company.getCreatedBy(), companies.get(0).getCreatedBy());
-        Assert.assertEquals(company.getCreatedDate(), companies.get(0).getCreatedDate());
-    }
-
-    private void getCompanyById() {
-        Company companyFromDB = companyDAO.getById(company.getId());
-
-        Assert.assertEquals(company.getTitle(), companyFromDB.getTitle());
-        Assert.assertEquals(company.getStatus(), companyFromDB.getStatus());
-        Assert.assertEquals(company.getCreatedBy(), companyFromDB.getCreatedBy());
-        Assert.assertEquals(company.getCreatedDate(), companyFromDB.getCreatedDate());
     }
 
     private void getUserByIdTest() {
