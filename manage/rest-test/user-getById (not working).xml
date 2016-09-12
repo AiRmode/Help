@@ -1,0 +1,52 @@
+<RestClientRequest>
+  <option name="biscuits">
+    <list>
+      <Biscuit>
+        <option name="date" value="1483239427623" />
+        <option name="domain" value="localhost" />
+        <option name="name" value="first" />
+        <option name="path" value="/" />
+        <option name="value" value="qiyetduwfvdibgfo8541kj" />
+      </Biscuit>
+      <Biscuit>
+        <option name="date" value="1483239461547" />
+        <option name="domain" value="localhost" />
+        <option name="name" value="abc" />
+        <option name="path" value="/" />
+        <option name="value" value="thatCookie123" />
+      </Biscuit>
+      <Biscuit>
+        <option name="date" value="-1" />
+        <option name="domain" value="localhost" />
+        <option name="name" value="myAddition" />
+        <option name="path" value="/proDobro/user/getByToken" />
+        <option name="value" value="123456789" />
+      </Biscuit>
+    </list>
+  </option>
+  <option name="httpMethod" value="GET" />
+  <option name="urlBase" value="http://localhost:8080" />
+  <option name="urlPath" value="/proDobro/user/getById/" />
+  <option name="headers">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="Accept" />
+        <option name="value" value="application/json" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parameters">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="id" />
+        <option name="value" value="2" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parametersEnabled" value="true" />
+  <option name="haveTextToSend" value="false" />
+  <option name="haveFileToSend" value="false" />
+  <option name="isFileUpload" value="false" />
+  <option name="textToSend" value="{   &quot;name&quot;: &quot;Petya&quot;,   &quot;email&quot;: &quot;qefaghdtjykuilkj&quot;,   &quot;passHash&quot;: &quot;tdukfyikdhdnfs642452t&quot;,   &quot;phoneNumber&quot;: &quot;+436234368689595867&quot; } " />
+  <option name="filesToSend" value="" />
+</RestClientRequest>

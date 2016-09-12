@@ -40,7 +40,7 @@ CREATE TABLE schema_name."user" (
   phone_num           VARCHAR(20)  NOT NULL,
   status_id           INTEGER      NOT NULL,
   avatar_id           INTEGER,
-  is_superuser        BOOLEAN      NOT NULL,
+  is_superuser        BOOLEAN      NOT NULL,  --default FALSE
   locale_lang         VARCHAR(20) DEFAULT 'ru',
   created_date        TIMESTAMP    NOT NULL,
   created_by_id       INTEGER,
