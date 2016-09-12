@@ -6,6 +6,11 @@ import java.util.List;
 
 public interface GenericService<T, PK extends Serializable> {
 
+	/**
+     * Saved instance will receive actual id from DB
+     *
+     * @param object to save
+     */
     void save(T object);
 
     T getById(PK id);
