@@ -1,5 +1,7 @@
 package com.provectus.prodobro.auth;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
@@ -8,13 +10,17 @@ import java.util.Arrays;
 import java.util.Optional;
 
 @Service("authChecker")
+@PropertySource("classpath:auth.properties")
 public class AuthCheckerImpl implements AuthChecker {
-	private final String cookieName;
+	@Value("${auth.cookieName}")
+	private String cookieName;
 
-	public AuthCheckerImpl(String cookieName) {
+	public void setCookieName(String cookieName) {
 		this.cookieName = cookieName;
 	}
 
+	public AuthCheckerImpl() {
+	}
 
 	@Override
 	public boolean isAllow(HttpServletRequest req) {

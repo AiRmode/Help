@@ -91,7 +91,7 @@ public class UserController {
 	 *
 	 * @param perspective - expect JSON in Body like below
 	 *                    {
-	 *                    "name": "Firstname Lastnamovich(-vna)",
+	 *                    "name": "Firstname Lastnamovich",
 	 *                    "email": "abc@mail.com",
 	 *                    "passHash": "rg5a65rg5ae5",
 	 *                    "phoneNumber": "+380(97)777-77-77"

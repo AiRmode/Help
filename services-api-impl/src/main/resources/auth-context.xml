@@ -12,8 +12,6 @@
 	   http://www.springframework.org/schema/context/spring-context.xsd
 	   ">
 
-	<context:property-placeholder location="classpath:auth.properties" />
-	<bean id="authChecker" class="com.provectus.prodobro.auth.AuthCheckerImpl"
-		  c:cookieName="${auth.cookieName}" />
+	<context:component-scan base-package="com.provectus.prodobro"/>
 
 </beans>
