@@ -26,13 +26,13 @@ public class ShelterStatus implements Status {
     }
 
     @Override
-    public String getStatus() {
-        return status.name();
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
-    public void setId(Long id) {
-        this.id = id;
+    public String getStatus() {
+        return status.name();
     }
 
     @Override

@@ -5,9 +5,9 @@ public interface Status {
 
     Long getId();
 
-    String getStatus();
-
     void setId(Long id);
+
+    String getStatus();
 
     void setStatus(String status);
 }

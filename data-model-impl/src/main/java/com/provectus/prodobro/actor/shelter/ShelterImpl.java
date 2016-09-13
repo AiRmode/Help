@@ -72,7 +72,6 @@ public class ShelterImpl implements Shelter {
     private Event event;
 
     @ManyToMany(
-            cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
             targetEntity = TagImpl.class
     )
@@ -92,68 +91,13 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
-    public Optional<Avatar> getAvatar() {
-        return Optional.ofNullable(avatar);
-    }
-
-    @Override
-    public Set<Info> getInfo() {
-        return info;
-    }
-
-    @Override
-    public Status getStatus() {
-        return status;
-    }
-
-    @Override
-    public Timestamp getCreatedDate() {
-        return createdDate;
-    }
-
-    @Override
-    public User getCreatedBy() {
-        return createdBy;
-    }
-
-    @Override
-    public Timestamp getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    @Override
-    public User getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    @Override
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public Optional<String> getDescription() {
-        return Optional.ofNullable(description);
-    }
-
-    @Override
-    public ShelterType getType() {
-        return type;
-    }
-
-    @Override
-    public Optional<Event> getEvent() {
-        return Optional.ofNullable(event);
-    }
-
-    @Override
-    public Set<Tag> getTags() {
-        return tags;
-    }
-
-    @Override
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public Optional<Avatar> getAvatar() {
+        return Optional.ofNullable(avatar);
     }
 
     @Override
@@ -162,8 +106,18 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
+    public Set<Info> getInfo() {
+        return info;
+    }
+
+    @Override
     public void setInfo(Set<Info> info) {
         this.info = info;
+    }
+
+    @Override
+    public Status getStatus() {
+        return status;
     }
 
     @Override
@@ -172,8 +126,18 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
+    public Timestamp getCreatedDate() {
+        return createdDate;
+    }
+
+    @Override
     public void setCreatedDate(Timestamp createdDate) {
         this.createdDate = createdDate;
+    }
+
+    @Override
+    public User getCreatedBy() {
+        return createdBy;
     }
 
     @Override
@@ -182,8 +146,18 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
+    public Timestamp getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    @Override
     public void setLastModifiedDate(Timestamp lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
+    }
+
+    @Override
+    public User getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
     @Override
@@ -192,8 +166,18 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public Optional<String> getDescription() {
+        return Optional.ofNullable(description);
     }
 
     @Override
@@ -202,13 +186,28 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
+    public ShelterType getType() {
+        return type;
+    }
+
+    @Override
     public void setType(ShelterType type) {
         this.type = type;
     }
 
     @Override
+    public Optional<Event> getEvent() {
+        return Optional.ofNullable(event);
+    }
+
+    @Override
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    @Override
+    public Set<Tag> getTags() {
+        return tags;
     }
 
     @Override
@@ -227,14 +226,10 @@ public class ShelterImpl implements Shelter {
         if (!info.equals(shelter.info)) return false;
         if (!status.equals(shelter.status)) return false;
         if (!createdDate.equals(shelter.createdDate)) return false;
-        if (!createdBy.equals(shelter.createdBy)) return false;
         if (!lastModifiedDate.equals(shelter.lastModifiedDate)) return false;
-        if (!lastModifiedBy.equals(shelter.lastModifiedBy)) return false;
         if (!title.equals(shelter.title)) return false;
         if (description != null ? !description.equals(shelter.description) : shelter.description != null) return false;
-        if (!type.equals(shelter.type)) return false;
-        if (event != null ? !event.equals(shelter.event) : shelter.event != null) return false;
-        return tags.equals(shelter.tags);
+        return type.equals(shelter.type);
 
     }
 
@@ -244,14 +239,10 @@ public class ShelterImpl implements Shelter {
         result = 31 * result + info.hashCode();
         result = 31 * result + status.hashCode();
         result = 31 * result + createdDate.hashCode();
-        result = 31 * result + createdBy.hashCode();
         result = 31 * result + lastModifiedDate.hashCode();
-        result = 31 * result + lastModifiedBy.hashCode();
         result = 31 * result + title.hashCode();
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + type.hashCode();
-        result = 31 * result + (event != null ? event.hashCode() : 0);
-        result = 31 * result + tags.hashCode();
         return result;
     }
 }

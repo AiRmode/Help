@@ -16,7 +16,11 @@ public interface User {
 
     Long getId();
 
+    void setId(Long id);
+
     Optional<Avatar> getAvatar();
+
+    void setAvatar(Avatar avatar);
 
     /**
      * Information: Photos, Emails, Websites, etc.
@@ -25,76 +29,72 @@ public interface User {
      */
     Set<Info> getInfo();
 
+    void setInfo(Set<Info> info);
+
     Status getStatus();
+
+    void setStatus(Status status);
 
     Timestamp getCreatedDate();
 
+    void setCreatedDate(Timestamp createdDate);
+
     User getCreatedBy();
+
+    void setCreatedBy(User createdBy);
 
     Timestamp getLastModifiedDate();
 
+    void setLastModifiedDate(Timestamp lastModifiedDate);
+
     User getLastModifiedBy();
+
+    void setLastModifiedBy(User lastModifiedBy);
 
     String getName();
 
+    void setName(String name);
+
     String getEmail();
+
+    void setEmail(String email);
 
     String getPassHash();
 
+    void setPassHash(String passHash);
+
     String getPhoneNumber();
 
+    void setPhoneNumber(String phoneNumber);
+
     boolean isSuperUser();
+
+    void setSuperUser(boolean isSuperUser);
 
     /**
      * @return User`s locale
      */
     Locale getLanguage();
 
+    void setLanguage(Locale language);
+
     /**
      * @return {@link Optional<EmployeeRelation>} user`s company
      */
     Optional<EmployeeRelation> getEmployeeRelation();
+
+    void setEmployeeRelation(EmployeeRelation employeeRelation);
 
     /**
      * @return {@link Set<Event>} of events, where {@link User} is assigned
      */
     Set<Event> getAssignedEvents();
 
+    void setAssignedEvents(Set<Event> assignedEvents);
+
     /**
      * @return {@link Set<Event>} of events, {@link User} has created
      */
     Set<Event> getCreatedEvents();
-
-    void setId(Long id);
-
-    void setAvatar(Avatar avatar);
-
-    void setInfo(Set<Info> info);
-
-    void setStatus(Status status);
-
-    void setCreatedDate(Timestamp createdDate);
-
-    void setCreatedBy(User createdBy);
-
-    void setLastModifiedDate(Timestamp lastModifiedDate);
-
-    void setLastModifiedBy(User lastModifiedBy);
-
-    void setName(String name);
-
-    void setEmail(String email);
-
-    void setPassHash(String passHash);
-
-    void setPhoneNumber(String phoneNumber);
-
-    void setSuperUser(boolean isSuperUser);
-
-    void setLanguage(Locale language);
-
-    void setEmployeeRelation(EmployeeRelation employeeRelation);
-
-    void setAssignedEvents(Set<Event> assignedEvents);
 
 }

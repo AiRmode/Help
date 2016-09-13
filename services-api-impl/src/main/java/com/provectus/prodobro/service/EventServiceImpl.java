@@ -4,7 +4,6 @@ package com.provectus.prodobro.service;
 import com.provectus.prodobro.actor.event.Event;
 import com.provectus.prodobro.dao.actor.EventDAO;
 import com.provectus.prodobro.service.actor.EventService;
-import com.provectus.prodobro.shared.status.StatusEnum;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 
@@ -50,16 +49,6 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<Event> getByDate(Timestamp date) {
         return eventDAO.getByDate(date);
-    }
-
-    @Override
-    public List<Event> getByStatus(StatusEnum status) {
-        return eventDAO.getByStatus(status);
-    }
-
-    @Override
-    public List<Event> getByStatus(String status) {
-        return eventDAO.getByStatus(status);
     }
 
     @Override

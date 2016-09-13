@@ -105,8 +105,18 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
     public Optional<Avatar> getAvatar() {
         return Optional.ofNullable(avatar);
+    }
+
+    @Override
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
     }
 
     @Override
@@ -115,8 +125,18 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setInfo(Set<Info> info) {
+        this.info = info;
+    }
+
+    @Override
     public Status getStatus() {
         return status;
+    }
+
+    @Override
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override
@@ -125,8 +145,18 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    @Override
     public User getCreatedBy() {
         return createdBy;
+    }
+
+    @Override
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
     }
 
     @Override
@@ -135,8 +165,18 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setLastModifiedDate(Timestamp lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
+    @Override
     public User getLastModifiedBy() {
         return lastModifiedBy;
+    }
+
+    @Override
+    public void setLastModifiedBy(User lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     @Override
@@ -145,8 +185,18 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -155,8 +205,18 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setPassHash(String passHash) {
+        this.passHash = passHash;
+    }
+
+    @Override
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    @Override
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     @Override
@@ -165,8 +225,18 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setSuperUser(boolean isSuperUser) {
+        this.isSuperUser = isSuperUser;
+    }
+
+    @Override
     public Locale getLanguage() {
         return language;
+    }
+
+    @Override
+    public void setLanguage(Locale language) {
+        this.language = language;
     }
 
     @Override
@@ -175,8 +245,18 @@ public class UserImpl implements User {
     }
 
     @Override
+    public void setEmployeeRelation(EmployeeRelation employeeRelation) {
+        this.employeeRelation = employeeRelation;
+    }
+
+    @Override
     public Set<Event> getAssignedEvents() {
         return assignedEvents;
+    }
+
+    @Override
+    public void setAssignedEvents(Set<Event> assignedEvents) {
+        this.assignedEvents = assignedEvents;
     }
 
     @Override
@@ -189,91 +269,39 @@ public class UserImpl implements User {
     }
 
     @Override
-    public void setId(Long id) {
-        this.id = id;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserImpl)) return false;
+
+        UserImpl user = (UserImpl) o;
+
+        if (isSuperUser != user.isSuperUser) return false;
+        if (avatar != null ? !avatar.equals(user.avatar) : user.avatar != null) return false;
+        if (!info.equals(user.info)) return false;
+        if (!status.equals(user.status)) return false;
+        if (!createdDate.equals(user.createdDate)) return false;
+        if (!lastModifiedDate.equals(user.lastModifiedDate)) return false;
+        if (!name.equals(user.name)) return false;
+        if (!email.equals(user.email)) return false;
+        if (!passHash.equals(user.passHash)) return false;
+        if (!phoneNumber.equals(user.phoneNumber)) return false;
+        return language != null ? language.equals(user.language) : user.language == null;
+
     }
 
     @Override
-    public void setAvatar(Avatar avatar) {
-        this.avatar = avatar;
-    }
-
-    @Override
-    public void setInfo(Set<Info> info) {
-        this.info = info;
-    }
-
-    @Override
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    @Override
-    public void setCreatedDate(Timestamp createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    @Override
-    public void setCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    @Override
-    public void setLastModifiedDate(Timestamp lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
-
-    @Override
-    public void setLastModifiedBy(User lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public void setPassHash(String passHash) {
-        this.passHash = passHash;
-    }
-
-    @Override
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    @Override
-    public void setSuperUser(boolean isSuperUser) {
-        this.isSuperUser = isSuperUser;
-    }
-
-    @Override
-    public void setLanguage(Locale language) {
-        this.language = language;
-    }
-
-    @Override
-    public void setEmployeeRelation(EmployeeRelation employeeRelation) {
-        this.employeeRelation = employeeRelation;
-    }
-
-    @Override
-    public void setAssignedEvents(Set<Event> assignedEvents) {
-        this.assignedEvents = assignedEvents;
-    }
-
-    @Override
-    public String toString() {
-        return "UserImpl{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public int hashCode() {
+        int result = avatar != null ? avatar.hashCode() : 0;
+        result = 31 * result + info.hashCode();
+        result = 31 * result + status.hashCode();
+        result = 31 * result + createdDate.hashCode();
+        result = 31 * result + lastModifiedDate.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + passHash.hashCode();
+        result = 31 * result + phoneNumber.hashCode();
+        result = 31 * result + (isSuperUser ? 1 : 0);
+        result = 31 * result + (language != null ? language.hashCode() : 0);
+        return result;
     }
 }

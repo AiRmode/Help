@@ -35,23 +35,13 @@ public class EventInfo implements Info<Event> {
     }
 
     @Override
-    public Event getOwner() {
-        return owner;
-    }
-
-    @Override
-    public String getType() {
-        return type.name();
-    }
-
-    @Override
-    public String getInfo() {
-        return info;
-    }
-
-    @Override
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public Event getOwner() {
+        return owner;
     }
 
     @Override
@@ -60,8 +50,18 @@ public class EventInfo implements Info<Event> {
     }
 
     @Override
+    public String getType() {
+        return type.name();
+    }
+
+    @Override
     public void setType(String type) {
         this.type = InfoTypeEnum.valueOf(type);
+    }
+
+    @Override
+    public String getInfo() {
+        return info;
     }
 
     @Override
@@ -76,7 +76,6 @@ public class EventInfo implements Info<Event> {
 
         EventInfo eventInfo = (EventInfo) o;
 
-        if (!owner.equals(eventInfo.owner)) return false;
         if (!info.equals(eventInfo.info)) return false;
         return type == eventInfo.type;
 
@@ -84,8 +83,7 @@ public class EventInfo implements Info<Event> {
 
     @Override
     public int hashCode() {
-        int result = owner.hashCode();
-        result = 31 * result + info.hashCode();
+        int result = info.hashCode();
         result = 31 * result + type.hashCode();
         return result;
     }

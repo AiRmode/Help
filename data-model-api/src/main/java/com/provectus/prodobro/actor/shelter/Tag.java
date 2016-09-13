@@ -8,13 +8,13 @@ public interface Tag {
 
     Long getId();
 
-    String getTitle();
-
-    Set<Shelter> getShelters();
-
     void setId(Long id);
 
+    String getTitle();
+
     void setTitle(String title);
+
+    Set<Shelter> getShelters();
 
     void setShelters(Set<Shelter> shelters);
 }

@@ -19,31 +19,31 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/shelter")
 public class ShelterController {
-	private ShelterService shelterService;
-	private AuthChecker authChecker;
+    private ShelterService shelterService;
+    private AuthChecker authChecker;
 
-	@Required
-	@Autowired
-	public void setUserService(ShelterService shelterService) {
-		this.shelterService = shelterService;
-	}
+    @Required
+    @Autowired
+    public void setUserService(ShelterService shelterService) {
+        this.shelterService = shelterService;
+    }
 
-	@Required
-	@Autowired
-	public void setAuthChecker(AuthChecker authChecker) {
-		this.authChecker = authChecker;
-	}
+    @Required
+    @Autowired
+    public void setAuthChecker(AuthChecker authChecker) {
+        this.authChecker = authChecker;
+    }
 
-	@RequestMapping(value = "/getById",
-			method = RequestMethod.GET,
-			produces = "application/json")
-	public ResponseEntity<Shelter> getUserById(HttpServletRequest req, @RequestParam Long id) {
-		Optional<Cookie> token = authChecker.getToken(req);
-		if (token.isPresent()) {
-			return new ResponseEntity<>(shelterService.getById(id), HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-	}
+    @RequestMapping(value = "/getById",
+            method = RequestMethod.GET,
+            produces = "application/json")
+    public ResponseEntity<Shelter> getUserById(HttpServletRequest req, @RequestParam Long id) {
+        Optional<Cookie> token = authChecker.getToken(req);
+        if (token.isPresent()) {
+            return new ResponseEntity<>(shelterService.getById(id), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    }
 
 
 }

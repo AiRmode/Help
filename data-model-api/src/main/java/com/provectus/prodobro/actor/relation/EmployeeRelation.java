@@ -8,17 +8,17 @@ public interface EmployeeRelation {
 
     Long getId();
 
-    User getUser();
-
-    Company getCompany();
-
-    boolean isAdmin();
-
     void setId(Long id);
+
+    User getUser();
 
     void setUser(User user);
 
+    Company getCompany();
+
     void setCompany(Company company);
+
+    boolean isAdmin();
 
     void setIsAdmin(boolean isAdmin);
 

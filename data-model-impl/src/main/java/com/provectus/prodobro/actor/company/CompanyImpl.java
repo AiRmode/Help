@@ -97,8 +97,18 @@ public class CompanyImpl implements Company {
     }
 
     @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
     public Optional<Avatar> getAvatar() {
         return Optional.ofNullable(avatar);
+    }
+
+    @Override
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
     }
 
     @Override
@@ -107,8 +117,18 @@ public class CompanyImpl implements Company {
     }
 
     @Override
+    public void setInfo(Set<Info> info) {
+        this.info = info;
+    }
+
+    @Override
     public Status getStatus() {
         return status;
+    }
+
+    @Override
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override
@@ -117,8 +137,18 @@ public class CompanyImpl implements Company {
     }
 
     @Override
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    @Override
     public User getCreatedBy() {
         return createdBy;
+    }
+
+    @Override
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
     }
 
     @Override
@@ -127,8 +157,18 @@ public class CompanyImpl implements Company {
     }
 
     @Override
+    public void setLastModifiedDate(Timestamp lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
+    @Override
     public User getLastModifiedBy() {
         return lastModifiedBy;
+    }
+
+    @Override
+    public void setLastModifiedBy(User lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     @Override
@@ -137,8 +177,18 @@ public class CompanyImpl implements Company {
     }
 
     @Override
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
     public Set<CompanyAlias> getAliases() {
         return aliases;
+    }
+
+    @Override
+    public void setAliases(Set<CompanyAlias> aliases) {
+        this.aliases = aliases;
     }
 
     @Override
@@ -152,8 +202,18 @@ public class CompanyImpl implements Company {
     }
 
     @Override
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
     public Set<EmployeeRelation> getEmployeeRelations() {
         return employeeRelations;
+    }
+
+    @Override
+    public void setEmployeeRelations(Set<EmployeeRelation> employeeRelations) {
+        this.employeeRelations = employeeRelations;
     }
 
     @Override
@@ -174,66 +234,6 @@ public class CompanyImpl implements Company {
     @Override
     public Set<Event> getAssignedEvents() {
         return assignedEvents;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public void setAvatar(Avatar avatar) {
-        this.avatar = avatar;
-    }
-
-    @Override
-    public void setInfo(Set<Info> info) {
-        this.info = info;
-    }
-
-    @Override
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    @Override
-    public void setCreatedDate(Timestamp createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    @Override
-    public void setCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    @Override
-    public void setLastModifiedDate(Timestamp lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
-
-    @Override
-    public void setLastModifiedBy(User lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    @Override
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Override
-    public void setAliases(Set<CompanyAlias> aliases) {
-        this.aliases = aliases;
-    }
-
-    @Override
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public void setEmployeeRelations(Set<EmployeeRelation> employeeRelations) {
-        this.employeeRelations = employeeRelations;
     }
 
     @Override

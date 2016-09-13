@@ -5,13 +5,13 @@ public interface CompanyAlias {
 
     Long getId();
 
-    String getAlias();
-
-    Company getCompany();
-
     void setId(Long id);
 
+    String getAlias();
+
     void setAlias(String alias);
+
+    Company getCompany();
 
     void setCompany(Company company);
 }

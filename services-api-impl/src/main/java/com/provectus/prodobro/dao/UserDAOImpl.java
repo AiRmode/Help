@@ -84,7 +84,7 @@ public class UserDAOImpl implements UserDAO {
     public User getByPhoneNumber(String phoneNumber) {
         return (User) sessionFactory
                 .getCurrentSession()
-                .createQuery("from UserImpl o where o.phone_num=:phone")
+                .createQuery("from UserImpl where phone_num=:phone")
                 .setParameter("phone", phoneNumber)
                 .uniqueResult();
     }
@@ -96,6 +96,17 @@ public class UserDAOImpl implements UserDAO {
                 .getCurrentSession()
                 .createQuery("from UserImpl where email=:email")
                 .setParameter("email", email)
+                .uniqueResult();
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public User getByLoginAndPassword(String login, String password) {
+        return (User) sessionFactory
+                .getCurrentSession()
+                .createQuery("from UserImpl where pass_hash=:pass and (email=:login or phone_num=:login)")
+                .setParameter("pass", password)
+                .setParameter("login", login)
                 .uniqueResult();
     }
 

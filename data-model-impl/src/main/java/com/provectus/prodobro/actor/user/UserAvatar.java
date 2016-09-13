@@ -24,13 +24,13 @@ public class UserAvatar implements Avatar {
     }
 
     @Override
-    public byte[] getBytea() {
-        return bytea;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
-    public void setId(Long id) {
-        this.id = id;
+    public byte[] getBytea() {
+        return bytea;
     }
 
     @Override

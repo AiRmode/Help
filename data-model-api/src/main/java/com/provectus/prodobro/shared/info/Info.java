@@ -5,17 +5,17 @@ public interface Info<T> {
 
     Long getId();
 
-    T getOwner();
-
-    String getInfo();
-
-    String getType();
-
     void setId(Long id);
+
+    T getOwner();
 
     void setOwner(T owner);
 
+    String getInfo();
+
     void setInfo(String info);
+
+    String getType();
 
     void setType(String type);
 

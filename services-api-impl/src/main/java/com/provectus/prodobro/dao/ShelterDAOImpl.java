@@ -46,7 +46,7 @@ public class ShelterDAOImpl implements ShelterDAO {
     public List<Shelter> getAll() {
         return sessionFactory
                 .getCurrentSession()
-                .createQuery("from UserInfo")
+                .createQuery("from ShelterImpl")
                 .list();
     }
 

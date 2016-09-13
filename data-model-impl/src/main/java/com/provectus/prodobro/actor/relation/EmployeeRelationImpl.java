@@ -37,23 +37,13 @@ public class EmployeeRelationImpl implements EmployeeRelation {
     }
 
     @Override
-    public User getUser() {
-        return user;
-    }
-
-    @Override
-    public Company getCompany() {
-        return company;
-    }
-
-    @Override
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    @Override
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public User getUser() {
+        return user;
     }
 
     @Override
@@ -62,8 +52,18 @@ public class EmployeeRelationImpl implements EmployeeRelation {
     }
 
     @Override
+    public Company getCompany() {
+        return company;
+    }
+
+    @Override
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    @Override
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
     @Override

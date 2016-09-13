@@ -80,9 +80,14 @@ public class UserServiceImpl implements UserService {
         return userDAO.getByEmail(email);
     }
 
+    @Override
+    public User getByLoginAndPassword(String login, String password) {
+        return userDAO.getByLoginAndPassword(login, password);
+    }
+
     @Required
     @Resource(name = "userDAO")
-    public void setUserDAO (UserDAO userDAO) {
+    public void setUserDAO(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
 }

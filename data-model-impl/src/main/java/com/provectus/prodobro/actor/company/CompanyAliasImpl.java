@@ -25,23 +25,23 @@ public class CompanyAliasImpl implements CompanyAlias {
     }
 
     @Override
-    public String getAlias() {
-        return alias;
-    }
-
-    @Override
-    public Company getCompany() {
-        return company;
-    }
-
-    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
     @Override
+    public String getAlias() {
+        return alias;
+    }
+
+    @Override
     public void setAlias(String alias) {
         this.alias = alias;
+    }
+
+    @Override
+    public Company getCompany() {
+        return company;
     }
 
     @Override

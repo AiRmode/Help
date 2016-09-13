@@ -2,8 +2,8 @@ package com.provectus.prodobro.dao;
 
 
 import com.provectus.prodobro.actor.event.Event;
+import com.provectus.prodobro.actor.event.EventImpl;
 import com.provectus.prodobro.dao.actor.EventDAO;
-import com.provectus.prodobro.shared.status.StatusEnum;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Repository;
@@ -28,7 +28,7 @@ public class EventDAOImpl implements EventDAO {
     @Transactional(readOnly = true)
     @Override
     public Event getById(Long id) {
-        return sessionFactory.getCurrentSession().get(Event.class, id);
+        return sessionFactory.getCurrentSession().get(EventImpl.class, id);
     }
 
     @Override
@@ -67,26 +67,6 @@ public class EventDAOImpl implements EventDAO {
                 .getCurrentSession()
                 .createQuery("from EventImpl o where o.date=:date")
                 .setParameter("date", date)
-                .list();
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<Event> getByStatus(String status) {
-        return sessionFactory
-                .getCurrentSession()
-                .createQuery("select c from EventImpl c inner join c.status where c.status.status=:status")
-                .setParameter("status", StatusEnum.valueOf(status))
-                .list();
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<Event> getByStatus(StatusEnum status) {
-        return sessionFactory
-                .getCurrentSession()
-                .createQuery("select c from EventImpl c inner join c.status where c.status.status=:status")
-                .setParameter("status", status)
                 .list();
     }
 
