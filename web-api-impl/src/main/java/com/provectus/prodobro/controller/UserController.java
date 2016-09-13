@@ -100,7 +100,7 @@ public class UserController {
             produces = "application/json")
     public ResponseEntity<User> createUser(@RequestBody UserImplWrapper wrapper) {
         User user = wrapper.getNewlyCreatedUser();
-		/*Long id = */
+        /*Long id = */
         userService.save(user);    //TODO: save() should return Long (id)(необязательно, id сетается)
 //		user.setId(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
