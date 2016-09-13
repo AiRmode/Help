@@ -22,4 +22,5 @@ public interface UserService extends GenericService<User, Long> {
 
     User getByEmail(String email);
 
+    User getByLoginAndPassword(String login, String password);
 }

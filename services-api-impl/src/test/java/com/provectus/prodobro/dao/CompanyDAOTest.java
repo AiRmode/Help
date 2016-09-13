@@ -48,13 +48,13 @@ public class CompanyDAOTest {
     @Rollback
     public void companyDAOTest() {
         companyDAO.save(company);
-        getCompanyByIdTest();
-        getAllCompaniesTest();
-        getCompanyByTitleTest();
-        getCompaniesByStatusTest();
+        getByIdTest();
+        getAllTest();
+        getByTitleTest();
+        getByStatusTest();
     }
 
-    private void getCompaniesByStatusTest() {
+    private void getByStatusTest() {
         List<Company> companies = companyDAO.getByStatus(StatusEnum.ACTIVE);
 
         Assert.assertEquals(1, companies.size());
@@ -64,7 +64,7 @@ public class CompanyDAOTest {
         Assert.assertEquals(company.getCreatedDate(), companies.get(0).getCreatedDate());
     }
 
-    private void getCompanyByTitleTest() {
+    private void getByTitleTest() {
         Company companyFromDB = companyDAO.getByTitle(company.getTitle());
 
         Assert.assertEquals(company.getId(), companyFromDB.getId());
@@ -73,7 +73,7 @@ public class CompanyDAOTest {
         Assert.assertEquals(company.getCreatedDate(), companyFromDB.getCreatedDate());
     }
 
-    private void getAllCompaniesTest() {
+    private void getAllTest() {
         List<Company> companies = companyDAO.getAll();
 
         Assert.assertEquals(1, companies.size());
@@ -83,7 +83,7 @@ public class CompanyDAOTest {
         Assert.assertEquals(company.getCreatedDate(), companies.get(0).getCreatedDate());
     }
 
-    private void getCompanyByIdTest() {
+    private void getByIdTest() {
         Company companyFromDB = companyDAO.getById(company.getId());
 
         Assert.assertEquals(company.getTitle(), companyFromDB.getTitle());

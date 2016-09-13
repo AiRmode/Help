@@ -18,4 +18,6 @@ public interface UserDAO extends GenericDAO<User, Long> {
     User getByPhoneNumber(String phoneNumber);
 
     User getByEmail(String email);
+
+    User getByLoginAndPassword(String login, String password);
 }

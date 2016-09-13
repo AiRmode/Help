@@ -50,15 +50,16 @@ public class UserDAOTest {
     @Rollback
     public void userDAOTest() {
         userDAO.save(user);
-        getUserByIdTest();
-        getAllUsersTest();
-        getUsersByNameTest();
-        getUsersByStatusTest();
-        getUserByPhoneNumberTest();
-        getUserByEmailTest();
+        getByIdTest();
+        getAllTest();
+        getByNameTest();
+        getByStatusTest();
+        getByPhoneNumberTest();
+        getByEmailTest();
+        getByLoginAndPasswordTest();
     }
 
-    private void getUserByIdTest() {
+    private void getByIdTest() {
         User userFromDB = userDAO.getById(user.getId());
 
         Assert.assertEquals(user.getName(), userFromDB.getName());
@@ -66,7 +67,7 @@ public class UserDAOTest {
         Assert.assertEquals(user.getPhoneNumber(), userFromDB.getPhoneNumber());
     }
 
-    private void getAllUsersTest() {
+    private void getAllTest() {
         List<User> users = userDAO.getAll();
 
         Assert.assertEquals(1, users.size());
@@ -76,7 +77,7 @@ public class UserDAOTest {
         Assert.assertEquals(user.getPhoneNumber(), users.get(0).getPhoneNumber());
     }
 
-    private void getUsersByNameTest() {
+    private void getByNameTest() {
         List<User> users = userDAO.getByName(user.getName());
 
         Assert.assertEquals(1, users.size());
@@ -85,7 +86,7 @@ public class UserDAOTest {
         Assert.assertEquals(user.getPhoneNumber(), users.get(0).getPhoneNumber());
     }
 
-    private void getUsersByStatusTest() {
+    private void getByStatusTest() {
         List<User> users = userDAO.getByStatus(user.getStatus().getStatus());
 
         Assert.assertEquals(1, users.size());
@@ -95,7 +96,7 @@ public class UserDAOTest {
         Assert.assertEquals(user.getPhoneNumber(), users.get(0).getPhoneNumber());
     }
 
-    private void getUserByPhoneNumberTest() {
+    private void getByPhoneNumberTest() {
         User userFromDB = userDAO.getByPhoneNumber(user.getPhoneNumber());
 
         Assert.assertEquals(user.getId(), userFromDB.getId());
@@ -103,11 +104,21 @@ public class UserDAOTest {
         Assert.assertEquals(user.getEmail(), userFromDB.getEmail());
     }
 
-    private void getUserByEmailTest() {
+    private void getByEmailTest() {
         User userFromDB = userDAO.getByEmail(user.getEmail());
 
         Assert.assertEquals(user.getId(), userFromDB.getId());
         Assert.assertEquals(user.getName(), userFromDB.getName());
         Assert.assertEquals(user.getPhoneNumber(), userFromDB.getPhoneNumber());
+    }
+
+    private void getByLoginAndPasswordTest() {
+        User userByEmail = userDAO.getByLoginAndPassword(user.getEmail(), user.getPassHash());
+        User userByPhoneNum = userDAO.getByLoginAndPassword(user.getPhoneNumber(), user.getPassHash());
+
+        Assert.assertEquals(userByEmail.getEmail(), userByPhoneNum.getEmail());
+        Assert.assertEquals(userByEmail.getName(), userByPhoneNum.getName());
+        Assert.assertEquals(userByEmail.getPhoneNumber(), userByPhoneNum.getPhoneNumber());
+        Assert.assertEquals(userByEmail.getId(), userByPhoneNum.getId());
     }
 }

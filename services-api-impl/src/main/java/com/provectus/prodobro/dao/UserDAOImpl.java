@@ -99,6 +99,17 @@ public class UserDAOImpl implements UserDAO {
                 .uniqueResult();
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public User getByLoginAndPassword(String login, String password) {
+        return (User) sessionFactory
+                .getCurrentSession()
+                .createQuery("from UserImpl where pass_hash=:pass and (email=:login or phone_num=:login)")
+                .setParameter("pass", password)
+                .setParameter("login", login)
+                .uniqueResult();
+    }
+
     @Resource(name = "sessionFactory")
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;

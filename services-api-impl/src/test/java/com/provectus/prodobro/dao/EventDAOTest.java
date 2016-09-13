@@ -70,15 +70,15 @@ public class EventDAOTest {
     public void eventDAOTest() {
         shelterDAO.save(shelter);
         eventDAO.save(event);
-        getEventByIdTest();
-        getAllEventsTest();
-        getEventByTitleTest();
-        getEventsByDateTest();
-        getAccessibleEvents();
-        getPrivateEvents();
+        getByIdTest();
+        getAllTest();
+        getByTitleTest();
+        getByDateTest();
+        getAccessibleTest();
+        getPrivateTest();
     }
 
-    private void getEventByIdTest() {
+    private void getByIdTest() {
         Event eventFromDB = eventDAO.getById(event.getId());
 
         Assert.assertEquals(event.getTitle(), eventFromDB.getTitle());
@@ -86,7 +86,7 @@ public class EventDAOTest {
         Assert.assertEquals(event.getShelter(), eventFromDB.getShelter());
     }
 
-    private void getAllEventsTest() {
+    private void getAllTest() {
         List<Event> events = eventDAO.getAll();
 
         Assert.assertEquals(1, events.size());
@@ -96,7 +96,7 @@ public class EventDAOTest {
         Assert.assertEquals(event.getShelter(), events.get(0).getShelter());
     }
 
-    private void getEventByTitleTest() {
+    private void getByTitleTest() {
         Event eventFromDB = eventDAO.getByTitle(event.getTitle());
 
         Assert.assertEquals(event.getId(), eventFromDB.getId());
@@ -104,7 +104,7 @@ public class EventDAOTest {
         Assert.assertEquals(event.getShelter(), eventFromDB.getShelter());
     }
 
-    private void getEventsByDateTest() {
+    private void getByDateTest() {
         List<Event> events = eventDAO.getByDate(event.getDate());
 
         Assert.assertEquals(1, events.size());
@@ -114,7 +114,7 @@ public class EventDAOTest {
         Assert.assertEquals(event.getShelter(), events.get(0).getShelter());
     }
 
-    private void getAccessibleEvents() {
+    private void getAccessibleTest() {
         List<Event> events = eventDAO.getAccessible();
 
         Assert.assertEquals(1, events.size());
@@ -124,7 +124,7 @@ public class EventDAOTest {
         Assert.assertEquals(event.getShelter(), events.get(0).getShelter());
     }
 
-    private void getPrivateEvents() {
+    private void getPrivateTest() {
         event.setAccessible(false);
         eventDAO.save(event);
 

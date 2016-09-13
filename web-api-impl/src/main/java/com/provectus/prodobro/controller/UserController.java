@@ -114,7 +114,7 @@ public class UserController {
         private String phoneNumber;
 
 /*
-		public UserImplWrapper(String name, String email,
+        public UserImplWrapper(String name, String email,
 							   String passHash, String phoneNumber) {
 			this.name = name;
 			this.email = email;

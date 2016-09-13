@@ -52,14 +52,14 @@ public class ShelterDAOTest {
     @Rollback
     public void shelterDAOTest() {
         shelterDAO.save(shelter);
-        getShelterByIdTest();
-        getAllSheltersTest();
-        getShelterByTitleTest();
-        getSheltersByStatusTest();
-        getSheltersByTypeTest();
+        getByIdTest();
+        getAllTest();
+        getByTitleTest();
+        getByStatusTest();
+        getByTypeTest();
     }
 
-    private void getSheltersByTypeTest() {
+    private void getByTypeTest() {
         List<Shelter> shelters = shelterDAO.getByType(shelter.getType().getType());
 
         Assert.assertEquals(1, shelters.size());
@@ -68,7 +68,7 @@ public class ShelterDAOTest {
         Assert.assertEquals(shelter.getCreatedDate(), shelters.get(0).getCreatedDate());
     }
 
-    private void getSheltersByStatusTest() {
+    private void getByStatusTest() {
         List<Shelter> shelters = shelterDAO.getByStatus(shelter.getStatus().getStatus());
 
         Assert.assertEquals(1, shelters.size());
@@ -78,7 +78,7 @@ public class ShelterDAOTest {
         Assert.assertEquals(shelter.getCreatedDate(), shelters.get(0).getCreatedDate());
     }
 
-    private void getShelterByTitleTest() {
+    private void getByTitleTest() {
         Shelter shelterFromDB = shelterDAO.getByTitle(shelter.getTitle());
 
         Assert.assertEquals(shelter.getId(), shelterFromDB.getId());
@@ -86,7 +86,7 @@ public class ShelterDAOTest {
         Assert.assertEquals(shelter.getCreatedDate(), shelterFromDB.getCreatedDate());
     }
 
-    private void getAllSheltersTest() {
+    private void getAllTest() {
         List<Shelter> shelters = shelterDAO.getAll();
 
         Assert.assertEquals(1, shelters.size());
@@ -96,7 +96,7 @@ public class ShelterDAOTest {
         Assert.assertEquals(shelter.getCreatedDate(), shelters.get(0).getCreatedDate());
     }
 
-    private void getShelterByIdTest() {
+    private void getByIdTest() {
         Shelter shelterFromDB = shelterDAO.getById(shelter.getId());
 
         Assert.assertEquals(shelter.getTitle(), shelterFromDB.getTitle());
