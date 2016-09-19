@@ -107,7 +107,7 @@ CREATE TABLE :schema_name."company_avatar" (
 CREATE TABLE :schema_name."company_alias" (
   id         SERIAL  NOT NULL,
   alias      VARCHAR NOT NULL,
-  company_id VARCHAR NOT NULL,
+  company_id INTEGER NOT NULL,
   PRIMARY KEY (id),
   UNIQUE (alias)
 );
@@ -262,6 +262,9 @@ ALTER TABLE :schema_name."company"
   ADD FOREIGN KEY (last_modified_by_id) REFERENCES :schema_name."user" (id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE RESTRICT;
 
 ALTER TABLE :schema_name."company_info"
+  ADD FOREIGN KEY (company_id) REFERENCES :schema_name."company" (id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE :schema_name."company_alias"
   ADD FOREIGN KEY (company_id) REFERENCES :schema_name."company" (id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE :schema_name."shelter"
