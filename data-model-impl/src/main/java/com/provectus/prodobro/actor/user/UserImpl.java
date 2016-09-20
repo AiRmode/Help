@@ -7,7 +7,7 @@ import com.provectus.prodobro.actor.relation.EmployeeRelation;
 import com.provectus.prodobro.actor.relation.EmployeeRelationImpl;
 import com.provectus.prodobro.shared.avatar.Avatar;
 import com.provectus.prodobro.shared.info.Info;
-import com.provectus.prodobro.shared.status.Status;
+import com.provectus.prodobro.shared.status.StatusEnumNew;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -38,9 +38,8 @@ public class UserImpl implements User {
     )
     private Set<Info> info = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = UserStatus.class)
-    @JoinColumn(name = "status_id")
-    private Status status;
+    @Column(name = "status_code")
+    private int statusCode;
 
     @Column(name = "created_date")
     private Timestamp createdDate;
@@ -130,13 +129,23 @@ public class UserImpl implements User {
     }
 
     @Override
-    public Status getStatus() {
-        return status;
+    public StatusEnumNew getStatus() {
+        return StatusEnumNew.getStatusByCode(statusCode);
     }
 
     @Override
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(StatusEnumNew status) {
+        this.statusCode = status.getCode();
+    }
+
+    @Override
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    @Override
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
     }
 
     @Override
@@ -278,7 +287,7 @@ public class UserImpl implements User {
         if (isSuperUser != user.isSuperUser) return false;
         if (avatar != null ? !avatar.equals(user.avatar) : user.avatar != null) return false;
         if (!info.equals(user.info)) return false;
-        if (!status.equals(user.status)) return false;
+        if (statusCode != user.statusCode) return false;
         if (!createdDate.equals(user.createdDate)) return false;
         if (!lastModifiedDate.equals(user.lastModifiedDate)) return false;
         if (!name.equals(user.name)) return false;
@@ -293,7 +302,7 @@ public class UserImpl implements User {
     public int hashCode() {
         int result = avatar != null ? avatar.hashCode() : 0;
         result = 31 * result + info.hashCode();
-        result = 31 * result + status.hashCode();
+        result = 31 * result + statusCode;
         result = 31 * result + createdDate.hashCode();
         result = 31 * result + lastModifiedDate.hashCode();
         result = 31 * result + name.hashCode();
