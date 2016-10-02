@@ -107,7 +107,7 @@ CREATE TABLE schema_name."company_avatar" (
 CREATE TABLE schema_name."company_alias" (
   id         SERIAL  NOT NULL,
   alias      VARCHAR NOT NULL,
-  company_id VARCHAR NOT NULL,
+  company_id INTEGER NOT NULL,
   PRIMARY KEY (id),
   UNIQUE (alias)
 );
