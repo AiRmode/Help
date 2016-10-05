@@ -20,7 +20,7 @@ CREATE TABLE schema_name."email_queue" (
 
 CREATE TABLE schema_name."email_queue_attachment" (
   id         SERIAL  NOT NULL,
-  attachment VARCHAR NOT NULL,
+  attachment BYTEA NOT NULL,
   PRIMARY KEY (id)
 );
 
