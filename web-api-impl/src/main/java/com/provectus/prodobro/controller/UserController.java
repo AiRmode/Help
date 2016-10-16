@@ -57,11 +57,7 @@ public class UserController {
 			method = RequestMethod.GET,
 			produces = "application/json")
 	public ResponseEntity<User> getUserById(HttpServletRequest req, @RequestParam Long id) {
-		Optional<Cookie> token = authChecker.getToken(req);
-		if (token.isPresent()) {
-			return new ResponseEntity<>(userService.getById(id), HttpStatus.OK);    //TODO: error
-		}
-		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		return new ResponseEntity<>(userService.getById(id), HttpStatus.OK);    //TODO: error
 	}
 
 
