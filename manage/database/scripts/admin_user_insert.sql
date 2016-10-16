@@ -1,13 +1,13 @@
 ﻿BEGIN;
 
-INSERT INTO shemaName."user_status" (id, title)
+INSERT INTO schema_name."user_status" (id, title)
 VALUES
   (1, 'ACTIVE'),
   (777, 'BOSS')
 ON CONFLICT (id)
   DO NOTHING;
 
-INSERT INTO shemaName."user" (id, name, email, pass_hash, phone_num, status_id,
+INSERT INTO schema_name."user" (id, name, email, pass_hash, phone_num, status_id,
                             is_superuser, created_date, created_by_id, last_modified_date, last_modified_by_id)
 VALUES
   (1, 'admin', 'example@mail.com', '120b6ae92e26693f1f0f77a9cc91e87a',
