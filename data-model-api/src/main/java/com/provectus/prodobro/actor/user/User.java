@@ -3,9 +3,9 @@ package com.provectus.prodobro.actor.user;
 
 import com.provectus.prodobro.actor.event.Event;
 import com.provectus.prodobro.actor.relation.EmployeeRelation;
+import com.provectus.prodobro.shared.StatusEnumNew;
 import com.provectus.prodobro.shared.avatar.Avatar;
 import com.provectus.prodobro.shared.info.Info;
-import com.provectus.prodobro.shared.status.Status;
 
 import java.sql.Timestamp;
 import java.util.Locale;
@@ -31,9 +31,13 @@ public interface User {
 
     void setInfo(Set<Info> info);
 
-    Status getStatus();
+    StatusEnumNew getStatus();
 
-    void setStatus(Status status);
+    void setStatus(StatusEnumNew status);
+
+    int getStatusCode();
+
+    void setStatusCode(int statusCode);
 
     Timestamp getCreatedDate();
 

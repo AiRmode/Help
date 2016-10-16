@@ -5,9 +5,9 @@ import com.provectus.prodobro.actor.event.Event;
 import com.provectus.prodobro.actor.event.EventImpl;
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.actor.user.UserImpl;
+import com.provectus.prodobro.shared.StatusEnumNew;
 import com.provectus.prodobro.shared.avatar.Avatar;
 import com.provectus.prodobro.shared.info.Info;
-import com.provectus.prodobro.shared.status.Status;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -36,9 +36,8 @@ public class ShelterImpl implements Shelter {
     )
     private Set<Info> info = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = ShelterStatus.class)
-    @JoinColumn(name = "status_id")
-    private Status status;
+    @Column(name = "status_id")
+    private int statusCode;
 
     @Column(name = "created_date")
     private Timestamp createdDate;
@@ -116,13 +115,23 @@ public class ShelterImpl implements Shelter {
     }
 
     @Override
-    public Status getStatus() {
-        return status;
+    public StatusEnumNew getStatus() {
+        return StatusEnumNew.getStatusByCode(statusCode);
     }
 
     @Override
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(StatusEnumNew status) {
+        this.statusCode = status.getCode();
+    }
+
+    @Override
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    @Override
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
     }
 
     @Override
@@ -224,7 +233,7 @@ public class ShelterImpl implements Shelter {
 
         if (avatar != null ? !avatar.equals(shelter.avatar) : shelter.avatar != null) return false;
         if (!info.equals(shelter.info)) return false;
-        if (!status.equals(shelter.status)) return false;
+        if (statusCode != shelter.getStatusCode()) return false;
         if (!createdDate.equals(shelter.createdDate)) return false;
         if (!lastModifiedDate.equals(shelter.lastModifiedDate)) return false;
         if (!title.equals(shelter.title)) return false;
@@ -237,7 +246,7 @@ public class ShelterImpl implements Shelter {
     public int hashCode() {
         int result = avatar != null ? avatar.hashCode() : 0;
         result = 31 * result + info.hashCode();
-        result = 31 * result + status.hashCode();
+        result = 31 * result + statusCode;
         result = 31 * result + createdDate.hashCode();
         result = 31 * result + lastModifiedDate.hashCode();
         result = 31 * result + title.hashCode();

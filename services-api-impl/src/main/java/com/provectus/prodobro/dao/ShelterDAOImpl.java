@@ -4,7 +4,7 @@ import com.provectus.prodobro.actor.shelter.Shelter;
 import com.provectus.prodobro.actor.shelter.ShelterImpl;
 import com.provectus.prodobro.actor.shelter.ShelterTypeEnum;
 import com.provectus.prodobro.dao.actor.ShelterDAO;
-import com.provectus.prodobro.shared.status.StatusEnum;
+import com.provectus.prodobro.shared.StatusEnumNew;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Repository;
@@ -62,21 +62,11 @@ public class ShelterDAOImpl implements ShelterDAO {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Shelter> getByStatus(String status) {
+    public List<Shelter> getByStatus(StatusEnumNew status) {
         return sessionFactory
                 .getCurrentSession()
-                .createQuery("select c from ShelterImpl c inner join c.status where c.status.status=:status")
-                .setParameter("status", StatusEnum.valueOf(status))
-                .list();
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<Shelter> getByStatus(StatusEnum status) {
-        return sessionFactory
-                .getCurrentSession()
-                .createQuery("select c from ShelterImpl c inner join c.status where c.status.status=:status")
-                .setParameter("status", status)
+                .createQuery("select c from ShelterImpl c where c.statusCode=:statusCode")
+                .setParameter("statusCode", status.getCode())
                 .list();
     }
 
@@ -85,7 +75,7 @@ public class ShelterDAOImpl implements ShelterDAO {
     public List<Shelter> getByType(String type) {
         return sessionFactory
                 .getCurrentSession()
-                .createQuery("select c from ShelterImpl c inner join c.status where c.type.type=:stype")
+                .createQuery("select c from ShelterImpl c where c.type.type=:stype")
                 .setParameter("stype", ShelterTypeEnum.valueOf(type))
                 .list();
     }
@@ -95,7 +85,7 @@ public class ShelterDAOImpl implements ShelterDAO {
     public List<Shelter> getByType(ShelterTypeEnum type) {
         return sessionFactory
                 .getCurrentSession()
-                .createQuery("select c from ShelterImpl c inner join c.status where c.type.type=:stype")
+                .createQuery("select c from ShelterImpl c where c.type.type=:stype")
                 .setParameter("stype", type)
                 .list();
     }

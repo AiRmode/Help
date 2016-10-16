@@ -4,7 +4,7 @@ package com.provectus.prodobro.dao;
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.actor.user.UserImpl;
 import com.provectus.prodobro.dao.actor.UserDAO;
-import com.provectus.prodobro.shared.status.StatusEnum;
+import com.provectus.prodobro.shared.StatusEnumNew;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,21 +61,11 @@ public class UserDAOImpl implements UserDAO {
 
     @Transactional(readOnly = true)
     @Override
-    public List<User> getByStatus(String status) {
+    public List<User> getByStatus(StatusEnumNew status) {
         return sessionFactory
                 .getCurrentSession()
-                .createQuery("select u from UserImpl u inner join u.status where u.status.status=:status")
-                .setParameter("status", StatusEnum.valueOf(status))
-                .list();
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<User> getByStatus(StatusEnum status) {
-        return sessionFactory
-                .getCurrentSession()
-                .createQuery("select u from UserImpl u inner join u.status where u.status.status=:status")
-                .setParameter("status", status)
+                .createQuery("select u from UserImpl u where u.statusCode=:statusCode")
+                .setParameter("statusCode", status.getCode())
                 .list();
     }
 
