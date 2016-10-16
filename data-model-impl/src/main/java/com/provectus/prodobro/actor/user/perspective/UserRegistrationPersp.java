@@ -2,7 +2,7 @@ package com.provectus.prodobro.actor.user.perspective;
 
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.actor.user.UserImpl;
-import com.provectus.prodobro.shared.status.StatusEnumNew;
+import com.provectus.prodobro.shared.StatusEnumNew;
 
 import java.sql.Timestamp;
 import java.util.Date;

@@ -7,9 +7,9 @@ import com.provectus.prodobro.actor.relation.EmployeeRelation;
 import com.provectus.prodobro.actor.relation.EmployeeRelationImpl;
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.actor.user.UserImpl;
+import com.provectus.prodobro.shared.StatusEnumNew;
 import com.provectus.prodobro.shared.avatar.Avatar;
 import com.provectus.prodobro.shared.info.Info;
-import com.provectus.prodobro.shared.status.Status;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -40,9 +40,8 @@ public class CompanyImpl implements Company {
     )
     private Set<Info> info = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = CompanyStatus.class)
-    @JoinColumn(name = "status_id")
-    private Status status;
+    @Column(name = "status_id")
+    private int statusCode;
 
     @Column(name = "created_date")
     private Timestamp createdDate;
@@ -122,13 +121,23 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public Status getStatus() {
-        return status;
+    public StatusEnumNew getStatus() {
+        return StatusEnumNew.getStatusByCode(statusCode);
     }
 
     @Override
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(StatusEnumNew status) {
+        this.statusCode = status.getCode();
+    }
+
+    @Override
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    @Override
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
     }
 
     @Override
@@ -249,7 +258,7 @@ public class CompanyImpl implements Company {
         CompanyImpl company = (CompanyImpl) o;
 
         if (!info.equals(company.info)) return false;
-        if (!status.equals(company.status)) return false;
+        if (statusCode != company.getStatusCode()) return false;
         if (!createdDate.equals(company.createdDate)) return false;
         if (!lastModifiedDate.equals(company.lastModifiedDate)) return false;
         if (!title.equals(company.title)) return false;
@@ -261,7 +270,7 @@ public class CompanyImpl implements Company {
     @Override
     public int hashCode() {
         int result = info.hashCode();
-        result = 31 * result + status.hashCode();
+        result = 31 * result + statusCode;
         result = 31 * result + createdDate.hashCode();
         result = 31 * result + lastModifiedDate.hashCode();
         result = 31 * result + title.hashCode();

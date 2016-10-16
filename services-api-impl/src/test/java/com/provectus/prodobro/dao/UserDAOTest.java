@@ -2,9 +2,8 @@ package com.provectus.prodobro.dao;
 
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.actor.user.UserImpl;
-import com.provectus.prodobro.actor.user.UserStatus;
 import com.provectus.prodobro.dao.actor.UserDAO;
-import com.provectus.prodobro.shared.status.Status;
+import com.provectus.prodobro.shared.StatusEnumNew;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 @ContextConfiguration(locations = "classpath:applicationContext-services.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,10 +36,7 @@ public class UserDAOTest {
 		user.setEmail("Email");
 		user.setPhoneNumber("Phone");
 		user.setPassHash("Pass");
-
-		Status userStatus = new UserStatus();
-		userStatus.setStatus("ACTIVE");
-		user.setStatus(userStatus);
+		user.setStatus(StatusEnumNew.ACTIVE);
 
 		Timestamp timestamp = new Timestamp(new Date().getTime());
 		user.setCreatedDate(timestamp);
@@ -61,53 +59,37 @@ public class UserDAOTest {
 
 	private void getByIdTest() {
 		User userFromDB = userDAO.getById(user.getId());
-
-		Assert.assertEquals(user.getName(), userFromDB.getName());
-		Assert.assertEquals(user.getEmail(), userFromDB.getEmail());
-		Assert.assertEquals(user.getPhoneNumber(), userFromDB.getPhoneNumber());
+		assertTrue(user.equals(userFromDB));
 	}
 
 	private void getAllTest() {
 		List<User> users = userDAO.getAll();
-		if (users.size() < 1) Assert.fail();
+		if (users.size() < 1) Assert.fail();    //т.к. всегда должен быть мин 1 юзер - админ
 	}
 
 	private void getByNameTest() {
 		List<User> users = userDAO.getByName(user.getName());
-
-		Assert.assertEquals(user.getId(), users.get(0).getId());
-		Assert.assertEquals(user.getEmail(), users.get(0).getEmail());
-		Assert.assertEquals(user.getPhoneNumber(), users.get(0).getPhoneNumber());
+		assertTrue(users.contains(user));
 	}
 
 	private void getByStatusTest() {
-		List<User> users = userDAO.getByStatus(user.getStatus().getStatus());
-		if (users.size() < 1) Assert.fail();
+		List<User> users = userDAO.getByStatus(user.getStatus());
+		assertTrue(users.contains(user));
 	}
 
 	private void getByPhoneNumberTest() {
 		User userFromDB = userDAO.getByPhoneNumber(user.getPhoneNumber());
-
-		Assert.assertEquals(user.getId(), userFromDB.getId());
-		Assert.assertEquals(user.getName(), userFromDB.getName());
-		Assert.assertEquals(user.getEmail(), userFromDB.getEmail());
+		assertTrue(user.equals(userFromDB));
 	}
 
 	private void getByEmailTest() {
 		User userFromDB = userDAO.getByEmail(user.getEmail());
-
-		Assert.assertEquals(user.getId(), userFromDB.getId());
-		Assert.assertEquals(user.getName(), userFromDB.getName());
-		Assert.assertEquals(user.getPhoneNumber(), userFromDB.getPhoneNumber());
+		assertTrue(user.equals(userFromDB));
 	}
 
 	private void getByLoginAndPasswordTest() {
 		User userByEmail = userDAO.getByLoginAndPassword(user.getEmail(), user.getPassHash());
 		User userByPhoneNum = userDAO.getByLoginAndPassword(user.getPhoneNumber(), user.getPassHash());
-
-		Assert.assertEquals(userByEmail.getEmail(), 		userByPhoneNum.getEmail());
-		Assert.assertEquals(userByEmail.getName(),			userByPhoneNum.getName());
-		Assert.assertEquals(userByEmail.getPhoneNumber(), 	userByPhoneNum.getPhoneNumber());
-		Assert.assertEquals(userByEmail.getId(), 			userByPhoneNum.getId());
+		assertTrue(userByEmail.equals(userByPhoneNum));
 	}
 }

@@ -3,7 +3,7 @@ package com.provectus.prodobro.service.actor;
 
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.service.GenericService;
-import com.provectus.prodobro.shared.status.StatusEnumNew;
+import com.provectus.prodobro.shared.StatusEnumNew;
 
 import java.util.List;
 

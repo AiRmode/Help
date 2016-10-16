@@ -44,7 +44,7 @@ CREATE TABLE schema_name."user" (
   email               VARCHAR(255) NOT NULL,
   pass_hash           VARCHAR      NOT NULL,
   phone_num           VARCHAR(20)  NOT NULL,
-  status_code         INTEGER      NOT NULL,
+  status_id           INTEGER      NOT NULL,
   avatar_id           INTEGER,
   is_superuser        BOOLEAN      NOT NULL DEFAULT FALSE,
   locale_lang         VARCHAR(20) DEFAULT 'ru',

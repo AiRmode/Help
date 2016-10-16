@@ -1,4 +1,4 @@
-package com.provectus.prodobro.shared.status;
+package com.provectus.prodobro.shared;
 
 
 public enum StatusEnumNew {
@@ -13,10 +13,6 @@ public enum StatusEnumNew {
         this.code = code;
     }
 
-    public int getCode() {
-        return code;
-    }
-
 //    public static Optional<StatusEnumNew> getStatusByCode(int code) {
     public static StatusEnumNew getStatusByCode(int code) {
         for (StatusEnumNew s : StatusEnumNew.values()) {
@@ -27,5 +23,9 @@ public enum StatusEnumNew {
         }
 //        return Optional.empty();
         return null;
+    }
+
+    public int getCode() {
+        return code;
     }
 }

@@ -4,7 +4,7 @@ package com.provectus.prodobro.service;
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.dao.actor.UserDAO;
 import com.provectus.prodobro.service.actor.UserService;
-import com.provectus.prodobro.shared.status.StatusEnumNew;
+import com.provectus.prodobro.shared.StatusEnumNew;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 

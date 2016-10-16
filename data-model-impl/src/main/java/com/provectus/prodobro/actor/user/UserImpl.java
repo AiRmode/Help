@@ -5,9 +5,9 @@ import com.provectus.prodobro.actor.event.Event;
 import com.provectus.prodobro.actor.event.EventImpl;
 import com.provectus.prodobro.actor.relation.EmployeeRelation;
 import com.provectus.prodobro.actor.relation.EmployeeRelationImpl;
+import com.provectus.prodobro.shared.StatusEnumNew;
 import com.provectus.prodobro.shared.avatar.Avatar;
 import com.provectus.prodobro.shared.info.Info;
-import com.provectus.prodobro.shared.status.StatusEnumNew;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -38,7 +38,7 @@ public class UserImpl implements User {
     )
     private Set<Info> info = new HashSet<>();
 
-    @Column(name = "status_code")
+    @Column(name = "status_id")
     private int statusCode;
 
     @Column(name = "created_date")
