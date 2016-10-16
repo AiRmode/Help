@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 echo 1>&2 "Enter Username:"
 read user
 echo 1>&2 "Enter Schema Name:"

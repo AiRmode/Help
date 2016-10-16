@@ -209,7 +209,7 @@ CREATE TABLE :schema_name."email_queue" (
   attachment_id INTEGER,
   created_date  TIMESTAMP    NOT NULL,
   status_id     VARCHAR(20)  NOT NULL,
-  send_date     TIMESTAMP    NOT NULL,
+  send_date     TIMESTAMP,
 
   PRIMARY KEY (email_id)
 );
