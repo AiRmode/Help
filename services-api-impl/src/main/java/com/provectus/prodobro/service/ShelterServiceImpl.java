@@ -5,7 +5,7 @@ import com.provectus.prodobro.actor.shelter.Shelter;
 import com.provectus.prodobro.actor.shelter.ShelterTypeEnum;
 import com.provectus.prodobro.dao.actor.ShelterDAO;
 import com.provectus.prodobro.service.actor.ShelterService;
-import com.provectus.prodobro.shared.status.StatusEnum;
+import com.provectus.prodobro.shared.StatusEnum;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 
@@ -52,18 +52,13 @@ public class ShelterServiceImpl implements ShelterService {
     @Override
     public void makeRemovedById(Long id) {
         Shelter company = shelterDAO.getById(id);
-        company.getStatus().setStatus("DELETED");
+        company.setStatus(StatusEnum.DELETED);
         shelterDAO.update(company);
     }
 
     @Override
     public Shelter getByTitle(String title) {
         return shelterDAO.getByTitle(title);
-    }
-
-    @Override
-    public List<Shelter> getByStatus(String status) {
-        return shelterDAO.getByStatus(status);
     }
 
     @Override

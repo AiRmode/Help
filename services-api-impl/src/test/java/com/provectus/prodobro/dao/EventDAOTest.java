@@ -4,12 +4,10 @@ import com.provectus.prodobro.actor.event.Event;
 import com.provectus.prodobro.actor.event.EventImpl;
 import com.provectus.prodobro.actor.shelter.Shelter;
 import com.provectus.prodobro.actor.shelter.ShelterImpl;
-import com.provectus.prodobro.actor.shelter.ShelterStatus;
 import com.provectus.prodobro.actor.shelter.ShelterTypeImpl;
 import com.provectus.prodobro.dao.actor.EventDAO;
 import com.provectus.prodobro.dao.actor.ShelterDAO;
-import com.provectus.prodobro.shared.status.Status;
-import org.junit.Assert;
+import com.provectus.prodobro.shared.StatusEnum;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 @ContextConfiguration(locations = "classpath:applicationContext-services.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -46,10 +46,7 @@ public class EventDAOTest {
         ShelterTypeImpl shelterType = new ShelterTypeImpl();
         shelterType.setType("HUMAN");
         shelter.setType(shelterType);
-
-        Status status = new ShelterStatus();
-        status.setStatus("ACTIVE");
-        shelter.setStatus(status);
+        shelter.setStatus(StatusEnum.ACTIVE);
 
         Timestamp timestamp = new Timestamp(new Date().getTime());
         shelter.setCreatedDate(timestamp);
@@ -80,48 +77,27 @@ public class EventDAOTest {
 
     private void getByIdTest() {
         Event eventFromDB = eventDAO.getById(event.getId());
-
-        Assert.assertEquals(event.getTitle(), eventFromDB.getTitle());
-        Assert.assertEquals(event.getDate(), eventFromDB.getDate());
-        Assert.assertEquals(event.getShelter(), eventFromDB.getShelter());
+        assertTrue(eventFromDB.equals(event));
     }
 
     private void getAllTest() {
         List<Event> events = eventDAO.getAll();
-
-        Assert.assertEquals(1, events.size());
-        Assert.assertEquals(event.getId(), events.get(0).getId());
-        Assert.assertEquals(event.getTitle(), events.get(0).getTitle());
-        Assert.assertEquals(event.getDate(), events.get(0).getDate());
-        Assert.assertEquals(event.getShelter(), events.get(0).getShelter());
+        assertTrue(events.contains(event));
     }
 
     private void getByTitleTest() {
         Event eventFromDB = eventDAO.getByTitle(event.getTitle());
-
-        Assert.assertEquals(event.getId(), eventFromDB.getId());
-        Assert.assertEquals(event.getDate(), eventFromDB.getDate());
-        Assert.assertEquals(event.getShelter(), eventFromDB.getShelter());
+        assertTrue(eventFromDB.equals(event));
     }
 
     private void getByDateTest() {
         List<Event> events = eventDAO.getByDate(event.getDate());
-
-        Assert.assertEquals(1, events.size());
-        Assert.assertEquals(event.getId(), events.get(0).getId());
-        Assert.assertEquals(event.getTitle(), events.get(0).getTitle());
-        Assert.assertEquals(event.getDate(), events.get(0).getDate());
-        Assert.assertEquals(event.getShelter(), events.get(0).getShelter());
+        assertTrue(events.contains(event));
     }
 
     private void getAccessibleTest() {
         List<Event> events = eventDAO.getAccessible();
-
-        Assert.assertEquals(1, events.size());
-        Assert.assertEquals(event.getId(), events.get(0).getId());
-        Assert.assertEquals(event.getTitle(), events.get(0).getTitle());
-        Assert.assertEquals(event.getDate(), events.get(0).getDate());
-        Assert.assertEquals(event.getShelter(), events.get(0).getShelter());
+        assertTrue(events.contains(event));
     }
 
     private void getPrivateTest() {
@@ -129,11 +105,6 @@ public class EventDAOTest {
         eventDAO.save(event);
 
         List<Event> events = eventDAO.getPrivate();
-
-        Assert.assertEquals(1, events.size());
-        Assert.assertEquals(event.getId(), events.get(0).getId());
-        Assert.assertEquals(event.getTitle(), events.get(0).getTitle());
-        Assert.assertEquals(event.getDate(), events.get(0).getDate());
-        Assert.assertEquals(event.getShelter(), events.get(0).getShelter());
+        assertTrue(events.contains(event));
     }
 }
