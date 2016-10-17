@@ -1,7 +1,7 @@
 package com.provectus.prodobro.shared;
 
 
-public enum StatusEnumNew {
+public enum StatusEnum {
     BANNED(-2),
     DELETED(-1),
     NOT_VERIFIED(0),
@@ -9,13 +9,13 @@ public enum StatusEnumNew {
 
     private int code;
 
-    StatusEnumNew(int code) {
+    StatusEnum(int code) {
         this.code = code;
     }
 
-//    public static Optional<StatusEnumNew> getStatusByCode(int code) {
-    public static StatusEnumNew getStatusByCode(int code) {
-        for (StatusEnumNew s : StatusEnumNew.values()) {
+//    public static Optional<StatusEnum> getStatusByCode(int code) {
+    public static StatusEnum getStatusByCode(int code) {
+        for (StatusEnum s : StatusEnum.values()) {
             if (s.code == code) {
 //                return Optional.of(s);
                 return s;

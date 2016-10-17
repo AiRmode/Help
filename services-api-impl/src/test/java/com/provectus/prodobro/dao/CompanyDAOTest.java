@@ -3,7 +3,7 @@ package com.provectus.prodobro.dao;
 import com.provectus.prodobro.actor.company.Company;
 import com.provectus.prodobro.actor.company.CompanyImpl;
 import com.provectus.prodobro.dao.actor.CompanyDAO;
-import com.provectus.prodobro.shared.StatusEnumNew;
+import com.provectus.prodobro.shared.StatusEnum;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,7 +32,7 @@ public class CompanyDAOTest {
     public void setUpData() {
         company = new CompanyImpl();
         company.setTitle("Provectus");
-        company.setStatus(StatusEnumNew.ACTIVE);
+        company.setStatus(StatusEnum.ACTIVE);
 
         Timestamp timestamp = new Timestamp(new Date().getTime());
         company.setCreatedDate(timestamp);
@@ -51,7 +51,7 @@ public class CompanyDAOTest {
     }
 
     private void getByStatusTest() {
-        List<Company> companies = companyDAO.getByStatus(StatusEnumNew.ACTIVE);
+        List<Company> companies = companyDAO.getByStatus(StatusEnum.ACTIVE);
         assertTrue(companies.contains(company));
     }
 

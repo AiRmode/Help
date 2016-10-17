@@ -4,7 +4,7 @@ package com.provectus.prodobro.dao;
 import com.provectus.prodobro.actor.company.Company;
 import com.provectus.prodobro.actor.company.CompanyImpl;
 import com.provectus.prodobro.dao.actor.CompanyDAO;
-import com.provectus.prodobro.shared.StatusEnumNew;
+import com.provectus.prodobro.shared.StatusEnum;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Repository;
@@ -62,7 +62,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Company> getByStatus(StatusEnumNew status) {
+    public List<Company> getByStatus(StatusEnum status) {
         return sessionFactory
                 .getCurrentSession()
                 .createQuery("select c from CompanyImpl c where c.statusCode=:status")

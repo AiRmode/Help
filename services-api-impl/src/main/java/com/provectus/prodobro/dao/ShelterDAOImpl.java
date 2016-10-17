@@ -4,7 +4,7 @@ import com.provectus.prodobro.actor.shelter.Shelter;
 import com.provectus.prodobro.actor.shelter.ShelterImpl;
 import com.provectus.prodobro.actor.shelter.ShelterTypeEnum;
 import com.provectus.prodobro.dao.actor.ShelterDAO;
-import com.provectus.prodobro.shared.StatusEnumNew;
+import com.provectus.prodobro.shared.StatusEnum;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Repository;
@@ -62,7 +62,7 @@ public class ShelterDAOImpl implements ShelterDAO {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Shelter> getByStatus(StatusEnumNew status) {
+    public List<Shelter> getByStatus(StatusEnum status) {
         return sessionFactory
                 .getCurrentSession()
                 .createQuery("select c from ShelterImpl c where c.statusCode=:statusCode")

@@ -3,7 +3,7 @@ package com.provectus.prodobro.actor.shelter;
 
 import com.provectus.prodobro.actor.event.Event;
 import com.provectus.prodobro.actor.user.User;
-import com.provectus.prodobro.shared.StatusEnumNew;
+import com.provectus.prodobro.shared.StatusEnum;
 import com.provectus.prodobro.shared.avatar.Avatar;
 import com.provectus.prodobro.shared.info.Info;
 
@@ -30,13 +30,9 @@ public interface Shelter {
 
     void setInfo(Set<Info> info);
 
-    StatusEnumNew getStatus();
+    StatusEnum getStatus();
 
-    void setStatus(StatusEnumNew status);
-
-    int getStatusCode();
-
-    void setStatusCode(int statusCode);
+    void setStatus(StatusEnum status);
 
     Timestamp getCreatedDate();
 

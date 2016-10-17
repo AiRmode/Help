@@ -7,7 +7,7 @@ import com.provectus.prodobro.actor.relation.EmployeeRelation;
 import com.provectus.prodobro.actor.relation.EmployeeRelationImpl;
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.actor.user.UserImpl;
-import com.provectus.prodobro.shared.StatusEnumNew;
+import com.provectus.prodobro.shared.StatusEnum;
 import com.provectus.prodobro.shared.avatar.Avatar;
 import com.provectus.prodobro.shared.info.Info;
 
@@ -121,21 +121,19 @@ public class CompanyImpl implements Company {
     }
 
     @Override
-    public StatusEnumNew getStatus() {
-        return StatusEnumNew.getStatusByCode(statusCode);
+    public StatusEnum getStatus() {
+        return StatusEnum.getStatusByCode(statusCode);
     }
 
     @Override
-    public void setStatus(StatusEnumNew status) {
+    public void setStatus(StatusEnum status) {
         this.statusCode = status.getCode();
     }
 
-    @Override
     public int getStatusCode() {
         return statusCode;
     }
 
-    @Override
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
     }

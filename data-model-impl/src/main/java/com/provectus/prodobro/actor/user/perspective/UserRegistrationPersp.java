@@ -2,7 +2,7 @@ package com.provectus.prodobro.actor.user.perspective;
 
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.actor.user.UserImpl;
-import com.provectus.prodobro.shared.StatusEnumNew;
+import com.provectus.prodobro.shared.StatusEnum;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -34,7 +34,7 @@ public class UserRegistrationPersp {
 
 	public User createUser() {
 		User user = new UserImpl(name, email, passHash, phoneNumber);
-		user.setStatus(StatusEnumNew.NOT_VERIFIED);
+		user.setStatus(StatusEnum.NOT_VERIFIED);
 		user.setCreatedDate(new Timestamp(new Date().getTime()));
 		user.setLastModifiedDate(new Timestamp(new Date().getTime()));
 

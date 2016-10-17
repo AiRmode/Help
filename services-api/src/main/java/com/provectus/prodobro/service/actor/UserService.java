@@ -3,7 +3,7 @@ package com.provectus.prodobro.service.actor;
 
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.service.GenericService;
-import com.provectus.prodobro.shared.StatusEnumNew;
+import com.provectus.prodobro.shared.StatusEnum;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface UserService extends GenericService<User, Long> {
 
     List<User> getByName(String name);
 
-    List<User> getByStatus(StatusEnumNew status);
+    List<User> getByStatus(StatusEnum status);
 
     User getByPhoneNumber(String phoneNumber);
 

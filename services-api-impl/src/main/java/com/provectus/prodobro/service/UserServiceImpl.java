@@ -4,7 +4,7 @@ package com.provectus.prodobro.service;
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.dao.actor.UserDAO;
 import com.provectus.prodobro.service.actor.UserService;
-import com.provectus.prodobro.shared.StatusEnumNew;
+import com.provectus.prodobro.shared.StatusEnum;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void makeRemovedById(Long id) {
         User user = userDAO.getById(id);
-        user.setStatus(StatusEnumNew.DELETED);
+        user.setStatus(StatusEnum.DELETED);
         userDAO.update(user);
     }
 
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getByStatus(StatusEnumNew status) {
+    public List<User> getByStatus(StatusEnum status) {
         return userDAO.getByStatus(status);
     }
 

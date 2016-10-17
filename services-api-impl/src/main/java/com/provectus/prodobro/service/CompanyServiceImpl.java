@@ -4,7 +4,7 @@ package com.provectus.prodobro.service;
 import com.provectus.prodobro.actor.company.Company;
 import com.provectus.prodobro.dao.actor.CompanyDAO;
 import com.provectus.prodobro.service.actor.CompanyService;
-import com.provectus.prodobro.shared.StatusEnumNew;
+import com.provectus.prodobro.shared.StatusEnum;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +52,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public void makeRemovedById(Long id) {
         Company company = companyDAO.getById(id);
-        company.setStatus(StatusEnumNew.DELETED);
+        company.setStatus(StatusEnum.DELETED);
         companyDAO.update(company);
     }
 
@@ -62,7 +62,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<Company> getByStatus(StatusEnumNew status) {
+    public List<Company> getByStatus(StatusEnum status) {
         return companyDAO.getByStatus(status);
     }
 

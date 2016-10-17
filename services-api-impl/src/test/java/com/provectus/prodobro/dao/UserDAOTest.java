@@ -3,8 +3,7 @@ package com.provectus.prodobro.dao;
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.actor.user.UserImpl;
 import com.provectus.prodobro.dao.actor.UserDAO;
-import com.provectus.prodobro.shared.StatusEnumNew;
-import org.junit.Assert;
+import com.provectus.prodobro.shared.StatusEnum;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,7 +35,7 @@ public class UserDAOTest {
 		user.setEmail("Email");
 		user.setPhoneNumber("Phone");
 		user.setPassHash("Pass");
-		user.setStatus(StatusEnumNew.ACTIVE);
+		user.setStatus(StatusEnum.ACTIVE);
 
 		Timestamp timestamp = new Timestamp(new Date().getTime());
 		user.setCreatedDate(timestamp);
@@ -64,7 +63,7 @@ public class UserDAOTest {
 
 	private void getAllTest() {
 		List<User> users = userDAO.getAll();
-		if (users.size() < 1) Assert.fail();    //т.к. всегда должен быть мин 1 юзер - админ
+		assertTrue(users.contains(user));
 	}
 
 	private void getByNameTest() {

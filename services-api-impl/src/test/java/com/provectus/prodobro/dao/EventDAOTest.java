@@ -7,7 +7,7 @@ import com.provectus.prodobro.actor.shelter.ShelterImpl;
 import com.provectus.prodobro.actor.shelter.ShelterTypeImpl;
 import com.provectus.prodobro.dao.actor.EventDAO;
 import com.provectus.prodobro.dao.actor.ShelterDAO;
-import com.provectus.prodobro.shared.StatusEnumNew;
+import com.provectus.prodobro.shared.StatusEnum;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,7 +46,7 @@ public class EventDAOTest {
         ShelterTypeImpl shelterType = new ShelterTypeImpl();
         shelterType.setType("HUMAN");
         shelter.setType(shelterType);
-        shelter.setStatus(StatusEnumNew.ACTIVE);
+        shelter.setStatus(StatusEnum.ACTIVE);
 
         Timestamp timestamp = new Timestamp(new Date().getTime());
         shelter.setCreatedDate(timestamp);
