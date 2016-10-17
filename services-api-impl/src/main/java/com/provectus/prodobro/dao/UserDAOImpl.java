@@ -1,6 +1,5 @@
 package com.provectus.prodobro.dao;
 
-
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.actor.user.UserImpl;
 import com.provectus.prodobro.dao.actor.UserDAO;
@@ -104,5 +103,4 @@ public class UserDAOImpl implements UserDAO {
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-
 }
