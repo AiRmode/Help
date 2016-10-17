@@ -2,7 +2,6 @@ package com.provectus.prodobro.controller;
 
 import com.provectus.prodobro.actor.user.User;
 import com.provectus.prodobro.actor.user.perspective.UserRegistrationPersp;
-import com.provectus.prodobro.auth.AuthChecker;
 import com.provectus.prodobro.service.actor.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
@@ -10,47 +9,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 	private UserService userService;
-	private AuthChecker authChecker;
 
 	@Required
 	@Autowired
 	public void setUserService(UserService userService) {
 		this.userService = userService;
-	}
-
-	@Required
-	@Autowired
-	public void setAuthChecker(AuthChecker authChecker) {
-		this.authChecker = authChecker;
-	}
-
-
-	/**
-	 * Not implemented yet. At first, we should implement persistence of token.
-	 *
-	 * @param req
-	 * @return
-	 */
-	@RequestMapping(value = "/getByToken",
-			method = RequestMethod.GET,
-			produces = "application/json")
-	public ResponseEntity<User> getUserByToken(HttpServletRequest req) {
-		Optional<Cookie> token = authChecker.getToken(req);
-		if (token.isPresent()) {
-			return new ResponseEntity<>(
-//					userService.getByToken(token),
-					HttpStatus.OK
-			);
-		}
-		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 
 	@RequestMapping(value = "/getById",
