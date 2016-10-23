@@ -4,9 +4,9 @@ package com.provectus.prodobro.actor.company;
 import com.provectus.prodobro.actor.event.Event;
 import com.provectus.prodobro.actor.relation.EmployeeRelation;
 import com.provectus.prodobro.actor.user.User;
+import com.provectus.prodobro.shared.StatusEnum;
 import com.provectus.prodobro.shared.avatar.Avatar;
 import com.provectus.prodobro.shared.info.Info;
-import com.provectus.prodobro.shared.status.Status;
 
 import java.sql.Timestamp;
 import java.util.Optional;
@@ -25,15 +25,15 @@ public interface Company {
     /**
      * Information: Photos, Emails, Websites, etc.
      *
-     * @return {@link Set< Info >} of Actor`s information
+     * @return {@link Set<Info>} of Actor`s information
      */
     Set<Info> getInfo();
 
     void setInfo(Set<Info> info);
 
-    Status getStatus();
+    StatusEnum getStatus();
 
-    void setStatus(Status status);
+    void setStatus(StatusEnum status);
 
     Timestamp getCreatedDate();
 

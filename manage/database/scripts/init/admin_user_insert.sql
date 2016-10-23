@@ -1,4 +1,4 @@
-﻿BEGIN;
+BEGIN;
 
 INSERT INTO schema_name."user_status" (id, title)
 VALUES
