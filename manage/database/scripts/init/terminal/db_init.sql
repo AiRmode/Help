@@ -197,11 +197,7 @@ CREATE TABLE :schema_name."email_queue" (
   message_body  TEXT,
   attachment_id INTEGER,
   created_date  TIMESTAMP    NOT NULL,
-<<<<<<< HEAD
-  status_id     VARCHAR(20)  NOT NULL,
-=======
   status        VARCHAR(20)  NOT NULL,
->>>>>>> PD-57_WebAPI
   send_date     TIMESTAMP,
 
   PRIMARY KEY (email_id)
